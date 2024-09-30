@@ -1,0 +1,34 @@
+.rectangle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%; /* Adjust this value to align below the menu */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%; /* Adjust width */
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+  }
+  
+  .rectangle-content {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #333;
+  }
+  
+  
+  @media (max-width: 768px) {
+    .rectangle-container {
+      width: 90%; /* Make the rectangle narrower for mobile screens */
+      padding: 15px;
+    }
+    
+    .rectangle-content {
+      font-size: 1rem; /* Adjust font size for smaller screens */
+    }
+  }
+  

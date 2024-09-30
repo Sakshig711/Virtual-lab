@@ -1,14 +1,14 @@
 import React from 'react';
 import './Menu.css';
 
-const Menu = () => {
+const Menu = ({ onMenuClick }) => {
   return (
     <div className="menu-container">
       <nav className="menu-items">
-        <a href="#info">Info</a>
-        <a href="#quiz">Quiz</a>
-        <a href="#try-yourself">Try Yourself</a>
-        <a href="#reference">Reference</a>
+        <a onClick={() => onMenuClick("info")}>Info</a>
+        <a onClick={() => onMenuClick("quiz")}>Quiz</a>
+        <a onClick={() => onMenuClick("try-yourself")}>Try Yourself</a>
+        <a onClick={() => onMenuClick("reference")}>Reference</a>
       </nav>
     </div>
   );
