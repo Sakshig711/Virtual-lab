@@ -2,42 +2,73 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar.jsx';
 import Menu from '../components/Menu.jsx';
 import HeroImg from '../components/HeroImg.jsx';
-import Footer from '../components/Footer.jsx';
 import Rectangle from '../components/Rectangle.jsx'; 
 
 const Project = () => {
-  const [content, setContent] = useState("This is the Info section."); 
+  const [content, setContent] = useState("info"); // Track the active section
 
   const handleMenuClick = (section) => {
-    switch (section) {
-      case "info":
-        setContent("This is the Info section.");
-        break;
-      case "quiz":
-        setContent("This is the Quiz section.");
-        break;
-      case "try-yourself":
-        setContent("This is the Try Yourself section.");
-        break;
-      case "reference":
-        setContent("This is the Reference section.");
-        break;
-      default:
-        setContent("This is the Info section.");
-    }
+    setContent(section); // Update the content based on the selected section
   };
 
   useEffect(() => {
-    handleMenuClick("info"); 
+    handleMenuClick("info"); // Set "info" as the default section on component mount
   }, []);
+
+  // Define content for each section
+  const renderContent = () => {
+    if (content === "info") {
+      return (
+        <>
+          <Rectangle 
+            Aim="Design & Develop DB for 'Order Management System' with all the constraints." 
+            problemStatement="Design & Develop DB for 'Order Management System' with all the constraints. (There must be at least 3 entities and relationships between them.) The statement should use SQL objects such as Table, View, Index, and Sequence." 
+            Objective="Apply DCL and DDL commands to convert ER/EER diagram to tables. To understand the technique for converting ER diagram into tables. To understand the use of DDL and DCL." 
+            Conclusion="Understand how to design and develop a relational database system using MySQL."
+          />
+        </>
+      );
+    } else {
+      switch (content) {
+        case "quiz":
+          return (
+            <>
+              <h3>Quiz Section:</h3>
+              <p>This is the content for the Quiz section. Add your quiz details or embed questions here.</p>
+            </>
+          );
+        case "try-yourself":
+          return (
+            <>
+              <h3>Try Yourself Section:</h3>
+              <p>This is the content for the Try Yourself section. Add interactive exercises or code challenges here.</p>
+            </>
+          );
+        case "reference":
+          return (
+            <>
+              <h3>Reference Section:</h3>
+              <p>This is the content for the Reference section. Provide references, links, or additional reading material here.</p>
+            </>
+          );
+        default:
+          return <p>Select a section from the menu.</p>;
+      }
+    }
+  };
 
   return (
     <div>
       <Navbar alwaysDark={true} />
-      <Menu onMenuClick={handleMenuClick} /> 
-      <Rectangle content={content} /> 
+      <Menu onMenuClick={handleMenuClick} />
+      {content === "info" ? (
+        renderContent()
+      ) : (
+        <Rectangle>
+          {renderContent()}
+        </Rectangle>
+      )}
       <HeroImg />
-      <Footer />
     </div>
   );
 };

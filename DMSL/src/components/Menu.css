@@ -7,7 +7,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 60%; /* Adjust the width as needed */
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(14, 13, 13, 0.7);
   padding: 10px 0;
   z-index: 10;
   border-radius: 5px;

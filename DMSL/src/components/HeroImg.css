@@ -1,11 +1,12 @@
 .hero {
     margin-top: 0px; 
-    height: 900px; 
+    height: 100vh; 
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     position: relative;  
+    overflow-x: hidden ;
     
   }
   
@@ -24,7 +25,8 @@
   }
   
   .content-container {
-    position: absolute;     top: 40%;
+    position: absolute;     
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%); 
     text-align: center; 
