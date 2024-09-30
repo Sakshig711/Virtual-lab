@@ -1,74 +1,59 @@
 .footer {
-    border-top: #ffffff ;
-    width: 100%;
-    padding: 2rem 0;
-    background-color:#282828;
-    color: #ffffff;  
+  background-color: #333;
+  color: #fff; 
+  padding: 1.5rem 0; 
+  text-align: center;
+  font-size: 0.9rem;
 }
-  
-  .footer-container {
-    max-width: 1140px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 2rem;
-    border: 3px solid #f0f0dc;  
-    border-radius: 10px;
-    padding-top: 3rem; 
-    margin-top: 2rem;
-    padding-bottom: 3rem;
-    margin-bottom: 2rem;
-  }
-  
- 
-  .left {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  .location, .phone, .email {
-    display: flex;
-    align-items: center;
-  }
-  
-  .location p, .phone p, .email p {
-    margin: 0;
-    line-height: 1.5;
-    font-size: 1.1rem;
-  }
-  
 
-  .right {
-    display: flex;
-    align-items:center;
-    justify-content: flex-end;
-    flex-direction: column;
-    padding-right: 20px;
-  }
-  
-  .right a {
-    color: #f0a500;
-    text-decoration: none;
-    font-weight: 600;
-  }
-  
-  .right a:hover {
-    text-decoration: underline;
-  }
- 
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  margin: auto;
+  border: solid 3px #ccc;
+  border-left-width: 300px;
+  border-right-width: 300px;
+  border-left-color: #333;
+  border-right-color: #333;
 
-  @media (max-width: 768px) {
-    .footer-container {
-      grid-template-columns: 1fr;
-      text-align: center;
-    }
-  
-    .right {
-      align-items: center;
-      justify-content: center;
-      padding-right: 0;
-    }
-  }
-  
+}
+
+.footer-section {
+  margin: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.location, .contact, .email {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.25rem; 
+}
+
+.footer-section p {
+  margin: 0;
+}
+
+.links {
+  margin-top: 0.75rem;
+}
+
+.links a {
+  color: #fff;
+  margin: 0 0.5rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.links a:hover {
+  color: #ccc;
+}
+
+.footer-section a {
+  color: #f39c12; 
+  font-weight: bold;
+}

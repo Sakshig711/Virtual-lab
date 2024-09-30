@@ -1,0 +1,38 @@
+.team-page {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; 
+    text-align: center;
+    z-index: 5; 
+    overflow-x: hidden;
+  }
+  
+  .team-page h1 {
+    color: #fff;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+  }
+  
+  .team-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  .team-card {
+    background-color: rgba(255, 255, 255, 0.9); 
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 250px;
+    text-align: center;
+    width: calc(50% - 20px);
+  }
+  

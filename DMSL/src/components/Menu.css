@@ -3,11 +3,11 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 15%; /* Adjust this value to vertically center the menu */
+  top: 15%; 
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 60%; /* Adjust the width as needed */
-  background-color: rgba(14, 13, 13, 0.7);
+  width: 60%;
+  background-color: hsla(0, 10%, 21%, 0.564);
   padding: 10px 0;
   z-index: 10;
   border-radius: 5px;
@@ -19,19 +19,41 @@
 }
 
 .menu-items a {
-  color: #ffffff;
+  color: #FFFFFF;
   padding: 10px 20px;
   text-decoration: none;
   font-weight: bold;
   font-size: 1rem;
+  position: relative;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .menu-items a:hover {
-  background-color: #f0a500;
+  background-color: #FFF0D1;
   color: #333;
-  border-radius: 5px;
   cursor: pointer;
+}
+
+.btn-1 svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.btn-1 rect {
+  stroke: #FFF0D1;
+  stroke-width: 2;
+  fill: none;
+  stroke-dasharray: 350, 450;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1.35s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.btn-1:hover rect {
+  stroke-dashoffset: -300;
 }
 
 @media (max-width: 768px) {

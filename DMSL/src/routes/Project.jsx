@@ -5,14 +5,14 @@ import HeroImg from '../components/HeroImg.jsx';
 import Rectangle from '../components/Rectangle.jsx'; 
 
 const Project = () => {
-  const [content, setContent] = useState("info"); // Track the active section
+  const [content, setContent] = useState("info"); 
 
   const handleMenuClick = (section) => {
-    setContent(section); // Update the content based on the selected section
+    setContent(section); 
   };
 
   useEffect(() => {
-    handleMenuClick("info"); // Set "info" as the default section on component mount
+    handleMenuClick("info"); 
   }, []);
 
   // Define content for each section

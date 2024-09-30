@@ -1,32 +1,32 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './Footer.css';
-import { FaHome, FaMailBulk, FaPhone } from 'react-icons/fa';
+import { FaHome, FaPhone, FaMailBulk } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
     <div className="footer">
       <div className="footer-container">
-        <div className="left">
-          <div className="location">
-            <FaHome size={20} style={{ color: '#fff', marginRight: '2rem' }} />
-            <div>
-              <p>Pune Institute Of Computer Technology</p>
-              <p>Survey No. 27, Near Trimurti Chowk Dhankwadi, Pune - 411043</p>
-            </div>
-          </div>
-          <div className="phone">
-            <FaPhone size={20} style={{ color: '#fff', marginRight: '2rem', rotate: '90deg' }} />
-            <p>+91 20 24371101</p>
-          </div>
-          <div className="email">
-            <FaMailBulk size={20} style={{ color: '#fff', marginRight: '2rem' }} />
-            <p>registrar@pict.edu</p>
-          </div>
+        <div className="footer-section location">
+          <FaHome size={16} style={{ color: '#fff', marginRight: '0.5rem' }} />
+          <p>Pune Institute Of Computer Technology</p>
+        </div>
+        <div className="footer-section contact">
+          <FaPhone size={16} style={{ color: '#fff', marginRight: '0.5rem' , rotate:'90deg' }} />
+          <p>+91 20 24371101</p>
+        </div>
+        <div className="footer-section email">
+          <FaMailBulk size={16} style={{ color: '#fff', marginRight: '0.5rem' }} />
+          <p>registrar@pict.edu</p>
+        </div>
+        <div className="footer-section">
+          <p>© 2024 IT Dept, PICT | All Rights Reserved</p>
+          <p>Developed By <Link to="/team" rel="noreferrer">DMSL team</Link></p>
+        </div>
+        <div className="footer-section links">
+          <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Services</a> | <a href="#contact">Contact</a>
         </div>
       </div>
-      <div className="right">
-          <p>Copyright © 2024 IT Dept, PICT, All Rights Reserved. | Developed By <a href="https://www.google.com" target="_blank" rel="noreferrer">DMSL team</a></p>
-        </div>
     </div>
   );
 };
