@@ -10,12 +10,43 @@
     text-align: center;
     z-index: 5; 
     overflow-x: hidden;
+    padding-top: 650px;
+    background-color: #fd5e53;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
+
+  .team-image {
+    width: 150px; 
+    height: 150px;
+    object-fit: cover; 
+    border-radius: 50%; 
+    overflow: hidden;
+    margin: 0 auto; 
+}
+
+  .team-card:hover {
+    transform: translateY(-5px) scale(1.05); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
+    background-color: #FFCCCB;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
   
   .team-page h1 {
-    color: #fff;
-    font-size: 2.5rem;
+    color: #000000;
+    font-size: 4rem;
+    margin-top: 490px;
     margin-bottom: 30px;
+    animation: fadeIn 1s ease;
   }
   
   .team-cards {
@@ -27,12 +58,36 @@
   }
   
   .team-card {
+    margin: 20px;
     background-color: rgba(255, 255, 255, 0.9); 
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 250px;
+    width: 500px;
     text-align: center;
-    width: calc(50% - 20px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
   }
+
+  .team-page  p{
+    color: #000000;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  @keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
   
+  body {
+    background: linear-gradient(120deg, #f0f0f0, #e0e0e0); /* Gradient background */
+    animation: gradientAnimation 5s ease infinite; /* Add animation */
+}
+
