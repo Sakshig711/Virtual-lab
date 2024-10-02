@@ -1,3 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@700;700&display=swap');
+
+
+
+
+
 .team-page {
     position: absolute;
     top: 50%;
@@ -11,7 +22,7 @@
     z-index: 5; 
     overflow-x: hidden;
     padding-top: 650px;
-    background-color: #fd5e53;
+    background-color: #E7CCCC;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
@@ -27,7 +38,7 @@
   .team-card:hover {
     transform: translateY(-5px) scale(1.05); 
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
-    background-color: #FFCCCB;
+    background-color: #f7eeee;
 }
 
 @keyframes fadeIn {
@@ -44,6 +55,8 @@
   .team-page h1 {
     color: #000000;
     font-size: 4rem;
+    font-family: 'Playfair Display', sans-serif;
+    font-weight: 600;
     margin-top: 490px;
     margin-bottom: 30px;
     animation: fadeIn 1s ease;
@@ -72,6 +85,9 @@
     color: #000000;
     font-size: 20px;
     margin-bottom: 20px;
+  }
+  .team-description{
+    font-family: "Tangerine", cursive;
   }
 
   @keyframes gradientAnimation {

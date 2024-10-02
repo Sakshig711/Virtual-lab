@@ -1,4 +1,6 @@
-/* Team.css */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+
 .team-page {
     display: flex;
     flex-direction: column;
@@ -47,11 +49,16 @@
     margin: 0 auto; 
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid #832019;
+    border: 3px solid #474242;
   }
   
   .team-card-content {
     padding: 20px;
+  }
+
+  .team-card h2{
+    font-family: 'Montserrat', sans-serif;
+  color: #0e0e0e; 
   }
   
   .team-card h3 {
@@ -79,7 +86,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #FFE3E1;
+    background-color: #f7eeee;
     border-radius: 50%; 
     font-size: 20px;
     
