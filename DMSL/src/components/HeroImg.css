@@ -1,56 +1,107 @@
+/* Global reset to ensure no unwanted margin or padding */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Set html and body to take full space */
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
   width: 100%;
+  height: 100%;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  font-family: Arial, sans-serif; /* Set a clean, readable font */
+  box-sizing: border-box;
 }
 
+/* Hero section to cover full viewport without leaving gaps */
 .hero {
-    margin-top: 0px; 
-    height: 100vh; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    position: relative;  
-    flex: 1;
-  }
-  
-  .mask {
-    width: 100%;
-    height: 100%;
-    position: relative; 
-    padding: 0px;
-    margin: 0px;
-  }
-  
-  .into-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .hero::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); 
-    z-index: 1; 
+  height: 100vh;
+  width: 100vw; /* Ensure it takes the full viewport width */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden; /* Ensure no extra content spills out */
 }
-  
-  .content-container {
-    position: absolute;     
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%); 
-    text-align: center; 
-    color:transparent; 
-    z-index: 1; 
-    overflow-x: hidden;
-    margin: 0px;
-  }
-  
-  
+
+/* Mask to ensure overlay settings */
+.mask {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Background image settings */
+.into-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Make sure the image covers the entire container */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+/* Overlay over the background image to increase text readability */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Darker overlay for better contrast */
+  z-index: 1;
+}
+
+/* Container for the text content, centered in the hero section */
+.content-container {
+  position: relative;
+  z-index: 2; /* Place the text above the overlay */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* Take full height to allow for proper centering */
+}
+
+/* The content inside the hero section (the rectangle) */
+.content {
+  padding: 3rem; /* Adjust padding for consistent spacing */
+  background-color: rgba(0, 0, 0, 0.7); /* Add a semi-transparent background for readability */
+  color: #ffffff;
+  max-width: 1000px; /* Set a reasonable max-width for better appearance */
+  width: 90%; /* Set width to 90% for better responsiveness */
+  margin: auto; /* Center the content */
+  text-align: left; /* Align text to the left for readability */
+  border-radius: 0; /* No border-radius for sharp edges */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for visual distinction */
+}
+
+h4, h2, h5 {
+  margin: 0 0 1rem 0;
+}
+
+h4 {
+  font-size: 2.5rem;
+  font-weight: 300;
+}
+
+h2 {
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+h5 {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  font-weight: 400;
+  color: #e0e0e0;
+}

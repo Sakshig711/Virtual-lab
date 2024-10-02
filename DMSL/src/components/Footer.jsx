@@ -7,24 +7,28 @@ const Footer = () => {
   return (
     <div className="footer">
       <div className="footer-container">
-        <div className="footer-section location">
-          <FaHome size={16} style={{ color: '#fff', marginRight: '0.5rem' }} />
-          <p>Pune Institute Of Computer Technology</p>
+        <div className="footer-left">
+          <div className="footer-section location">
+            <FaHome size={16} style={{ color: '#fff', marginRight: '0.5rem' }} />
+            <p>Pune Institute Of Computer Technology</p>
+          </div>
+          <div className="footer-section contact">
+            <FaPhone size={16} style={{ color: '#fff', marginRight: '0.5rem' }} />
+            <p>+91 20 24371101</p>
+          </div>
+          <div className="footer-section email">
+            <FaMailBulk size={16} style={{ color: '#fff', marginRight: '0.5rem' }} />
+            <p>registrar@pict.edu</p>
+          </div>
         </div>
-        <div className="footer-section contact">
-          <FaPhone size={16} style={{ color: '#fff', marginRight: '0.5rem' , rotate:'90deg' }} />
-          <p>+91 20 24371101</p>
-        </div>
-        <div className="footer-section email">
-          <FaMailBulk size={16} style={{ color: '#fff', marginRight: '0.5rem' }} />
-          <p>registrar@pict.edu</p>
-        </div>
-        <div className="footer-section">
-          <p>© 2024 IT Dept, PICT | All Rights Reserved</p>
-          <p>Developed By <Link to="/team" rel="noreferrer">DMSL team</Link></p>
-        </div>
-        <div className="footer-section links">
-          <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Services</a> | <a href="#contact">Contact</a>
+        <div className="footer-right">
+          <div className="footer-section">
+            <p>© 2024 IT Dept, PICT | All Rights Reserved</p>
+            <p>Developed By <Link to="/team" rel="noreferrer">DMSL team</Link></p>
+          </div>
+          <div className="footer-section links">
+            <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Services</a> | <a href="#contact">Contact</a>
+          </div>
         </div>
       </div>
     </div>

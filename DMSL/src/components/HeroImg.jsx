@@ -7,7 +7,6 @@ const HeroImg = ({ children }) => {
     <div className="hero">
       <div className="mask">
         <img className="into-img" src={bgimg} alt="background img" />
-        {/* Add a container for the content */}
         <div className="content-container">
           {children}
         </div>

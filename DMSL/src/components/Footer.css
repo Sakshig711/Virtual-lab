@@ -2,29 +2,23 @@
   background-color: #333; 
   color: #fff; 
   padding: 1.5rem 0;  
-  text-align: center;
   font-size: 0.9rem;
 }
 
 .footer-container {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between; /* Adjusts the alignment of the left and right sections */
   align-items: center;
-  justify-content: center;
-  max-width: 100%;
-  margin: auto;
-  border: solid 3px #ccc;
-  border-left-width: 300px;
-  border-right-width: 300px;
-  border-left-color: #333;
-  border-right-color: #333;
+  max-width: 1200px; /* Set a reasonable max-width to make it more compact */
+  width: 90%; /* Set width to 90% for responsiveness */
+  margin: 0 auto; /* Center the footer content */
+  padding: 0 2rem; /* Adjust padding to bring sections closer together */
 }
 
 .footer-section {
-  margin: 0.5rem 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  margin: 0.5rem;
 }
 
 .location, .contact, .email {
