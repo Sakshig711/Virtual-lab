@@ -3,24 +3,24 @@ import Navbar from '../components/Navbar.jsx';
 import Menu from '../components/Menu.jsx';
 import HeroImg from '../components/HeroImg.jsx';
 import Rectangle from '../components/Rectangle.jsx'; 
+import Quiz from '../components/Quiz.jsx';
 
 const Project = () => {
   const [content, setContent] = useState("info");
+  const [activeSection, setActiveSection] = useState("info"); 
 
   const handleMenuClick = (section) => {
     if (section === "try-yourself") {
-      // Open the link directly when "Try Yourself" is clicked
       window.open("https://www.programiz.com/sql/online-compiler/", "_blank");
     } else {
-      setContent(section); // Update content for other sections
-    }
+      setContent(section); 
+      setActiveSection(section); 
   };
 
   useEffect(() => {
-    handleMenuClick("info"); // Set "info" as the default section on component mount
+    handleMenuClick("info"); 
   }, []);
 
-  // Define content for each section
   const renderContent = () => {
     if (content === "info") {
       return (
@@ -41,32 +41,17 @@ const Project = () => {
           ]}
         />
       );
+    } else if (content === "quiz") {
+      return <Quiz />; 
     } else {
-      switch (content) {
-        case "quiz":
-          return (
-            <div className="section-content">
-              <h3>Quiz Section:</h3>
-              <p>This is the content for the Quiz section. Add your quiz details or embed questions here.</p>
-            </div>
-          );
-        case "demo":
-          return (
-            <div className="section-content">
-              <h3>Demo Section:</h3>
-              <p>This is the content for the Demo section. Provide demo-related content here.</p>
-            </div>
-          );
-        default:
-          return <p>Select a section from the menu.</p>;
-      }
+      return <p>Select a section from the menu.</p>;
     }
   };
 
   return (
     <div>
       <Navbar alwaysDark={true} />
-      <Menu onMenuClick={handleMenuClick} />
+      <Menu onMenuClick={handleMenuClick} activeSection={activeSection} /> 
       {renderContent()}
       <HeroImg />
     </div>

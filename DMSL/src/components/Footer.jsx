@@ -21,6 +21,7 @@ const Footer = () => {
             <p>registrar@pict.edu</p>
           </div>
         </div>
+        <div className="divider"></div> {/* Divider Line */}
         <div className="footer-right">
           <div className="footer-section">
             <p>© 2024 IT Dept, PICT | All Rights Reserved</p>

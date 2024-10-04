@@ -26,11 +26,10 @@
 
 /* Default no background for the initial navbar */
 .header {
-  background-color: transparent; /* Fully transparent at the start */
-  margin: 0; /* Ensure no margin to remove any unintended white space */
+  background-color: transparent; 
+  margin: 0; 
 }
 
-/* When scrolled, dark background */
 .header.header-bg {
   background-color: rgba(24, 20, 20, 0.9); /* Semi-transparent dark when scrolled */
   margin: 0; /* Ensure no extra space above or below */

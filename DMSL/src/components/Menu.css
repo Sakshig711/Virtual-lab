@@ -7,7 +7,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 60%;
-  background-color: hsla(0, 10%, 21%, 0.564);
+  background-color: hsla(0, 10%, 21%, 0.712);
   padding: 10px 0;
   z-index: 10;
   border-radius: 5px;
@@ -50,6 +50,11 @@
   stroke-dasharray: 350, 450;
   stroke-dashoffset: 0;
   transition: stroke-dashoffset 1.35s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.btn-1.active {
+  background-color: #FFF0D1; 
+  color: black;  
 }
 
 .btn-1:hover rect {
