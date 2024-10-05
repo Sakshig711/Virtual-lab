@@ -4,7 +4,8 @@ import Menu from '../components/Menu.jsx';
 import HeroImg from '../components/HeroImg.jsx';
 import Rectangle from '../components/Rectangle.jsx'; 
 import Quiz from '../components/Quiz.jsx';
-
+import QuizApp from '../components/Quiz1.jsx';
+import VideoGallery from '../components/Video.jsx';
 const Project = () => {
   const [content, setContent] = useState("info");
   const [activeSection, setActiveSection] = useState("info"); 
@@ -15,6 +16,7 @@ const Project = () => {
     } else {
       setContent(section); 
       setActiveSection(section); 
+    }
   };
 
   useEffect(() => {
@@ -42,8 +44,17 @@ const Project = () => {
         />
       );
     } else if (content === "quiz") {
-      return <Quiz />; 
-    } else {
+      // return <Quiz />;
+      return <QuizApp />;  
+    } else if(content==="demo"){
+      return(
+      <div className="section-content">
+      {/* <h3>Demo Section:</h3> */}
+      <VideoGallery/>
+      {/* <p>This is the content for the Demo section. Provide demo-related content here.</p> */}
+    </div>
+      );
+    }else {
       return <p>Select a section from the menu.</p>;
     }
   };
