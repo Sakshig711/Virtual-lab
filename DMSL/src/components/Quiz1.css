@@ -1,0 +1,200 @@
+.content-quiz{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 63%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 470px; 
+    background-color: rgba(255, 255, 255, 1);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+    overflow-y: auto;
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+}
+
+  /* header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f4f4f4;
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  } */
+  
+  header h2 {
+    text-align: center;
+    margin: 0;
+    padding-bottom: 10px;
+  }
+
+  
+  .mcq-container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    
+    .question-container, .result-container {
+      margin-top: 20px;
+    }
+    
+    .option-item {
+      margin: 10px 0;
+    }
+    
+    .button {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    
+    .correct-option label {
+      color: green;
+      font-weight: bold;
+    }
+    
+    .selected-option label {
+      color: red;
+    }
+    
+    .option-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+    
+    .option-item input[type="radio"] {
+      margin-right: 10px;
+    }
+    
+    .correct-option label {
+      color: green;
+      font-weight: bold;
+    }
+    
+    .selected-option label {
+      color: red;
+    }
+    
+    .options-form {
+      margin-top: 10px;
+    }
+    
+    .question-container {
+      margin-bottom: 20px;
+    }
+    
+    .button {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    
+    .reset-btn, .next-btn, .prev-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    
+    .reset-btn:hover, .next-btn:hover, .prev-btn:hover {
+      background-color: #0056b3;
+    }
+    
+  
+  
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  
+  #unit-buttons {
+    margin-bottom: 20px;
+  }
+  
+  #unit-buttons button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .question-container {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+  }
+  
+  .options {
+    margin-top: 10px;
+  }
+  
+  .option-item {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 30px;
+  }
+  
+  .option-item.correc label {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .option-item.incorrec label {
+    color: red;
+    font-weight: bold;
+  }
+  
+  button.submit-btn, button.reset-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .result-container {
+    text-align: center;
+  }
+  
+  .result-container .question-item {
+    text-align: left;
+    margin-bottom: 15px;
+  }
+  
+  .result-container .option-item {
+    padding-left: 30px;
+  }
+  
+  .result-container .option-item.correc::before {
+    content: "✔️";
+    position: absolute;
+    left: 0;
+    color: green;
+  }
+  
+  .result-container .option-item.incorrec::before {
+    content: "❌";
+    position: absolute;
+    left: 0;
+    color: red;
+  }
+  

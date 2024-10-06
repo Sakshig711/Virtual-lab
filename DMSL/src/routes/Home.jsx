@@ -7,9 +7,9 @@ import '../routes/Home.css';
 const Home = () => {
   return (
     <div className="home-container">
+      
       <Navbar />
-      <HeroImg>
-        <div className="content">
+      <div className="content">
           <h4>Hello DataArchitect,</h4>
           <h2>Welcome to DMSL Virtual Lab</h2>
           <h5>
@@ -26,8 +26,7 @@ const Home = () => {
             redundancy in values. DBMS offer many benefits over traditional file systems, including flexibility
             and a more complex backup system.
           </h5>
-        </div>
-      </HeroImg>
+      </div>
       <Footer />
     </div>
   );

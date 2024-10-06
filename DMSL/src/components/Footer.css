@@ -1,9 +1,11 @@
 .footer {
-  background-color: #333; /* Set footer background color */
+  background-color: #243457; /* Set footer background color */
   color: #fff; 
+  left : 0;
   padding: 2rem 0; /* Padding for better look */
   font-size: 1rem;
   position: relative;
+  width: 100%;
 }
 
 .footer-container {
@@ -11,7 +13,7 @@
   justify-content: space-between; 
   align-items: flex-start;
   max-width: 1200px; 
-  width: 90%; 
+  width: 100%; 
   margin: 0 auto; 
   padding: 1rem 2rem; 
   border: 3px solid #fff;
