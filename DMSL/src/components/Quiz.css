@@ -1,7 +1,7 @@
 .quiz-container {
     text-align: center;
     margin: 20px;
-    padding: 20px;
+    padding: 10px;
     height: 100vh;
     background-color: #f4f4f4;
     border-radius: 10px;
@@ -10,7 +10,7 @@
   
   .question-card {
     margin-bottom: 20px;
-    padding: 20px;
+    padding: 10px;
     background-color: #fff;
     border-radius: 10px;
     border: 1px solid #ccc;
@@ -75,7 +75,7 @@
   }
   
   .previous-button, .next-button{
-    padding: 10px 20px;
+    padding: 10px 15px;
     background-color: #007bff;
     color: white;
     border: none;
@@ -88,18 +88,7 @@
     justify-content: center;
     margin-top: 20px; 
   }
-  
-
-  .submit-button{
-    padding: 10px 15px;
-    text-align: center;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
+    
   .previous-button:disabled, .next-button:disabled {
     background-color: grey;
     cursor: not-allowed;
@@ -143,3 +132,8 @@
     justify-content: center;
     margin-top: 20px;
   } 
+
+  .rectangle-content{
+    font-size: larger;
+    padding-top: -9px;
+  }

@@ -15,10 +15,11 @@ const Project = () => {
     } else {
       setContent(section); 
       setActiveSection(section); 
+    } // <-- This closing bracket was missing
   };
 
   useEffect(() => {
-    handleMenuClick("info"); 
+    handleMenuClick("info"); // Set "info" as default
   }, []);
 
   const renderContent = () => {
