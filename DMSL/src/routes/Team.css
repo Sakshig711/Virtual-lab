@@ -5,13 +5,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@700;700&display=swap');
 
-
-
-
-
 .team-page {
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
@@ -22,7 +18,7 @@
     z-index: 5; 
     overflow-x: hidden;
     padding-top: 650px;
-    background-color: #E7CCCC;
+    background-color: #243457;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
@@ -38,7 +34,7 @@
   .team-card:hover {
     transform: translateY(-5px) scale(1.05); 
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
-    background-color: #f7eeee;
+    background-color: #849ec6;
 }
 
 @keyframes fadeIn {
@@ -53,7 +49,7 @@
 }
   
   .team-page h1 {
-    color: #000000;
+    color: #FFFFFF;
     font-size: 4rem;
     font-family: 'Playfair Display', sans-serif;
     font-weight: 600;
@@ -68,11 +64,16 @@
     flex-wrap: wrap;
     gap: 20px;
     width: 100%;
+    margin-top: 5%;
+  }
+
+  .team-cards-role{
+    color: black;
   }
   
   .team-card {
     margin: 20px;
-    background-color: rgba(255, 255, 255, 0.9); 
+    background-color: rgba(203, 217, 230, 0.9); 
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -81,13 +82,14 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
   }
 
-  .team-page  p{
-    color: #000000;
+  .team-description  h4{
+    color: #ffffff;
     font-size: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
-  .team-description{
+  .team-description {
     font-family: "Tangerine", cursive;
+    color: #ffffff;
   }
 
   @keyframes gradientAnimation {
@@ -103,7 +105,6 @@
 }
   
   body {
-    background: linear-gradient(120deg, #f0f0f0, #e0e0e0); /* Gradient background */
     animation: gradientAnimation 5s ease infinite; /* Add animation */
 }
 

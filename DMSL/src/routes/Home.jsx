@@ -1,14 +1,16 @@
 import React from 'react';
-import Navbar from '../components/Navbar.jsx';
-import HeroImg from '../components/HeroImg.jsx';
 import Footer from '../components/Footer.jsx';
 import '../routes/Home.css';
+import Navbar from '../components/Nav.jsx'; // Import the JPG image
+import Menu from '../components/Navbar.jsx'
 
 const Home = () => {
   return (
     <div className="home-container">
       
       <Navbar />
+      <Menu  />
+
       <div className="content">
           <h4>Hello DataArchitect,</h4>
           <h2>Welcome to DMSL Virtual Lab</h2>

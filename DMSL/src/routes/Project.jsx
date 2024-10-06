@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'; 
-import Navbar from '../components/Navbar.jsx';
 import Menu from '../components/Menu.jsx';
-import HeroImg from '../components/HeroImg.jsx';
+import Navbar from '../components/Nav.jsx';
 import Rectangle from '../components/Rectangle.jsx'; 
 import QuizApp from '../components/Quiz1.jsx';
 import VideoGallery from '../components/Video.jsx';
@@ -58,10 +57,9 @@ const Project = () => {
 
   return (
     <div>
-      <Navbar alwaysDark={true} />
+      <Navbar />
       <Menu onMenuClick={handleMenuClick} activeSection={activeSection} /> 
       {renderContent()}
-      <HeroImg />
     </div>
   );
 };

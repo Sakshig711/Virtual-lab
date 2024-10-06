@@ -2,6 +2,11 @@
   background-color: #ffffff;
 }
 
+.navbar-pdf {
+  width: 100%;  /* Make the PDF span the full width of the page */
+  height: 500px; /* You can adjust the height based on how much space you want the PDF to take */
+  border: none; /* Remove any default border */
+}
 
 .home-container{
   display: flex;
@@ -15,9 +20,9 @@
   padding: 2rem;
   background-color: white;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  `/*box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);*/
   color: #333333; 
-  margin-top: 80px; /* Adds space between the navbar and content */
+  margin-top: 60px; /* Adds space between the navbar and content */
   margin-bottom: 40px;
 }
 

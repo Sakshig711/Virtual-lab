@@ -3,11 +3,11 @@
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 50%; 
+    top: 60%; 
     left: 50%;
     transform: translate(-50%, -50%);
     width: 70%; 
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: #f5f7fb;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -17,7 +17,7 @@
   .rectangle-content {
     text-align:left;
     font-size: 1.1rem;
-    color: #333;
+    color: #243457;
   }
   .rectangle-content p{
     color: #333;

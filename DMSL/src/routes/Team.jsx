@@ -63,11 +63,11 @@ const Team = () => {
       
       <div className="team-page">
         <h1>Meet the Team</h1>
-        <p className="team-description">
+        <h5 className="team-description">
           Discover the creative minds behind our website's design and development. 
           Meet our team of talented individuals who collaborated to bring our vision to life through captivating logos, 
           innovative designs, and a cohesive platform.
-        </p>
+        </h5>
         <div className="team-cards">
           {teamMembers.map((member, index) => (
             <TeamCard

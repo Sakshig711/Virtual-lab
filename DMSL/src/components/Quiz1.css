@@ -7,8 +7,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 60%;
-    height: 470px; 
-    background-color: rgba(255, 255, 255, 1);
+    height: 430px; 
+    background-color: #f5f7fb;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -40,7 +40,7 @@
       max-width: 600px;
       margin: auto;
       padding: 20px;
-      border: 1px solid #ccc;
+      border: 3px solid #243457;
       border-radius: 10px;
     }
     
@@ -124,8 +124,7 @@
   
   body {
     font-family: Arial, sans-serif;
-    margin: 20px;
-  }
+    }
   
   #unit-buttons {
     margin-bottom: 20px;
