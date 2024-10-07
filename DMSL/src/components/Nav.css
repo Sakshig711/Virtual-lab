@@ -78,3 +78,20 @@
     top: 6px;
     left: 7px; /* Align to the left */
 }
+
+.nav-links {
+    margin-left: auto;
+    display: flex;
+    gap: 20px; 
+  }
+  
+  .nav-links a {
+    color: #354F77; /* Link color */
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-links a:hover {
+    color: #f0a500; /* Color on hover */
+  }

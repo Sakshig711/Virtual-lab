@@ -1,103 +1,63 @@
 .assignment-container {
-      margin-top: 2rem;
-      margin-bottom: 4rem;
-      display: flex;
-      justify-content: center;
-      width: 100%;
-    }
-    
-    .scrolling-wrapper {
-      display: flex;
-      overflow-x: auto;  /* Enables horizontal scroll */
-      scroll-behavior: smooth;
-      padding-left: 2rem; /* Adds padding to the left to provide more space */
-      padding-right: 2rem; /* Adds padding to the right to ensure the last card is visible */
-      gap: 1rem; /* Space between cards */
-    }
-    
-    .scrolling-card {
-      min-width: 250px;
-      max-width: 300px; /* Set a maximum width for consistency */
-      width: 300px; /* Ensure all cards are of the same width */
-      background-color: #C2CAD6;
-      border-radius: 10px;
-      padding: 1rem;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-      flex-shrink: 0; /* Ensures they don't get squished */
-      overflow: hidden; /* Avoid text overflow */
-      text-overflow: ellipsis; /* Add ellipsis if the text is too long */
-    }
-    
-    .assignment-title {
-      font-size: 1.5rem;
-      text-align: center;
-      font-weight: bold;
-      color: #354F77; /* Changed from blue */
-      margin-bottom: 0.5rem;
-    }
-    
-    .assignment-aim {
-      font-size: 1rem;
-      color: #333333;
-      text-align: center;.assignment-container {
   margin-top: 2rem;
   margin-bottom: 4rem;
   display: flex;
+  align-items: center;
   justify-content: center;
   width: 100%;
 }
 
 .scrolling-wrapper {
   display: flex;
-  overflow-x: auto;  /* Enables horizontal scroll */
-  scroll-behavior: smooth;
-  padding: 1rem 0;  /* Reduced padding to keep card sizes the same */
-  gap: 1rem; /* Space between cards */
+  overflow: hidden; /* Hide the scrollbar */
+  gap: 1rem;
+  width: 90%; /* Set a width for the scrollable area */
 }
 
 .scrolling-card {
-  min-width: 300px; /* Revert to larger size */
-  max-width: 300px;
-  width: 300px;
+  min-width: 250px;
+  max-width: 350px;
+  width: 350px;
   background-color: #C2CAD6;
   border-radius: 10px;
-  padding: 1rem 0;
+  padding: 2rem;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Align content to center */
-  justify-content: space-between; /* Keep title and description evenly spaced */
-}
-
-.scrolling-card:first-child {
-  margin-left: 1rem; /* Add space to the left of the first card */
-}
-
-.scrolling-card:last-child {
-  margin-right: 1rem; /* Add space to the right of the last card */
 }
 
 .assignment-title {
   font-size: 1.5rem;
+  text-align: center;
   font-weight: bold;
   color: #354F77;
-  text-align: center; /* Centers the title within the card */
-  margin-bottom: 0.5rem;
 }
 
 .assignment-aim {
+  margin-top: 30px;
   font-size: 1rem;
   color: #333333;
-  text-align: center; /* Centers the description text */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 250px;
-  
+  text-align: center;
 }
 
-    }
-    
+.scroll-btn {
+  background-color: #354F77;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.scroll-btn.left {
+  margin-right: 1rem;
+}
+
+.scroll-btn.right {
+  margin-left: 1rem;
+}
+
+.scroll-btn:hover {
+  background-color: #2A3E5B; /* Darken button on hover */
+}

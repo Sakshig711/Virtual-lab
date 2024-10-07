@@ -1,7 +1,5 @@
 import React from "react";
 import pictlogo from "../assets/pictlogo.png";
-import polygon2 from '../assets/poly1.svg';
-import polygon3 from '../assets/poly2.svg';
 import polygon from '../assets/poly4.svg';
 import "./Nav.css";
 const Nav = () => {
@@ -16,6 +14,12 @@ const Nav = () => {
                 <p className="text-wrapper">Pune Institute Of Computer Technology</p>
                 <p className="p">A Virtual Lab for Database Management System</p>
                 <img className="pictlogo" alt="Pictlogo" src={pictlogo} />
+
+                <div className="nav-links">
+                  <a href="#home">Home</a>
+                  <a href="#about-us">About Us</a>
+                  <a href="#contact">Contact</a>
+                </div>
               </div>
             </div>
           </div>

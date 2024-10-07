@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import './AssignmentContainer.css';
 
 const AssignmentContainer = () => {
+  const scrollingWrapperRef = useRef(null);
+
+  const scrollLeft = () => {
+    scrollingWrapperRef.current.scrollBy({
+      left: -364, 
+      behavior: 'smooth',
+    });
+  };
+
+  const scrollRight = () => {
+    scrollingWrapperRef.current.scrollBy({
+      left: 364,
+      behavior: 'smooth',
+    });
+  };
+
   const assignments = [
     { id: 1, title: "Assignment no.1", aim: "To Study & Compare with suitable example various SQL database systems." },
     { id: 2, title: "Assignment no.2", aim: "Install and configure client and server for MySQL(Show all commands and necessary steps for installationand configuration)" },
@@ -17,13 +33,12 @@ const AssignmentContainer = () => {
     { id: 12, title: "Assignment no.10", aim: "Implement views in SQL to simplify complex queries on the above DB." },
     { id: 13, title: "Assignment no.11", aim: "Implement index structures to optimize query performance on the above DB." },
     { id: 14, title: "Assignment no.12", aim: "Perform backup and restore operations on the above DB." },
-    
-    
   ];
 
   return (
     <div className="assignment-container">
-      <div className="scrolling-wrapper">
+      <button className="scroll-btn left" onClick={scrollLeft}>&lt;</button>
+      <div className="scrolling-wrapper" ref={scrollingWrapperRef}>
         {assignments.map((assignment) => (
           <div className="scrolling-card" key={assignment.id}>
             <h4 className="assignment-title">{assignment.title}</h4>
@@ -31,6 +46,7 @@ const AssignmentContainer = () => {
           </div>
         ))}
       </div>
+      <button className="scroll-btn right" onClick={scrollRight}>&gt;</button>
     </div>
   );
 };

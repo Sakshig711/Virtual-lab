@@ -4,22 +4,12 @@
   align-items: center;
   padding: 0 40px;
   height: 70px;
-  position: fixed;
   width: 100%;
-  top: 30px;
-  left: 0;
-  z-index: 100000;
-  transition: background-color 0.3s ease; /* Smooth background transition */
-  margin: 0; /* Ensure no extra space above or below the navbar */
-  border: none; /* Remove any potential border */
-  box-sizing: border-box; /* Include padding and border in width/height calculations */
-  overflow-x: hidden;
-}
-
-/* Default transparent header */
-.header {
-  background-color: transparent; 
   margin: 0;
+  border: none;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  background-color: transparent; 
 }
 
 /* Logo container */
@@ -34,7 +24,7 @@
 }
 
 .logo-container h1 {
-  color: black; /* Default color when not scrolled */
+  color: black;
 }
 
 /* Navbar links */
@@ -43,12 +33,12 @@
   display: flex;
   gap: 20px;
   margin: 0;
-  padding: 0; /* Ensure no extra space from padding */
+  padding: 0;
   font-size: larger;
 }
 
 .nav-menu li a {
-  color: white; /* Default color when not scrolled */
+  color: white;
   text-decoration: none;
   font-size: 1.3rem;
 }
@@ -56,8 +46,6 @@
 .nav-menu li a:hover {
   color: #f0a500;
 }
-
-
 
 /* On smaller screens */
 @media (max-width: 768px) {
@@ -70,7 +58,7 @@
     position: absolute;
     top: 70px;
     right: 0;
-    background-color: rgba(43, 42, 42, 0.9); /* Dark background for mobile */
+    background-color: rgba(43, 42, 42, 0.9); 
     width: 100%;
     flex-direction: column;
     align-items: center;
@@ -79,8 +67,6 @@
     margin: 0;
   }
 
- 
-
   .header h1 {
     font-size: 1.2rem;
   }
@@ -88,8 +74,4 @@
   .logo {
     height: 40px;
   }
-}
-
-* {
-  box-sizing: border-box;
 }

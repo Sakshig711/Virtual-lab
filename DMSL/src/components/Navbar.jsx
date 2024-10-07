@@ -1,7 +1,6 @@
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
 import logo from '/src/assets/pictLogo.png';
 
 const Navbar = ({ alwaysDark }) => {
