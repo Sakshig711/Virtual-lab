@@ -1,15 +1,15 @@
 import React from 'react';
 import Footer from '../components/Footer.jsx';
 import '../routes/Home.css';
-import Navbar from '../components/Nav.jsx'; // Import the JPG image
-import Menu from '../components/Navbar.jsx'
+import Navbar from '../components/Nav.jsx'; 
+import Menu from '../components/Navbar.jsx';
+import AssignmentContainer from '../components/AssignmentContainer'; // Import Assignment container
 
 const Home = () => {
   return (
     <div className="home-container">
-      
       <Navbar />
-      <Menu  />
+      <Menu />
 
       <div className="content">
           <h4>Hello DataArchitect,</h4>
@@ -29,6 +29,10 @@ const Home = () => {
             and a more complex backup system.
           </h5>
       </div>
+
+      {/* Assignment Scrolling Container */}
+      <AssignmentContainer />
+
       <Footer />
     </div>
   );
