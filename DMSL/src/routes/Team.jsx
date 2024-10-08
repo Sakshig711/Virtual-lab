@@ -5,7 +5,7 @@ import './Team.css';
 import Atharva from '../assets/atharva.png';
 import Kshitij from '../assets/Kshitij.png';
 import Shlok from '../assets/Shlok.jpg';
-import Sakshi from '../assets/Sakshi.jpeg';
+import Sakshi from '../assets/sakshi.jpeg';
 import Satvik from '../assets/satvik.jpeg';
 
 const teamMembers = [
