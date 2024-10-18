@@ -14,6 +14,12 @@
   width: 90%; /* Set a width for the scrollable area */
 }
 
+.scrolling-wrapper button{
+  background: none;
+  border:none;
+  cursor: pointer;
+}
+
 .scrolling-card {
   min-width: 250px;
   max-width: 350px;
@@ -25,6 +31,7 @@
   flex-shrink: 0;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: center;
 }
 
 .assignment-title {

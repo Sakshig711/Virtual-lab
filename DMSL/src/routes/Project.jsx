@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import Menu from '../components/Menu.jsx';
 import Navbar from '../components/Nav.jsx';
 import Rectangle from '../components/Rectangle.jsx'; 
@@ -8,6 +10,14 @@ import VideoGallery from '../components/Video.jsx';
 const Project = () => {
   const [content, setContent] = useState("info");
   const [activeSection, setActiveSection] = useState("info");
+
+  const location = useLocation(); // Access location object
+  const { practicalData } = location.state || {}; // Get practical data from state
+
+  // Check if practicalData exists and is an array
+  const practical = practicalData && Array.isArray(practicalData) && practicalData.length > 0 
+    ? practicalData[0]  // Access the first element in the array
+    : null;
 
   const handleMenuClick = (section) => {
     if (section === "try-yourself") {
@@ -24,12 +34,15 @@ const Project = () => {
 
   const renderContent = () => {
     if (content === "info") {
+      if (!practical) {
+        return <p>No practical data available</p>; // Handle missing data gracefully
+      }
       return (
-        <Rectangle 
-          Aim="Design & Develop DB for 'Order Management System' with all the constraints." 
-          problemStatement="Design & Develop DB for 'Order Management System' with all the constraints. (There must be at least 3 entities and relationships between them.) The statement should use SQL objects such as Table, View, Index, and Sequence." 
-          Objective="Apply DCL and DDL commands to convert ER/EER diagram to tables. To understand the technique for converting ER diagram into tables. To understand the use of DDL and DCL." 
-          Conclusion="Understand how to design and develop a relational database system using MySQL."
+        <Rectangle
+          Aim={practical.aim || "No Aim available"}
+          problemStatement={practical.problemStatement || "No Problem Statement available"}
+          Objective={practical.objective || "No Objective available"}
+          Conclusion={practical.conclusion || "No Conclusion available"}
         />
       );
     } else if (content === "reference") {

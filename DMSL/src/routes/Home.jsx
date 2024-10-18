@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <div className="home-container">
       <Navbar />
-      <Menu />
+      {/* <Menu /> */}
 
       <div className="content">
           <h4>Hello DataArchitect,</h4>
