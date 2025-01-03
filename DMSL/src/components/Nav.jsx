@@ -2,6 +2,8 @@ import React from "react";
 import pictlogo from '../assets/pictlogo.png';
 import polygon from '../assets/poly4.svg';
 import "./Nav.css";
+import { Link } from "react-router-dom";
+
 const Nav = () => {
     return (
         <div className="frame">
@@ -16,9 +18,9 @@ const Nav = () => {
                 <img className="pictlogo" alt="Pictlogo" src={pictlogo} />
 
                 <div className="nav-links">
-                  <a href="#home">Home</a>
-                  <a href="#about-us">About Us</a>
-                  <a href="#contact">Contact</a>
+                  <Link to="/">Home</Link>
+                  <Link to="/aboutus">About Us</Link>
+                  <Link to="/contact">Contact</Link>
                 </div>
               </div>
             </div>

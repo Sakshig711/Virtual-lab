@@ -14,7 +14,6 @@ const VideoGallery = () => {
         <div key={index} className="video-container">
           <video width="600" controls>
             <source src={videoUrl} type="video/mp4" />
-           
           </video>
         </div>
       ))}

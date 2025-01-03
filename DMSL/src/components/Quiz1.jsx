@@ -7,13 +7,10 @@ const QuizApp = () => {
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
 
-   
-
   const shuffleQuestions = (questions) => {
     return [...questions].sort(() => Math.random() - 0.5);
   };
 
- 
   useEffect(() => {
     fetch('/mcq.json')
       .then((response) => response.json())
@@ -24,7 +21,7 @@ const QuizApp = () => {
       })
       .catch((error) => console.error("Error fetching quiz data from S3:", error));
   }, []);
- 
+
   const handleOptionChange = (questionIndex, optionValue) => {
     const updatedSelectedOptions = [...selectedOptions];
     updatedSelectedOptions[questionIndex] = optionValue;

@@ -107,25 +107,16 @@ const AssignmentContainer = () => {
 
   return (
     <div className="assignment-container">
-      <button className="scroll-btn left" onClick={scrollLeft}>
-        &lt;
-      </button>
+      <button className="scroll-btn left" onClick={scrollLeft}>&lt;</button>
       <div className="scrolling-wrapper" ref={scrollingWrapperRef}>
         {assignments.map((assignment) => (
           <div className="scrolling-card" key={assignment.id}>
-            <button
-              className="assignment-title"
-              onClick={() => handleClick(assignment.id)}
-            >
-              {assignment.title}
-            </button>
+            <button className="assignment-title" onClick={() => handleClick(assignment.id)}>{assignment.title}</button>
             <p className="assignment-aim">{assignment.aim}</p>
           </div>
         ))}
       </div>
-      <button className="scroll-btn right" onClick={scrollRight}>
-        &gt;
-      </button>
+      <button className="scroll-btn right" onClick={scrollRight}>&gt;</button>
     </div>
   );
 };
