@@ -1,5 +1,5 @@
 import React from "react";
-import pictlogo from '../assets/pictlogo.png';
+import pictlogo from '../assets/pictLogo.png'
 import polygon from '../assets/poly4.svg';
 import "./Nav.css";
 import { Link } from "react-router-dom";
