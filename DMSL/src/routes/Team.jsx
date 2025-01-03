@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from '../components/Navbar'; 
+import Navbar from '../components/Nav.jsx'; 
 import TeamCard from '../components/Card'; 
 import './Team.css'; 
 import Atharva from '../assets/atharva.png';
