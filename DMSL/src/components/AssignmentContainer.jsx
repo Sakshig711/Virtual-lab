@@ -16,7 +16,7 @@ const AssignmentContainer = () => {
 
   const handleClick = async (id) => {
     try {
-      const resp = await axios.get(`https://virtual-lab-server.vercel.app/practical/${id}`);
+      const resp = await axios.get(`http://localhost:3000/practical/${id}`);
       console.log(resp.data);
       
       // Navigate to the Project page, passing the `id` as part of state or as a parameter
