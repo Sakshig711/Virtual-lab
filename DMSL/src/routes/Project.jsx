@@ -12,8 +12,8 @@ const Project = () => {
   const [activeSection, setActiveSection] = useState("info");
 
   const location = useLocation(); // Access location object
-  const { practicalData } = location.state || {}; // Get practical data from state
-
+  // const { practicalData } = location.state || {}; // Get practical data from state
+  const { id, practicalData } = location.state || {};
   // Check if practicalData exists and is an array
   const practical = practicalData && Array.isArray(practicalData) && practicalData.length > 0 
     ? practicalData[0]  // Access the first element in the array
@@ -60,7 +60,8 @@ const Project = () => {
     } else if (content === "demo") {
       return (
         <div className="section-content">
-          <VideoGallery />
+          {/* <VideoGallery /> */}
+          <VideoGallery id={id} />
         </div>
       );
     } else {
