@@ -20,7 +20,8 @@ const AssignmentContainer = () => {
       console.log(resp.data);
       
       // Navigate to the Project page, passing the `id` as part of state or as a parameter
-      navigate("/project", { state: { practicalData: resp.data } });
+      // navigate("/project", { state: { practicalData: resp.data } });
+      navigate("/project", { state: { id, practicalData: resp.data } });
     } catch (error) {
       console.error("Error fetching practical data:", error);
     }
