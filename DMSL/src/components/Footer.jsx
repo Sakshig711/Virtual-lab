@@ -25,7 +25,7 @@ const Footer = () => {
         <div className="footer-right">
           <div className="footer-section">
             <p>© 2024 IT Dept, PICT | All Rights Reserved</p>
-            <p>Developed By <Link to="/team" rel="noreferrer">DMSL team</Link></p>
+            
           </div>
           <div className="footer-section links">
             <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Services</a> | <a href="#contact">Contact</a>

@@ -20,7 +20,7 @@ const Nav = () => {
                 <div className="nav-links">
                   <Link to="/">Home</Link>
                   <Link to="/aboutus">About Us</Link>
-                  <Link to="/contact">Contact</Link>
+                  <Link to="/contact">Team</Link>
                 </div>
               </div>
             </div>
