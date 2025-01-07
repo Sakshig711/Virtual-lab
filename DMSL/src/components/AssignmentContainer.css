@@ -9,14 +9,14 @@
 
 .scrolling-wrapper {
   display: flex;
-  overflow: hidden; /* Hide the scrollbar */
+  overflow: hidden;
   gap: 1rem;
-  width: 90%; /* Set a width for the scrollable area */
+  width: 90%;
 }
 
-.scrolling-wrapper button{
+.scrolling-wrapper button {
   background: none;
-  border:none;
+  border: none;
   cursor: pointer;
 }
 
@@ -29,9 +29,21 @@
   padding: 2rem;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
   text-align: center;
+  transition: all 0.3s ease;
+}
+
+/* Hover Effect */
+.scrolling-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Active (Clicked) Card - Applies Hover Effect Persistently */
+.scrolling-card.active {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+  border: 2px solid #354F77;  /* Highlight active card */
 }
 
 .assignment-title {
@@ -39,6 +51,19 @@
   text-align: center;
   font-weight: bold;
   color: #354F77;
+  transition: all 0.3s ease;  /* Smooth transition for hover effect */
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* Hover Effect - Changes Background and Text Color */
+.assignment-title:hover {
+  color: white;  /* Text color change on hover */
+  background-color: #354F77;  /* Background color change */
+  border-radius: 5px;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
 }
 
 .assignment-aim {
@@ -66,5 +91,5 @@
 }
 
 .scroll-btn:hover {
-  background-color: #2A3E5B; /* Darken button on hover */
+  background-color: #2A3E5B;
 }
