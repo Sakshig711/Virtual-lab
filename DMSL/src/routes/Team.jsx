@@ -56,13 +56,13 @@ const teamMembers = [
   },
 ];
 
-const Team = () => {
+const Contact= () => {
   return (
     <div>
       <Navbar alwaysDark={true} />
       
       <div className="team-page">
-        <h1>Meet the Team</h1>
+        <h1 className='heading'>Meet the Team</h1>
         <h5 className="team-description">
           Discover the creative minds behind our website's design and development. 
           Meet our team of talented individuals who collaborated to bring our vision to life through captivating logos, 
@@ -87,4 +87,4 @@ const Team = () => {
   );
 };
 
-export default Team;
+export default Contact;
