@@ -31,7 +31,6 @@ const Home = () => {
 
       {/* Assignment Scrolling Container */}
       <AssignmentContainer />
-
       <Footer />
     </div>
   );
