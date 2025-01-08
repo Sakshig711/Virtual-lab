@@ -7,10 +7,18 @@ const AssignmentContainer = () => {
   const scrollingWrapperRef = useRef(null);
   const autoScrollInterval = useRef(null);
   const navigate = useNavigate();
+  const [activeAssignment, setActiveAssignment] = useState(null);  // Track active assignment title
 
   const scrollLeft = () => {
     scrollingWrapperRef.current.scrollBy({
       left: -364,
+      behavior: "smooth",
+    });
+  };
+
+  const scrollRight = () => {
+    scrollingWrapperRef.current.scrollBy({
+      left: 364,
       behavior: "smooth",
     });
   };
@@ -22,12 +30,6 @@ const AssignmentContainer = () => {
       console.error("Error fetching practical data:", error);
     }
   };
-  const scrollRight = () => {
-    scrollingWrapperRef.current.scrollBy({
-      left: 364,
-      behavior: "smooth",
-    });
-  };
 
   const assignments = [
     {
@@ -38,7 +40,7 @@ const AssignmentContainer = () => {
     {
       id: 2,
       title: "Assignment no.2",
-      aim: "Install and configure client and server for MySQL(Show all commands and necessary steps for installationand configuration)",
+      aim: "Install and configure client and server for MySQL (Show all commands and necessary steps).",
     },
     {
       id: 3,
@@ -48,7 +50,7 @@ const AssignmentContainer = () => {
     {
       id: 4,
       title: "Assignment no.4",
-      aim: "Design &amp; Develop DB for “Order Management System”with all the constraints.",
+      aim: "Design & Develop DB for Order Management System with constraints.",
     },
     {
       id: 5,
@@ -148,7 +150,12 @@ const stopAutoScroll = () => {
         }}>
         {assignments.map((assignment) => (
           <div className="scrolling-card" key={assignment.id}>
-            <button className="assignment-title" onClick={() => handleClick(assignment.id)}>{assignment.title}</button>
+            <button 
+              className={`assignment-title ${activeAssignment === assignment.id ? 'active' : ''}`} 
+              onClick={() => handleClick(assignment.id)}
+            >
+              {assignment.title}
+            </button>
             <p className="assignment-aim">{assignment.aim}</p>
           </div>
         ))}
