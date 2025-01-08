@@ -20,32 +20,49 @@ class Rectangle extends Component {
                     )}
                     {this.props.objective && (
                         <>
-                            {console.log(this.props.objective)}
                             <h3>Objective:</h3>
+                            {
+                            Array.isArray(this.props.objective) ? 
                             <ol>
                                 {this.props.objective.map((item, index) => (
-                                    <li key={index}>{item}</li>
+                                    <li key={index}>{index+1}. {item}</li>
                                 ))}
-                            </ol>
+                            </ol>:
+                            <p>{this.props.objective}</p>
+                            }
+                            
                         </>
                     )}
 
                     {this.props.Conclusion && (
                         <>
+                            <br />
                             <h3>Conclusion:</h3>
-                            <p>{this.props.Conclusion}</p>
+                            {Array.isArray(this.props.Conclusion) ? 
+                                <ol>
+                                    {this.props.Conclusion.map((con,index)=>(
+                                    <li key={index}>{index+1}. {con}</li>
+                                    ))}
+                                </ol>
+                            : <p>{this.props.Conclusion}</p>
+                            }
+                            
                         </>
                     )}
                     {this.props.References && (
                         <>
                             <h3>REFERENCE BOOK:</h3>
-                            <ul>
+                            {Array.isArray(this.props.References) ? 
+                                <ol>
                                 {this.props.References.map(
                                     (reference, index) => (
-                                        <li key={index}>{reference}</li>
+                                        <li key={index}>{index+1}. {reference}</li>
                                     )
                                 )}
-                            </ul>
+                                </ol>
+                            : <p>{this.props.References}</p>
+                            }
+                            
                         </>
                     )}
                 </div>

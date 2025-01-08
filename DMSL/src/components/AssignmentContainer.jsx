@@ -149,7 +149,7 @@ const stopAutoScroll = () => {
           }, 2000);
         }}>
         {assignments.map((assignment) => (
-          <div className="scrolling-card" key={assignment.id}>
+          <div className="scrolling-card" key={assignment.id} onClick={() => handleClick(assignment.id)}>
             <button 
               className={`assignment-title ${activeAssignment === assignment.id ? 'active' : ''}`} 
               onClick={() => handleClick(assignment.id)}
