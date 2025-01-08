@@ -6,13 +6,13 @@ import Project from "./routes/Project";
 import Contact from "./routes/Contact";
 import Team from "./routes/Team";
 
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router-dom";
 
 function App() {
   return (
     <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/project" element={<Project />} />
+        <Route path="/practical/:id" element={<Project />} />
         <Route path="/aboutus" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/team" element={<Team />} />

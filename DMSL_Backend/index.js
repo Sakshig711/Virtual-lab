@@ -20,7 +20,7 @@ app.get("/practical/:id", async (req, resp) => {
     const assign_id = req.params.id;
     try {
         const data = await doc.find({ id: assign_id });
-        console.log(data);
+        
         if (data) {
             resp.status(200).json(data);
         } else {

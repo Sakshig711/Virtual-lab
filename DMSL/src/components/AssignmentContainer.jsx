@@ -1,10 +1,11 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import "./AssignmentContainer.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const AssignmentContainer = () => {
   const scrollingWrapperRef = useRef(null);
+  const autoScrollInterval = useRef(null);
   const navigate = useNavigate();
 
   const scrollLeft = () => {
@@ -16,12 +17,7 @@ const AssignmentContainer = () => {
 
   const handleClick = async (id) => {
     try {
-      const resp = await axios.get(`http://localhost:3000/practical/${id}`);
-      console.log(resp.data);
-      
-      // Navigate to the Project page, passing the `id` as part of state or as a parameter
-      // navigate("/project", { state: { practicalData: resp.data } });
-      navigate("/project", { state: { id, practicalData: resp.data } });
+      navigate(`/practical/${id}`);
     } catch (error) {
       console.error("Error fetching practical data:", error);
     }
@@ -106,10 +102,50 @@ const AssignmentContainer = () => {
     },
   ];
 
+useEffect(() => {
+    const startAutoscroll = () =>{
+      autoScrollInterval.current = setInterval(() => {
+        if(scrollingWrapperRef.current){
+          const container = scrollingWrapperRef.current;
+          const maxScrollLeft = container.scrollWidth - container.clientWidth;
+          scrollingWrapperRef.current.scrollBy({
+            left:364,
+            behavior:'smooth',
+          });
+          if (container.scrollLeft >= maxScrollLeft) {
+            setTimeout(() => {
+              container.scrollLeft = 0; // Reset to the first card
+            }, 400)
+          }
+        }
+      },2000);
+    }
+  
+  startAutoscroll();
+    return() =>{
+      clearInterval(autoScrollInterval.current);
+    }
+},[]);
+
+const stopAutoScroll = () => {
+  clearInterval(autoScrollInterval.current);
+};
+
   return (
     <div className="assignment-container">
       <button className="scroll-btn left" onClick={scrollLeft}>&lt;</button>
-      <div className="scrolling-wrapper" ref={scrollingWrapperRef}>
+      <div className="scrolling-wrapper" 
+        ref={scrollingWrapperRef} 
+        onMouseEnter={stopAutoScroll} // Stop auto-scroll when mouse hovers
+        onMouseLeave={() => {
+          // Restart auto-scroll when mouse leaves
+          autoScrollInterval.current = setInterval(() => {
+            scrollingWrapperRef.current.scrollBy({
+              left: 364,
+              behavior: "smooth",
+            });
+          }, 2000);
+        }}>
         {assignments.map((assignment) => (
           <div className="scrolling-card" key={assignment.id}>
             <button className="assignment-title" onClick={() => handleClick(assignment.id)}>{assignment.title}</button>
@@ -117,7 +153,9 @@ const AssignmentContainer = () => {
           </div>
         ))}
       </div>
-      <button className="scroll-btn right" onClick={scrollRight}>&gt;</button>
+      <button className="scroll-btn right" onClick={() => { stopAutoScroll(); scrollRight(); }}>
+        &gt;
+      </button>
     </div>
   );
 };
