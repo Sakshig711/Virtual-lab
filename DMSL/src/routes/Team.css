@@ -15,7 +15,7 @@
     align-items: center;
     width: 100%;
     text-align: center;
-    z-index: 5;
+    
     overflow-x: hidden;
     padding-top: 650px;
     background-color: #243457;
@@ -50,13 +50,15 @@
 
 .team-page h1 {
     color: #FFFFFF;
-    font-size: 4rem;
+    font-size: 3rem;
     height: fit-content;
     width: fit-content;
+    padding-top: 50px;
     font-family: 'Playfair Display', sans-serif;
-    margin-bottom: 20px;
+    margin-bottom: 00px; /* Add space below the heading */
     animation: fadeIn 1s ease;
 }
+
 
 .team-cards {
     display: flex;
@@ -64,13 +66,14 @@
     flex-wrap: wrap;
     gap: 20px;
     width: 100%;
-    margin-top: 5%;
+    margin-top: 2.5%;
     max-width: 1200px;
 }
 
 .team-cards-role {
     color: black;
 }
+
 
 .team-card {
     flex: 0 0 calc(33.33% - 40px);
@@ -98,16 +101,16 @@
 }
 
 
-.team-description h5 {
-    color: #ffffff;
-    font-size: 20px;
-    margin-bottom: 40px;
-}
+
 
 .team-description {
     font-family: "Tangerine", cursive;
     color: #ffffff;
+    font-size: 15px;
+    margin-top: 30px; /* Add margin to push the description down */
+    text-align: center; /* Ensure it aligns properly */
 }
+
 
 @keyframes gradientAnimation {
     0% {
