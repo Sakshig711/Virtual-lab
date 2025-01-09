@@ -25,7 +25,7 @@ const Menu = ({ onMenuClick, activeSection }) => {
             <rect x="0" y="0" fill="none" width="100%" height="100%" />
           </svg>
         </a> */}
-         {![1, 2, 3].includes(id) && (
+         {![1, 2, 3,4].includes(id) && (
           <a
             onClick={() => onMenuClick("demo")}
             className={`btn-1 ${activeSection === "demo" ? "active" : ""}`}
