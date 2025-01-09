@@ -25,7 +25,7 @@ const AssignmentContainer = () => {
 
   const handleClick = async (id) => {
     try {
-      navigate(`/practical/${id}`);
+      navigate(`/practical/${id}`,{ state: { id } });
     } catch (error) {
       console.error("Error fetching practical data:", error);
     }
