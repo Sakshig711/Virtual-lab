@@ -30,6 +30,22 @@ app.get("/practical/:id", async (req, resp) => {
         resp.status(500).send("Server Error");
     }
 });
+
+app.get("/assignmentlist", async(req,resp) =>{
+    try{
+        const list = await doc.find().select({id:1,aim:1,_id:0}).sort({id:1});
+        resp.status(200).json({
+            error:"false",
+            data:list
+        })
+    }catch(err){
+        resp.send(500).json({
+            error:"true",
+            message:"Internal error"
+        })
+    }
+});
+
 app.listen(3000, () => {
     console.log("Listening on 3000");
 });

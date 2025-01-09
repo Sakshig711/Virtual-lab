@@ -58,14 +58,14 @@ const Project = () => {
           <Rectangle
             Aim={practical.aim || "No Aim available"}
             problemStatement={practical.problemStatement || "No Problem Statement available"}
-            Objective={practical.objective || "No Objective available"}
+            objective={practical.objective || "No Objective available"}
             Conclusion={practical.conclusion || "No Conclusion available"}
           />
         );
       case "reference":
         return (
           <Rectangle
-            References={[
+            References = {practical.references || [
               "1) Silberschatz A., Korth H., Sudarshan S., 'Database System Concepts', 6th Edition, McGraw Hill Publishers, ISBN 0-07-120413-X",
               "2) The Complete Reference MySQL - McGraw Hill",
               "3) DBMS Complete Practical Approach - Maheshwari, Jain",
