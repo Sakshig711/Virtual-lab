@@ -7,6 +7,7 @@ import Contact from "./routes/Contact";
 import Team from "./routes/Team";
 
 import { Route, Routes, useParams } from "react-router-dom";
+import AssignmentList from "./routes/AssignmentList";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/aboutus" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/team" element={<Team />} />
+        <Route path="/assignmentlist" element={<AssignmentList />} />
       </Routes>
   );
 }
