@@ -9,7 +9,7 @@ function AssignmentList() {
 
     useEffect(() => {
         // Fetch data from the API
-        fetch("http://localhost:3000/assignmentlist") // Replace with your API endpoint
+        fetch("https://virtual-lab-server.vercel.app/assignmentlist") // Replace with your API endpoint
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("Failed to fetch assignments");
