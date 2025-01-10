@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import './Quiz1.css';
+import './css/Quiz1.css';
 
 const QuizApp = () => {
   const [questions, setQuestions] = useState([]);

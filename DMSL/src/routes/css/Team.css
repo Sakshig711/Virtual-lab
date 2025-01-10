@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@700;700&display=swap');
+
+.team-page {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    
+    overflow-x: hidden;
+    padding-top: 650px;
+    background-color: #243457;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.team-card:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    background-color: #849ec6;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.team-page h1 {
+    color: #FFFFFF;
+    font-size: 3rem;
+    height: fit-content;
+    width: fit-content;
+    padding-top: 50px;
+    font-family: 'Playfair Display', sans-serif;
+    margin-bottom: 00px; /* Add space below the heading */
+    animation: fadeIn 1s ease;
+}
+
+
+.team-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+    margin-top: 2.5%;
+    max-width: 1200px;
+}
+
+.team-cards-role {
+    color: black;
+}
+
+
+.team-card {
+    flex: 0 0 calc(33.33% - 40px);
+    background-color: rgba(203, 217, 230, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: calc(33.33% - 40px);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+@media screen and (max-width: 768px) {
+    .team-card {
+        flex: 0 0 calc(50% - 40px);
+        width: calc(50% - 40px);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .team-card {
+        flex: 0 0 100%;
+        width: 100%;
+    }
+}
+
+
+
+
+.team-description {
+    font-family: "Tangerine", cursive;
+    color: #ffffff;
+    font-size: 15px;
+    margin-top: 30px; /* Add margin to push the description down */
+    text-align: center; /* Ensure it aligns properly */
+}
+
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+body {
+    animation: gradientAnimation 5s ease infinite;
+}

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Rectangle.css";
+import "./css/Rectangle.css";
 
 class Rectangle extends Component {
     render() {

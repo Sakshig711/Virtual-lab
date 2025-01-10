@@ -1,4 +1,4 @@
-import "./HeroImg.css";
+import "./css/HeroImg.css";
 import React from 'react';
 import bgimg from '../assets/pict building.jpg';
 
