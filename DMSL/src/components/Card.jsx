@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa'; 
-import './Card.css'; 
+import './css/Card.css'; 
 
 const TeamCard = ({ name, role, description, imageUrl, linkedinUrl, githubUrl, mailUrl }) => {
   return (

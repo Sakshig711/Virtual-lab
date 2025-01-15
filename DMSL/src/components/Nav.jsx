@@ -1,7 +1,7 @@
 import React from "react";
 import pictlogo from '../assets/pictLogo.png'
 import polygon from '../assets/poly4.svg';
-import "./Nav.css";
+import "./css/Nav.css";
 import { Link } from "react-router-dom";
 
 const Nav = () => {
@@ -20,7 +20,7 @@ const Nav = () => {
                 <div className="nav-links">
                   <Link to="/">Home</Link>
                   <Link to="/aboutus">About Us</Link>
-                  <Link to="/contact">Team</Link>
+                  <Link to="/assignmentlist">List</Link>
                 </div>
               </div>
             </div>

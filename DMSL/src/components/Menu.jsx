@@ -1,5 +1,5 @@
 import React from 'react';
-import './Menu.css';
+import './css/Menu.css';
 import { useLocation } from 'react-router-dom';
 const Menu = ({ onMenuClick, activeSection }) => {
   const location = useLocation();
