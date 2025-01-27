@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../components/Nav.jsx'; 
 import TeamCard from '../components/Card.jsx';
-import './About.css';
+import './css/About.css';
 import Hod from '../assets/hod.jpg';
 import Jakate from '../assets/jakhete.jpg';
 import Hiray from '../assets/hiray.jpg';
