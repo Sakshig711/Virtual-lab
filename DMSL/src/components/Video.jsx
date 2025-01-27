@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import "./Video.css";
+import "./css/Video.css";
 
 const VideoGallery = ({ id }) => {
   const defaultVideoUrl = "https://dmsl-vlab.s3.ap-south-1.amazonaws.com/Assignment_5.mp4";

@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../components/Nav.jsx'; 
 import TeamCard from '../components/Card'; 
-import './Team.css'; 
+import './css/Team.css'; 
 import Atharva from '../assets/atharva.png';
 import Kshitij from '../assets/Kshitij.png';
 import Shlok from '../assets/Shlok.jpg';
@@ -30,7 +30,7 @@ const teamMembers = [
   {
     name: 'Sakshi Gangurde',
     role: 'Fullstack Developer',
-    description: 'Built the backend APIs.',
+    description: 'Developed the UI of the website.',
     imageUrl: Sakshi,
     linkedinUrl: 'https://www.linkedin.com/in/sakshi-s-gangurde/',
     githubUrl: 'https://github.com/sakshig711',
@@ -39,7 +39,7 @@ const teamMembers = [
   {
     name: 'Shlok Gaidhani',
     role: 'Fullstack Developer',
-    description: 'Built the backend APIs.',
+    description: 'Developed the UI of the website.',
     imageUrl: Shlok,
     linkedinUrl: 'https://www.linkedin.com/in/shlok-gaidhani-57135629a/',
     githubUrl: 'https://github.com/Shlok-06',

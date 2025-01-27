@@ -1,6 +1,6 @@
 import React from 'react';
 import Footer from '../components/Footer.jsx';
-import '../routes/Home.css';
+import './css/Home.css';
 import Navbar from '../components/Nav.jsx'; 
 import AssignmentContainer from '../components/AssignmentContainer'; // Import Assignment container
 

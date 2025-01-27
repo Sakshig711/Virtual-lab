@@ -1,5 +1,5 @@
 import React from 'react';
-import './Footer.css';
+import './css/Footer.css';
 import { FaHome, FaPhone, FaMailBulk } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
@@ -28,7 +28,7 @@ const Footer = () => {
             
           </div>
           <div className="footer-section links">
-            <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Services</a> | <a href="#contact">Contact</a>
+            <Link to="/team">Our Team</Link>
           </div>
         </div>
       </div>
