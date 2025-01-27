@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from '../components/Nav.jsx'; 
-import TeamCard from '../components/Card';
+import TeamCard from '../components/Card.jsx';
 import './About.css';
 import Hod from '../assets/hod.jpg';
 import Jakate from '../assets/jakhete.jpg';
@@ -21,8 +21,10 @@ const teamMembers = [
     name: 'Sumitra A. Jakate',
     role: 'Associate Prof. at Dept. of Information Technology',
     location: 'Pict, Pune, India',
-    email: 'sajakete@pict.edu',
     imageUrl: Jakate,
+    linkedinUrl: 'https://www.linkedin.com/in/atharva-dhake-155160258/',
+    githubUrl: 'https://github.com/atharva-dhake',
+    mailUrl: 'atharvadhake01@gmail.com',
   },
   {
     name: 'Swapnaja R. Hiray',
