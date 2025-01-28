@@ -3,7 +3,7 @@ import Navbar from '../components/Nav.jsx';
 import TeamCard from '../components/Card.jsx';
 import './css/About.css';
 import Hod from '../assets/hod.jpg';
-import Jakate from '../assets/jakhete.jpg';
+import Jakate from '../assets/Jakhete.jpg';
 import Hiray from '../assets/hiray.jpg';
 import Archana from '../assets/Archana_Kadam.jpg';
 // Uncomment and ensure this image exists if needed
