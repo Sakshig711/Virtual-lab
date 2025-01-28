@@ -19,17 +19,14 @@ const Project = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log(`Fetching data for ID: ${id}`);
       try {
-        const resp = await axios.get(`http://localhost:3000/practical/${id}`);
-        console.log("Fetched Data:", resp.data);
-        if (Array.isArray(resp.data) && resp.data.length > 0) {
+        const resp = await axios.get(`https://virtual-lab-server.vercel.app/practical/${id}`);
+        if(Array.isArray(resp.data) && resp.data.length > 0){
           setPractical(resp.data[0]);
         } else {
           setError("No practical data found for the given ID.");
         }
       } catch (err) {
-        console.error("Fetch Error:", err);
         setError("Failed to fetch practical data. Please try again later.");
       } finally {
         setLoading(false);
