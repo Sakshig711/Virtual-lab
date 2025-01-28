@@ -39,18 +39,25 @@ const Project = () => {
   }, [id]);
 
   const handleMenuClick = (section) => {
-    if (section === "try-yourself") {
-      window.open("https://www.programiz.com/sql/online-compiler/", "_blank");
-    } else {
-      setContent(section);
-      setActiveSection(section);
-    }
-  };
-
-  useEffect(() => {
-    handleMenuClick("info"); // Set "info" as default
-  }, []);
-
+	if (section === "try-yourself") {
+	  if (id == 1) {
+	    window.open("https://dev.mysql.com/doc/", "_blank");
+	  } 
+	  else if(id == 2) {
+	    window.open("https://dev.mysql.com/doc/refman/8.0/en/installing.html", "_blank");
+	  }
+	  else if(id == 3) {
+	    window.open("https://www.geeksforgeeks.org/difference-between-sql-and-nosql/", "_blank");
+	  }
+	  else {
+	    window.open("https://www.programiz.com/sql/online-compiler/", "_blank");
+	  }
+	} else {
+	  setContent(section);
+	  setActiveSection(section);
+	}
+      };
+      
   const renderContent = () => {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
