@@ -5,13 +5,15 @@ import About from "./routes/About";
 import Project from "./routes/Project";
 import Contact from "./routes/Contact";
 import Team from "./routes/Team";
-
-import { Route, Routes, useParams } from "react-router-dom";
 import AssignmentList from "./routes/AssignmentList";
+import FeedbackForm from "./components/FeedbackForm";
+
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <Routes>
+    <>
+      <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/practical/:id" element={<Project />} />
         <Route path="/aboutus" element={<About />} />
@@ -19,7 +21,9 @@ function App() {
         <Route path="/team" element={<Team />} />
         <Route path="/assignmentlist" element={<AssignmentList />} />
       </Routes>
+      <FeedbackForm />
+    </>
   );
 }
 
-export default App
+export default App;
