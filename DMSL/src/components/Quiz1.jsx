@@ -10,17 +10,36 @@ const QuizApp = () => {
   const shuffleQuestions = (questions) => {
     return [...questions].sort(() => Math.random() - 0.5);
   };
+  const location = useLocation();
+  const { id} = location.state || {};
+  console.log(id);
 
   useEffect(() => {
-    fetch('/mcq.json')
-      .then((response) => response.json())
+    // const getJsonFile = () => `/mcq${id}.json`;
+    const getJsonFile = () => {
+      if (id >=  10&& id <= 14) {
+        return `/mcq${id - 2}.json`; // Adjusted for ids 7 to 14
+      }else if(id>=7 && id<10){
+        return `/mcq7.json`;
+      }
+      return `/mcq${id}.json`; // For ids other than 7 to 14
+    };
+    const jsonFile = getJsonFile();
+
+    fetch(jsonFile)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Error fetching quiz data: ${response.statusText}`);
+        }
+        return response.json();
+      })
       .then((data) => {
         console.log(data);
         setQuestions(shuffleQuestions(data));
-        setSelectedOptions(Array(data.length).fill("")); 
+        setSelectedOptions(Array(data.length).fill(""));
       })
-      .catch((error) => console.error("Error fetching quiz data from S3:", error));
-  }, []);
+      .catch((error) => console.error("Error fetching quiz data:", error));
+  }, [id]);
 
   const handleOptionChange = (questionIndex, optionValue) => {
     const updatedSelectedOptions = [...selectedOptions];

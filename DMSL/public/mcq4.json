@@ -1,0 +1,58 @@
+[
+    {
+      "id": 1,
+      "question": "Which of the following is a primary key constraint in a database?",
+      "options": [
+        "Ensures a column has unique values",
+        "Allows duplicate values in a column",
+        "Links two tables together",
+        "Specifies a default value for a column"
+      ],
+      "correctOption": "Ensures a column has unique values"
+    },
+    {
+      "id": 2,
+      "question": "In an ER diagram, what does a diamond shape represent?",
+      "options": [
+        "Entity",
+        "Attribute",
+        "Relationship",
+        "Primary Key"
+      ],
+      "correctOption": "Relationship"
+    },
+    {
+      "id": 3,
+      "question": "Which SQL object is used to improve query performance by speeding up searches?",
+      "options": [
+        "View",
+        "Sequence",
+        "Index",
+        "Trigger"
+      ],
+      "correctOption": "Index"
+    },
+    {
+      "id": 4,
+      "question": "Which SQL statement is used to create a table in a database?",
+      "options": [
+        "INSERT INTO",
+        "CREATE TABLE",
+        "ALTER TABLE",
+        "DROP TABLE"
+      ],
+      "correctOption": "CREATE TABLE"
+    },
+    {
+      "id": 5,
+      "question": "Which SQL object is used to generate unique numeric values automatically?",
+      "options": [
+        "Trigger",
+        "Sequence",
+        "Index",
+        "View"
+      ],
+      "correctOption": "Sequence"
+    }
+  ]
+  

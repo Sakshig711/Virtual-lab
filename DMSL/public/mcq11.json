@@ -1,0 +1,58 @@
+[
+    {
+      "id": 1,
+      "question": "Which SQL keyword is used to check whether a subquery returns any rows?",
+      "options": [
+        "EXISTS",
+        "IN",
+        "ANY",
+        "ALL"
+      ],
+      "correctOption": "EXISTS"
+    },
+    {
+      "id": 2,
+      "question": "What will the following query return?\n\n```sql\nSELECT * FROM Orders WHERE product_id NOT IN (SELECT product_id FROM Products WHERE category = 'Electronics');\n```\n",
+      "options": [
+        "Orders containing only electronic products",
+        "Orders containing products from all categories",
+        "Orders containing products that are not from the Electronics category",
+        "Orders that have no products"
+      ],
+      "correctOption": "Orders containing products that are not from the Electronics category"
+    },
+    {
+      "id": 3,
+      "question": "Which SQL clause allows you to compare a value with multiple values returned by a subquery?",
+      "options": [
+        "IN",
+        "BETWEEN",
+        "ANY",
+        "LIKE"
+      ],
+      "correctOption": "ANY"
+    },
+    {
+      "id": 4,
+      "question": "Which of the following statements about the `EXISTS` clause in SQL is true?",
+      "options": [
+        "`EXISTS` returns TRUE if at least one row is returned by the subquery.",
+        "`EXISTS` returns the first row from the subquery.",
+        "`EXISTS` can only be used with aggregate functions.",
+        "`EXISTS` checks for NULL values only."
+      ],
+      "correctOption": "`EXISTS` returns TRUE if at least one row is returned by the subquery."
+    },
+    {
+      "id": 5,
+      "question": "What does the following SQL query do?\n\n```sql\nSELECT * FROM Products WHERE price > ALL (SELECT price FROM Products WHERE name = 'Apple 7');\n```\n",
+      "options": [
+        "Selects all products with a price lower than 'Apple 7'.",
+        "Selects all products with a price higher than 'Apple 7'.",
+        "Selects only the product 'Apple 7'.",
+        "Returns an error because of the ALL keyword."
+      ],
+      "correctOption": "Selects all products with a price higher than 'Apple 7'."
+    }
+  ]
+  

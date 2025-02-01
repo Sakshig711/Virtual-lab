@@ -1,0 +1,58 @@
+[
+    {
+      "id": 1,
+      "question": "Which SQL function is used to find the total number of records in a table?",
+      "options": [
+        "SUM()",
+        "COUNT()",
+        "AVG()",
+        "MAX()"
+      ],
+      "correctOption": "COUNT()"
+    },
+    {
+      "id": 2,
+      "question": "Which SQL function is used to retrieve the current date and time?",
+      "options": [
+        "GETDATE()",
+        "CURDATE()",
+        "NOW()",
+        "CURRENT_TIMESTAMP()"
+      ],
+      "correctOption": "NOW()"
+    },
+    {
+      "id": 3,
+      "question": "Which SQL clause is used to filter the results of a GROUP BY statement?",
+      "options": [
+        "WHERE",
+        "HAVING",
+        "ORDER BY",
+        "LIMIT"
+      ],
+      "correctOption": "HAVING"
+    },
+    {
+      "id": 4,
+      "question": "Which SQL function can be used to extract the name of the month from a date?",
+      "options": [
+        "DAYNAME()",
+        "MONTH()",
+        "MONTHNAME()",
+        "YEAR()"
+      ],
+      "correctOption": "MONTHNAME()"
+    },
+    {
+      "id": 5,
+      "question": "Which SQL statement will return all purchases made today?",
+      "options": [
+        "SELECT * FROM purchases WHERE purchase_date = NOW();",
+        "SELECT * FROM purchases WHERE purchase_date = CURDATE();",
+        "SELECT * FROM purchases WHERE purchase_date = CURRENT_TIMESTAMP();",
+        "SELECT * FROM purchases WHERE purchase_date = GETDATE();"
+      ],
+      "correctOption": "SELECT * FROM purchases WHERE purchase_date = CURDATE();"
+    }
+  ]
+  

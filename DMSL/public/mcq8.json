@@ -1,0 +1,58 @@
+[
+    {
+      "id": 1,
+      "question": "Which SQL statement is used to create a VIEW?",
+      "options": [
+        "CREATE VIEW",
+        "ALTER VIEW",
+        "INSERT VIEW",
+        "DEFINE VIEW"
+      ],
+      "correctOption": "CREATE VIEW"
+    },
+    {
+      "id": 2,
+      "question": "Which of the following is TRUE about updating records through a VIEW?",
+      "options": [
+        "A view can always be updated regardless of its definition.",
+        "A view cannot be updated if it contains aggregate functions like SUM() or AVG().",
+        "Views cannot be updated under any circumstances.",
+        "A view must contain all columns of the base table to be updatable."
+      ],
+      "correctOption": "A view cannot be updated if it contains aggregate functions like SUM() or AVG()."
+    },
+    {
+      "id": 3,
+      "question": "Which SQL command is used to modify an existing VIEW?",
+      "options": [
+        "ALTER VIEW",
+        "UPDATE VIEW",
+        "MODIFY VIEW",
+        "CHANGE VIEW"
+      ],
+      "correctOption": "ALTER VIEW"
+    },
+    {
+      "id": 4,
+      "question": "Which of the following is NOT a restriction applicable to VIEWS?",
+      "options": [
+        "A view cannot have ORDER BY unless used with TOP or LIMIT.",
+        "A view can contain aggregate functions but may not be updatable.",
+        "A view can include multiple tables using JOIN.",
+        "A view can store data permanently like a table."
+      ],
+      "correctOption": "A view can store data permanently like a table."
+    },
+    {
+      "id": 5,
+      "question": "What happens when a base table is deleted but a VIEW based on it still exists?",
+      "options": [
+        "The view automatically gets deleted.",
+        "The view remains but becomes invalid.",
+        "The view will continue working with existing data.",
+        "The view automatically creates a new base table."
+      ],
+      "correctOption": "The view remains but becomes invalid."
+    }
+  ]
+  

@@ -1,0 +1,58 @@
+[
+    {
+      "id": 1,
+      "question": "Which keyword is used to create a stored procedure in PL/SQL?",
+      "options": [
+        "CREATE PROCEDURE",
+        "DECLARE PROCEDURE",
+        "NEW PROCEDURE",
+        "DEFINE PROCEDURE"
+      ],
+      "correctOption": "CREATE PROCEDURE"
+    },
+    {
+      "id": 2,
+      "question": "Which of the following is TRUE about a stored function in PL/SQL?",
+      "options": [
+        "It cannot return a value.",
+        "It must return a value.",
+        "It can only be executed inside a trigger.",
+        "It cannot use parameters."
+      ],
+      "correctOption": "It must return a value."
+    },
+    {
+      "id": 3,
+      "question": "Which SQL keyword is used to execute a stored procedure?",
+      "options": [
+        "CALL",
+        "RUN",
+        "EXECUTE",
+        "START"
+      ],
+      "correctOption": "CALL"
+    },
+    {
+      "id": 4,
+      "question": "Which type of parameter in a stored procedure allows both input and output values?",
+      "options": [
+        "IN",
+        "OUT",
+        "IN OUT",
+        "RETURN"
+      ],
+      "correctOption": "IN OUT"
+    },
+    {
+      "id": 5,
+      "question": "Which of the following is a key difference between a stored procedure and a function?",
+      "options": [
+        "Functions cannot have parameters, but procedures can.",
+        "Functions must return a value, whereas procedures do not have to.",
+        "Procedures can only be used inside SQL queries.",
+        "Procedures cannot modify table data."
+      ],
+      "correctOption": "Functions must return a value, whereas procedures do not have to."
+    }
+  ]
+  

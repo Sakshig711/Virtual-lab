@@ -1,0 +1,58 @@
+[
+    {
+      "id": 1,
+      "question": "Which SQL command is used to create a new table in a database?",
+      "options": [
+        "INSERT",
+        "CREATE TABLE",
+        "ALTER TABLE",
+        "DROP TABLE"
+      ],
+      "correctOption": "CREATE TABLE"
+    },
+    {
+      "id": 2,
+      "question": "Which SQL command is used to grant or revoke privileges to users?",
+      "options": [
+        "GRANT and REVOKE",
+        "SELECT and UPDATE",
+        "INSERT and DELETE",
+        "CREATE and DROP"
+      ],
+      "correctOption": "GRANT and REVOKE"
+    },
+    {
+      "id": 3,
+      "question": "Which of the following is a Data Definition Language (DDL) command?",
+      "options": [
+        "SELECT",
+        "UPDATE",
+        "CREATE",
+        "GRANT"
+      ],
+      "correctOption": "CREATE"
+    },
+    {
+      "id": 4,
+      "question": "Which SQL object is used to store a query as a virtual table?",
+      "options": [
+        "Index",
+        "View",
+        "Trigger",
+        "Sequence"
+      ],
+      "correctOption": "View"
+    },
+    {
+      "id": 5,
+      "question": "Which SQL command is used to define access control on database objects?",
+      "options": [
+        "GRANT",
+        "UPDATE",
+        "SELECT",
+        "INSERT"
+      ],
+      "correctOption": "GRANT"
+    }
+  ]
+  

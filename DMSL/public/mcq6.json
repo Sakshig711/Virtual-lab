@@ -1,0 +1,58 @@
+[
+    {
+      "id": 1,
+      "question": "Which SQL command is used to modify the structure of an existing table?",
+      "options": [
+        "CREATE TABLE",
+        "ALTER TABLE",
+        "DROP TABLE",
+        "TRUNCATE TABLE"
+      ],
+      "correctOption": "ALTER TABLE"
+    },
+    {
+      "id": 2,
+      "question": "Which of the following is a Data Definition Language (DDL) command?",
+      "options": [
+        "SELECT",
+        "INSERT",
+        "CREATE",
+        "UPDATE"
+      ],
+      "correctOption": "CREATE"
+    },
+    {
+      "id": 3,
+      "question": "Which SQL object helps in improving the performance of queries by reducing search time?",
+      "options": [
+        "View",
+        "Trigger",
+        "Index",
+        "Sequence"
+      ],
+      "correctOption": "Index"
+    },
+    {
+      "id": 4,
+      "question": "Which SQL object is used to generate unique numeric values automatically?",
+      "options": [
+        "Trigger",
+        "Sequence",
+        "View",
+        "Index"
+      ],
+      "correctOption": "Sequence"
+    },
+    {
+      "id": 5,
+      "question": "Which DCL command is used to give user access privileges to a database object?",
+      "options": [
+        "GRANT",
+        "REVOKE",
+        "CREATE",
+        "ALTER"
+      ],
+      "correctOption": "GRANT"
+    }
+  ]
+  

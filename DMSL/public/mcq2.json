@@ -1,0 +1,58 @@
+[
+    {
+      "id": 1,
+      "question": "Which command is used to install MySQL on Ubuntu?",
+      "options": [
+        "sudo apt-get install mysql-server",
+        "install mysql",
+        "sudo install mysql",
+        "setup mysql"
+      ],
+      "correctOption": "sudo apt-get install mysql-server"
+    },
+    {
+      "id": 2,
+      "question": "Which configuration file is used for MySQL settings?",
+      "options": [
+        "/etc/mysql/my.cnf",
+        "/var/lib/mysql/my.cnf",
+        "/usr/mysql/config.cnf",
+        "/etc/mysql/settings.cnf"
+      ],
+      "correctOption": "/etc/mysql/my.cnf"
+    },
+    {
+      "id": 3,
+      "question": "Which command is used to start MySQL service?",
+      "options": [
+        "sudo service mysql start",
+        "start mysql",
+        "mysql start",
+        "service mysql"
+      ],
+      "correctOption": "sudo service mysql start"
+    },
+    {
+      "id": 4,
+      "question": "Which MySQL user has full administrative privileges?",
+      "options": [
+        "root",
+        "admin",
+        "mysql",
+        "superuser"
+      ],
+      "correctOption": "root"
+    },
+    {
+      "id": 5,
+      "question": "Which command allows you to log in to the MySQL client?",
+      "options": [
+        "mysql -u root -p",
+        "mysql client login",
+        "mysql start client",
+        "login mysql client"
+      ],
+      "correctOption": "mysql -u root -p"
+    }
+  ]
+  

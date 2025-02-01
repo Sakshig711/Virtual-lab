@@ -1,0 +1,58 @@
+[
+    {
+      "id": 1,
+      "question": "Which of the following types of triggers executes once for each affected row in a table?",
+      "options": [
+        "Statement-level trigger",
+        "Row-level trigger",
+        "Schema-level trigger",
+        "Database-level trigger"
+      ],
+      "correctOption": "Row-level trigger"
+    },
+    {
+      "id": 2,
+      "question": "Which trigger is fired before an INSERT, UPDATE, or DELETE operation on a table?",
+      "options": [
+        "BEFORE trigger",
+        "AFTER trigger",
+        "INSTEAD OF trigger",
+        "COMMIT trigger"
+      ],
+      "correctOption": "BEFORE trigger"
+    },
+    {
+      "id": 3,
+      "question": "Which SQL keyword is used to create a trigger in PL/SQL?",
+      "options": [
+        "CREATE TRIGGER",
+        "DECLARE TRIGGER",
+        "NEW TRIGGER",
+        "DEFINE TRIGGER"
+      ],
+      "correctOption": "CREATE TRIGGER"
+    },
+    {
+      "id": 4,
+      "question": "Which of the following statements about statement-level triggers is TRUE?",
+      "options": [
+        "They execute once for each affected row.",
+        "They execute once per SQL statement, regardless of the number of rows affected.",
+        "They cannot be used for DELETE operations.",
+        "They are the same as row-level triggers."
+      ],
+      "correctOption": "They execute once per SQL statement, regardless of the number of rows affected."
+    },
+    {
+      "id": 5,
+      "question": "Which special PL/SQL variables are used to access old and new values in a row-level trigger?",
+      "options": [
+        ":OLD and :NEW",
+        "BEFORE and AFTER",
+        "TRIGGER_OLD and TRIGGER_NEW",
+        "PREV and NEXT"
+      ],
+      "correctOption": ":OLD and :NEW"
+    }
+  ]
+  

@@ -1,0 +1,58 @@
+[
+    {
+      "id": 1,
+      "question": "Which database is known for its support for NoSQL and SQL features?",
+      "options": [
+        "PostgreSQL",
+        "Oracle",
+        "MySQL",
+        "Sybase"
+      ],
+      "correctOption": "PostgreSQL"
+    },
+    {
+      "id": 2,
+      "question": "Which database system is widely used for enterprise applications?",
+      "options": [
+        "Oracle",
+        "MySQL",
+        "PostgreSQL",
+        "SQLite"
+      ],
+      "correctOption": "Oracle"
+    },
+    {
+      "id": 3,
+      "question": "Which database is known for its high transaction reliability?",
+      "options": [
+        "MS SQL Server",
+        "MySQL",
+        "PostgreSQL",
+        "Oracle"
+      ],
+      "correctOption": "MS SQL Server"
+    },
+    {
+      "id": 4,
+      "question": "Which database supports the concept of 'Replication Server' for scalability?",
+      "options": [
+        "Sybase",
+        "MySQL",
+        "PostgreSQL",
+        "SQLite"
+      ],
+      "correctOption": "Sybase"
+    },
+    {
+      "id": 5,
+      "question": "Which database is best known for its simplicity and small footprint?",
+      "options": [
+        "SQLite",
+        "Oracle",
+        "PostgreSQL",
+        "Sybase"
+      ],
+      "correctOption": "SQLite"
+    }
+  ]
+  

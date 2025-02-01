@@ -1,0 +1,58 @@
+[
+    {
+      "id": 1,
+      "question": "What is a database?",
+      "options": [
+        "Organized collection of information that cannot be accessed, updated, and managed",
+        "Collection of data or information without organizing",
+        "Organized collection of data or information that can be accessed, updated, and managed",
+        "Organized collection of data that cannot be updated"
+      ],
+      "correctOption": "Organized collection of data or information that can be accessed, updated, and managed"
+    },
+    {
+      "id": 2,
+      "question": "Which of the following is not a type of database?",
+      "options": [
+        "Hierarchical",
+        "Network",
+        "Distributed",
+        "Decentralized"
+      ],
+      "correctOption": "Decentralized"
+    },
+    {
+      "id": 3,
+      "question": "Which of the following is not an example of DBMS?",
+      "options": [
+        "MySQL",
+        "Microsoft Access",
+        "IBM DB2",
+        "Google"
+      ],
+      "correctOption": "Google"
+    },
+    {
+      "id": 4,
+      "question": "Which of the following is not a feature of DBMS?",
+      "options": [
+        "Minimum Duplication and Redundancy of Data",
+        "High Level of Security",
+        "Single-user Access only",
+        "Support ACID Property"
+      ],
+      "correctOption": "Single-user Access only"
+    },
+    {
+      "id": 5,
+      "question": "Which of the following is a feature of the database?",
+      "options": [
+        "No-backup for the data stored",
+        "User interface provided",
+        "Lack of Authentication",
+        "Store data in multiple locations"
+      ],
+      "correctOption": "Store data in multiple locations"
+    }
+  ]
+  
