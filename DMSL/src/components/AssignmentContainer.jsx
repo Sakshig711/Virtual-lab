@@ -96,16 +96,6 @@ const AssignmentContainer = () => {
       id: 13,
       title: "Assignment no.11",
       aim: "Implement index structures to optimize query performance on the above DB.",
-    },
-    {
-      id: 14,
-      title: "Assignment no.12",
-      aim: "Perform backup and restore operations on the above DB.",
-    },
-    {
-      id: 15,
-      title: "Assignment no.13",
-      aim: "Write following nested sub queries on above DB.",
     }
   ];
 

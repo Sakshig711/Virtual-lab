@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import './css/AssignmentList.css'
 
-function AssignmentListCard({ id, aim }) {
+function AssignmentListCard({ id, aim, title }) {
     const navigate = useNavigate();
 
     const handleClick = () => {
@@ -12,7 +12,7 @@ function AssignmentListCard({ id, aim }) {
     return (
         <div className="Card">
             <div className="Box" onClick={handleClick}>
-                <h3>Assignmet: {id}</h3>
+                <h3>{title}</h3>
                 <p>{aim}</p>
             </div>
         </div>

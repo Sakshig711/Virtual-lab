@@ -33,7 +33,7 @@ app.get("/practical/:id", async (req, resp) => {
 
 app.get("/assignmentlist", async(req,resp) =>{
     try{
-        const list = await doc.find().select({id:1,aim:1,_id:0}).sort({id:1});
+        const list = await doc.find().select({id:1,aim:1,title:1,_id:0}).sort({id:1});
         resp.status(200).json({
             error:"false",
             data:list

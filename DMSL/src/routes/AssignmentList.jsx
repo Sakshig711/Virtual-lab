@@ -19,8 +19,6 @@ function AssignmentList() {
           withCredentials: true, // Use if the server expects cookies or credentials
         });
 
-        console.log("API Response:", response.data);
-
         // Ensure error is explicitly checked as a string
         if (response.data && response.data.error === "false" && Array.isArray(response.data.data)) {
           setAssignments(response.data.data);
@@ -60,7 +58,7 @@ function AssignmentList() {
       <Nav />
       {Array.isArray(assignments) && assignments.length > 0 ? (
         assignments.map((assign) => (
-          <AssignmentListCard key={assign.id} id={assign.id} aim={assign.aim} />
+          <AssignmentListCard key={assign.id} id={assign.id} title={assign.title} aim={assign.aim} />
         ))
       ) : (
         <p>No assignments available</p>
