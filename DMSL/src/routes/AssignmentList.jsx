@@ -9,37 +9,38 @@ function AssignmentList() {
   const [loading, setLoading] = useState(true); // State for loading status
   const [error, setError] = useState(null); // State for error handling
 
-    useEffect(() => {
-        const fetchAssignments = async () => {
-            try {
-                const response = await axios.get('https://virtual-lab-server.vercel.app/assignmentlist', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    withCredentials: true, // Use if the server expects cookies or credentials
-                });
+  useEffect(() => {
+    const fetchAssignments = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/assignmentlist", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true, // Use if the server expects cookies or credentials
+        });
 
-                // Log the data and update the assignments state
-                console.log(response.data);
-                if (response.data && !response.data.error) {
-                    setAssignments(response.data.data); // Assuming `data` holds the assignments
-                } else {
-                    setError(response.data.message || "Failed to load assignments");
-                }
-            } catch (err) {
-                // Handle error and update error state
-                console.error("Error fetching assignments:", err.response ? err.response.data : err.message);
-                setError(err.response?.data?.message || "Something went wrong");
-            } finally {
-                setLoading(false); // Stop the loading spinner
-            }
-        };
+        console.log("API Response:", response.data);
 
-        fetchAssignments();
-    }, []);
+        // Ensure error is explicitly checked as a string
+        if (response.data && response.data.error === "false" && Array.isArray(response.data.data)) {
+          setAssignments(response.data.data);
+          setError(null); // Clear any previous errors
+        } else {
+          setError(response.data.message || "Invalid data format received.");
+        }
+      } catch (err) {
+        console.error("Error fetching assignments:", err?.response?.data || err.message);
+        setError(err?.response?.data?.message || "Failed to load assignments. Please try again.");
+      } finally {
+        setLoading(false); // Stop the loading spinner
+      }
+    };
+
+    fetchAssignments();
+  }, []);
 
   if (loading) return <p>Loading assignments...</p>; // Show loading message
-  if (error) return <p>Error: {error}</p>; // Show error message
+  if (error) return <p style={{ color: "red" }}>Error: {error}</p>; // Show error message in red
 
   return (
     <div
@@ -56,9 +57,8 @@ function AssignmentList() {
         justifyContent: "flex-start",
       }}
     >
-
       <Nav />
-      {assignments.length > 0 ? (
+      {Array.isArray(assignments) && assignments.length > 0 ? (
         assignments.map((assign) => (
           <AssignmentListCard key={assign.id} id={assign.id} aim={assign.aim} />
         ))

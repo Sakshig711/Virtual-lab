@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import './css/Quiz1.css';
+import { useLocation } from "react-router-dom"; // ✅ Fix: Import useLocation
+import "./css/Quiz1.css";
 
 const QuizApp = () => {
   const [questions, setQuestions] = useState([]);
@@ -7,24 +8,27 @@ const QuizApp = () => {
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
 
+  const location = useLocation();
+  const { id = 1 } = location.state || {}; // ✅ Fix: Provide default value for id
+
+  console.log("Quiz ID:", id); // ✅ Debugging line
+
   const shuffleQuestions = (questions) => {
     return [...questions].sort(() => Math.random() - 0.5);
   };
-  const location = useLocation();
-  const { id} = location.state || {};
-  console.log(id);
 
   useEffect(() => {
-    // const getJsonFile = () => `/mcq${id}.json`;
     const getJsonFile = () => {
-      if (id >=  10&& id <= 14) {
-        return `/mcq${id - 2}.json`; // Adjusted for ids 7 to 14
-      }else if(id>=7 && id<10){
+      if (id >= 10 && id <= 14) {
+        return `/mcq${id - 2}.json`;
+      } else if (id >= 7 && id < 10) {
         return `/mcq7.json`;
       }
-      return `/mcq${id}.json`; // For ids other than 7 to 14
+      return `/mcq${id}.json`;
     };
+
     const jsonFile = getJsonFile();
+    console.log("Fetching:", jsonFile); // ✅ Debugging line
 
     fetch(jsonFile)
       .then((response) => {
@@ -34,7 +38,7 @@ const QuizApp = () => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        console.log("Fetched Data:", data); // ✅ Debugging line
         setQuestions(shuffleQuestions(data));
         setSelectedOptions(Array(data.length).fill(""));
       })
@@ -64,36 +68,39 @@ const QuizApp = () => {
   };
 
   const resetTest = () => {
-    setQuestions(shuffleQuestions(questions));
-    setSelectedOptions(Array(questions.length).fill(""));
-    setScore(0);
     setShowResult(false);
+    setScore(0);
+    setSelectedOptions(Array(questions.length).fill(""));
   };
 
   const renderQuiz = () => (
     <form onSubmit={handleSubmit}>
       <h2>Quiz</h2>
-      {questions.map((question, index) => (
-        <div key={index} className="question-container">
-          <h3>Question {index + 1}</h3>
-          <div className="question">{question.question}</div>
-          <div className="options">
-            {question.options.map((option, optIndex) => (
-              <div key={optIndex} className="option-item">
-                <input
-                  type="radio"
-                  id={`q${index}_option${optIndex}`}
-                  name={`question${index}`}
-                  value={option}
-                  checked={selectedOptions[index] === option}
-                  onChange={() => handleOptionChange(index, option)}
-                />
-                <label htmlFor={`q${index}_option${optIndex}`}>{option}</label>
-              </div>
-            ))}
+      {questions.length > 0 ? (
+        questions.map((question, index) => (
+          <div key={index} className="question-container">
+            <h3>Question {index + 1}</h3>
+            <div className="question">{question.question}</div>
+            <div className="options">
+              {question.options.map((option, optIndex) => (
+                <div key={optIndex} className="option-item">
+                  <input
+                    type="radio"
+                    id={`q${index}_option${optIndex}`}
+                    name={`question${index}`}
+                    value={option}
+                    checked={selectedOptions[index] === option}
+                    onChange={() => handleOptionChange(index, option)}
+                  />
+                  <label htmlFor={`q${index}_option${optIndex}`}>{option}</label>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <p>Loading quiz...</p>
+      )}
       <div className="button">
         <button type="submit" className="submit-btn">
           Submit
@@ -109,7 +116,9 @@ const QuizApp = () => {
       <h3>Questions and Answers:</h3>
       {questions.map((question, index) => (
         <div key={index} className="question-item">
-          <div><strong>Question {index + 1}:</strong> {question.question}</div>
+          <div>
+            <strong>Question {index + 1}:</strong> {question.question}
+          </div>
           <div className="options">
             {question.options.map((option, optIndex) => {
               const isCorrect = option === question.correctOption;
@@ -120,16 +129,16 @@ const QuizApp = () => {
               let icon = "";
 
               if (isCorrect) {
-                optionClass = "correc";
+                optionClass = "correct";
                 icon = "✔️";
               }
 
               if (isSelected) {
                 if (isUserCorrect) {
-                  optionClass = "correc";
+                  optionClass = "correct";
                   icon = "✔️";
                 } else {
-                  optionClass = "incorrec";
+                  optionClass = "incorrect";
                   icon = "❌";
                 }
               }
@@ -145,7 +154,7 @@ const QuizApp = () => {
                     disabled
                   />
                   <label htmlFor={`result_q${index}_option${optIndex}`}>
-                    {option}
+                    {option} {icon}
                   </label>
                 </div>
               );

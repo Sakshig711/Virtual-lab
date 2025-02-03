@@ -20,7 +20,7 @@ const Project = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const resp = await axios.get(`https://virtual-lab-server.vercel.app/practical/${id}`);
+        const resp = await axios.get(`http://localhost:3000/practical/${id}`);
         if(Array.isArray(resp.data) && resp.data.length > 0){
           setPractical(resp.data[0]);
         } else {
