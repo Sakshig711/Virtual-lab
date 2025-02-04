@@ -6,7 +6,7 @@ function AssignmentListCard({ id, aim, title }) {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate(`/practical/${id}`);
+        navigate(`/practical/${id}`,{ state: { id } });
     };
 
     return (

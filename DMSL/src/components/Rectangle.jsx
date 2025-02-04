@@ -8,6 +8,7 @@ class Rectangle extends Component {
                 <div className="rectangle-content">
                     {this.props.Aim && (
                         <>
+                            <h2 style={{textAlign:"center"}}>{this.props.title}</h2>
                             <h3>Aim:</h3>
                             <p>{this.props.Aim}</p>
                         </>
@@ -51,18 +52,41 @@ class Rectangle extends Component {
                     )}
                     {this.props.References && (
                         <>
-                            <h3>REFERENCE BOOK:</h3>
-                            {Array.isArray(this.props.References) ? 
-                                <ol>
-                                {this.props.References.map(
-                                    (reference, index) => (
-                                        <li key={index}>{index+1}. {reference}</li>
-                                    )
-                                )}
-                                </ol>
-                            : <p>{this.props.References}</p>
-                            }
-                            
+                            <h3 className="reference-title">REFERENCE BOOK:</h3>
+<div className="reference-links">
+    <a 
+        href="https://drive.google.com/file/d/1S-UvNXFAqigA84oCGriNZO4y7aU4KHXn/view?usp=sharing" 
+        target="_blank" 
+        className="reference-link"
+    >
+        Raghu Ramkrishnan Database Management Systems. 2nd Ed
+    </a>
+    <a 
+        href="https://drive.google.com/file/d/1H4BVCFVoJZFmEijit1yNQofHsKaV-awj/view?usp=sharing" 
+        target="_blank" 
+        className="reference-link"
+    >
+        DATABASE MANAGEMENT SYSTEMS
+    </a>
+    <a 
+        href="https://drive.google.com/file/d/1wrNjZ-wsL1dLXXwrZ905Mf2Tfot-rIe3/view?usp=sharing" 
+        target="_blank" 
+        className="reference-link"
+    >
+        Database_Systems by Navathe original book
+    </a>
+    
+    {Array.isArray(this.props.References) ? (
+        <ol className="custom-ol">
+            {this.props.References.map((reference, index) => (
+                <li key={index} className="custom-li">{index + 1}. {reference}</li>
+            ))}
+        </ol>
+    ) : (
+        <p className="custom-p">{this.props.References}</p>
+    )}
+</div>
+
                         </>
                     )}
                 </div>

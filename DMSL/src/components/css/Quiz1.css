@@ -197,4 +197,84 @@
     left: 0;
     color: red;
   }
+
+  .InputDetails {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px; 
+  }
   
+  .InputDetails input {
+    display: block;
+    width: 100%; 
+    height: 40px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid #243457;
+    border-radius: 8px;
+    margin-top: 6px; 
+  }
+  
+  .InputDetails label {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    color: #243457;
+  }
+  
+  .NameDiv, .RollNoDiv {
+    flex: 1; /* Take equal space for both fields */
+    min-width: 200px; /* Ensure fields don't shrink below this width */
+  }
+  
+  @media (max-width: 768px) {
+    .InputDetails {
+      flex-direction: column; /* Stack fields vertically on small screens */
+    }
+  }
+  .reference-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.reference-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.reference-link {
+    text-decoration: none;
+    color: #2980b9;
+    font-size: 18px;
+    padding: 8px;
+    border: 2px solid #2980b9;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.reference-link:hover {
+    background-color: #2980b9;
+    color: white;
+    border-color: #2c3e50;
+}
+
+.custom-ol {
+    margin-top: 10px;
+    padding-left: 20px;
+    font-size: 16px;
+    color: #34495e;
+}
+
+.custom-li {
+    margin-bottom: 8px;
+}
+
+.custom-p {
+    font-size: 16px;
+    color: #34495e;
+    margin-top: 10px;
+}

@@ -8,7 +8,6 @@ const Home = () => {
   return (
     <div className="home-container">
       <Navbar />
-      {/* <Menu /> */}
 
       <div className="content">
           <h4>Hello DataArchitect,</h4>
@@ -29,7 +28,6 @@ const Home = () => {
           </h5>
       </div>
 
-      {/* Assignment Scrolling Container */}
       <AssignmentContainer />
       <Footer />
     </div>

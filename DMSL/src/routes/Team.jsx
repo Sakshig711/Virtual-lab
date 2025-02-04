@@ -12,7 +12,7 @@ const teamMembers = [
   {
     name: "Atharva Dhake",
     role: "Fullstack Developer",
-    description: "Developed the UI of the website.",
+    description: "Designed and developed the UI.",
     imageUrl: Atharva,
     linkedinUrl: "https://www.linkedin.com/in/atharva-dhake-155160258/",
     githubUrl: "https://github.com/atharva-dhake",
@@ -21,7 +21,7 @@ const teamMembers = [
   {
     name: "Kshitij Dhake",
     role: "Fullstack Developer",
-    description: "Built the backend APIs.",
+    description: "Built backend APIs and integrated them with the UI.",
     imageUrl: Kshitij,
     linkedinUrl: "https://www.linkedin.com/in/kshitijdhake/",
     githubUrl: "https://github.com/ksdhake28",
@@ -30,7 +30,7 @@ const teamMembers = [
   {
     name: "Sakshi Gangurde",
     role: "Fullstack Developer",
-    description: "Developed the UI of the website.",
+    description: "Designed and developed the UI.",
     imageUrl: Sakshi,
     linkedinUrl: "https://www.linkedin.com/in/sakshi-s-gangurde/",
     githubUrl: "https://github.com/sakshig711",
@@ -39,7 +39,7 @@ const teamMembers = [
   {
     name: "Shlok Gaidhani",
     role: "Fullstack Developer",
-    description: "Developed the UI of the website.",
+    description: "Designed and developed the UI.",
     imageUrl: Shlok,
     linkedinUrl: "https://www.linkedin.com/in/shlok-gaidhani-57135629a/",
     githubUrl: "https://github.com/Shlok-06",
@@ -48,46 +48,35 @@ const teamMembers = [
   {
     name: "Satvik Gaikwad",
     role: "Fullstack Developer",
-    description: "Built the backend APIs.",
+    description: "Built backend APIs.",
     imageUrl: Satvik,
-    linkedinUrl: "https://www.linkedin.com/in/atharva-dhake",
+    linkedinUrl: "https://www.linkedin.com/in/satvik-gaikwad-67878b250/",
     githubUrl: "https://github.com/satvik9862",
-    mailUrl: "https://www.linkedin.com/in/satvik-gaikwad-67878b250/",
+    mailUrl: "satvik.gaikwad@gmail.com",
   },
 ];
 
 const Contact = () => {
   useEffect(() => {
-    // Ensure the page loads at the top
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <div>
-      <Navbar alwaysDark={true} />
-      <div className="team-page">
+      <Navbar alwaysDark />
+      <section className="team-page">
         <h1 className="heading">Meet the Team</h1>
-        <h5 className="team-description">
-          Discover the creative minds behind our website's design and
-          development. Meet our team of talented individuals who collaborated to
-          bring our vision to life through captivating logos, innovative
-          designs, and a cohesive platform.
-        </h5>
+        <p className="team-description">
+          Meet the creative minds who designed and developed this platform,
+          bringing our vision to life with innovative designs and seamless
+          functionality.
+        </p>
         <div className="team-cards">
           {teamMembers.map((member, index) => (
-            <TeamCard
-              key={index}
-              name={member.name}
-              role={member.role}
-              description={member.description}
-              imageUrl={member.imageUrl}
-              linkedinUrl={member.linkedinUrl}
-              githubUrl={member.githubUrl}
-              mailUrl={member.mailUrl}
-            />
+            <TeamCard key={index} {...member} />
           ))}
         </div>
-      </div>
+      </section>
     </div>
   );
 };
