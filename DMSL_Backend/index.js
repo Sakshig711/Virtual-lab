@@ -5,7 +5,8 @@ require("./connect.js");
 const doc = require("./docschema.js");
 
 const corsOptions = {
-    origin: ["https://virtual-lab-nine.vercel.app", "http://localhost:5173"],
+
+    origin: ["https://virtual-lab-nine.vercel.app","https://dmsl-virtual-lab.vercel.app","https://virtual-lab-ksdhake28s-projects.vercel.app"],
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
 };
