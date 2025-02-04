@@ -3,6 +3,7 @@ import AssignmentListCard from "../components/AssignmentListCard";
 import Nav from "../components/Nav";
 import bgImage from "../assets/bgimg4.jpeg";
 import axios from "axios";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function AssignmentList() {
   const [assignments, setAssignments] = useState([]); // State to store assignments
@@ -12,7 +13,7 @@ function AssignmentList() {
   useEffect(() => {
     const fetchAssignments = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/assignmentlist", {
+        const response = await axios.get(`${BASE_URL}/assignmentlist`, {
           headers: {
             "Content-Type": "application/json",
           },

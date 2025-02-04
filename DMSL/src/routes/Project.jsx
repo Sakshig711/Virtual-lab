@@ -8,6 +8,7 @@ import Rectangle from "../components/Rectangle.jsx";
 import QuizApp from "../components/Quiz1.jsx";
 import VideoGallery from "../components/Video.jsx";
 import bgImage from "../assets/bgimg5.jpeg"; // Import the image
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const Project = () => {
     const { id } = useParams();
@@ -21,7 +22,7 @@ const Project = () => {
         const fetchData = async () => {
             try {
                 const resp = await axios.get(
-                    `http://localhost:3000/practical/${id}`
+                    `${BASE_URL}/practical/${id}`
                 );
                 if (Array.isArray(resp.data) && resp.data.length > 0) {
                     setPractical(resp.data[0]);

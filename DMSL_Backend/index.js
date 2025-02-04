@@ -8,11 +8,17 @@ const app = express();
 
 // Middleware
 app.use(express.json()); // Parse incoming JSON requests
-app.use(cors({
-    origin: ["https://virtual-lab-nine.vercel.app", "http://localhost:5173"],
-    methods: "GET,POST,PUT,DELETE",
-    credentials: true,
-}));
+app.use(
+    cors({
+        origin: [
+            "https://virtual-lab-nine.vercel.app",
+            "http://localhost:5173",
+            "https://dmsl-virtual-lab.vercel.app",
+        ],
+        methods: "GET,POST,PUT,DELETE",
+        credentials: true,
+    })
+);
 
 // Routes
 app.get("/", (req, resp) => {
@@ -62,12 +68,13 @@ app.post("/quiz-response", async (req, resp) => {
 
         resp.status(200).json({
             error: "false",
-            message: "Response saved successfully"
+            message: "Response saved successfully",
         });
     } catch (err) {
         resp.status(500).json({
             error: "true",
-            message: err.message || "An error occurred while saving the response"
+            message:
+                err.message || "An error occurred while saving the response",
         });
     }
 });
