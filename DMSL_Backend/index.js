@@ -3,7 +3,7 @@ const cors = require("cors");
 require("./connect.js");
 const doc = require("./docschema.js");
 const resultSchema = require("./resultSchema.js");
-
+const quiz=require("./quizschema.js");
 const app = express();
 
 // Middleware
@@ -79,6 +79,25 @@ app.post("/quiz-response", async (req, resp) => {
     }
 });
 
+app.get("/quiz/:id",async(req,res)=>{
+    const assign_id = req.params.id;
+    try{
+        const data = await quiz.find({ assignmentId: assign_id }, { "questions":1, _id: 0 });
+        const questions = data.length > 0 ? data[0].questions : [];
+        if (data && data.length > 0) {
+            res.status(200).json(questions);
+        } else {
+            res.status(404).send("Document not found");
+        }
+    }
+    catch(err){
+        res.status(500).json({
+            error: "true",
+            message:
+                err.message || "An error occurred while fetching the response",
+        });
+    }
+});
 // Start server
 app.listen(3000, () => {
     console.log("Listening on 3000");

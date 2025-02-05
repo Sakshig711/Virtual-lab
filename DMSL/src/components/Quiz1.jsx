@@ -17,25 +17,40 @@ const QuizApp = ({ id }) => {
     });
     const [isRollNoValid, setIsRollNoValid] = useState(true); // Added validation state for roll number
 
+    // useEffect(() => {
+    //     const getJsonFile = () => {
+    //         if (id >= 10 && id <= 14) return `/mcq${id - 2}.json`;
+    //         if (id >= 7 && id < 10) return `/mcq7.json`;
+    //         return `/mcq${id}.json`;
+    //     };
+
+    //     fetch(getJsonFile())
+    //         .then((response) => {
+    //             if (!response.ok) throw new Error(`Error fetching data: ${response.statusText}`);
+    //             return response.json();
+    //         })
+    //         .then((data) => {
+    //             setQuestions(data.sort(() => Math.random() - 0.5));
+    //             setSelectedOptions(Array(data.length).fill("")); // Initialize selected options
+    //         })
+    //         .catch((error) => console.error("Error fetching quiz data:", error));
+    // }, [id]);
     useEffect(() => {
-        const getJsonFile = () => {
-            if (id >= 10 && id <= 14) return `/mcq${id - 2}.json`;
-            if (id >= 7 && id < 10) return `/mcq7.json`;
-            return `/mcq${id}.json`;
+        console.log("fetching");
+                const getId = () => {
+            if (id >= 10 && id <= 14) return id - 2;
+            if (id >= 7 && id < 10) return 7;
+            return id ;
         };
 
-        fetch(getJsonFile())
+        axios.get(`${BASE_URL}/quiz/${getId()}`)
             .then((response) => {
-                if (!response.ok) throw new Error(`Error fetching data: ${response.statusText}`);
-                return response.json();
-            })
-            .then((data) => {
-                setQuestions(data.sort(() => Math.random() - 0.5));
-                setSelectedOptions(Array(data.length).fill("")); // Initialize selected options
+                setQuestions(response.data.sort(() => Math.random() - 0.5));
+                console.log(response.data);
+                setSelectedOptions(Array(response.data.length).fill("")); // Initialize selected options
             })
             .catch((error) => console.error("Error fetching quiz data:", error));
     }, [id]);
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
