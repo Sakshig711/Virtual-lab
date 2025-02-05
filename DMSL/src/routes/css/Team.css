@@ -20,7 +20,7 @@
     padding-top: 650px;
     background-color: #243457;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+}   
 
 .team-image {
     width: 150px;
@@ -96,21 +96,34 @@
 @media screen and (max-width: 480px) {
     .team-card {
         flex: 0 0 100%;
+        background-color: rgba(203, 217, 230, 0.9);
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         width: 100%;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
     }
-}
 
-
-
-
+    .team-page {
+    position: absolute;
+    top: 79%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    width: 100%;
+    overflow-x: hidden;
+    padding-top: 1250px;
+    background-color: #243457;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 .team-description {
     font-family: "Tangerine", cursive;
     color: #ffffff;
     font-size: 15px;
     margin-top: 30px; /* Add margin to push the description down */
-    text-align: center; /* Ensure it aligns properly */
+    text-align:initial; /* Ensure it aligns properly */
 }
-
 
 @keyframes gradientAnimation {
     0% {
@@ -127,3 +140,4 @@
 body {
     animation: gradientAnimation 5s ease infinite;
 }
+}   

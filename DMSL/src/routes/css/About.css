@@ -106,22 +106,35 @@ body {
 }
 
 @media (max-width: 480px) {
+  .about-page {
+    padding-top: 1650px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  
+  .heading {
+    font-size: 2rem;
+  }
+
   .team-card {
     flex: 1 1 100%;
     max-width: 100%;
   }
 }
+
 @keyframes gradientAnimation {
-      0% {
-          background-position: 0% 50%;
-      }
-      50% {
-          background-position: 100% 50%;
-      }
-      100% {
-          background-position: 0% 50%;
-      }
+  0% {
+    background-position: 0% 50%;
   }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 body {
-      animation: gradientAnimation 5s ease infinite;
-  }
+  animation: gradientAnimation 5s ease infinite;
+}

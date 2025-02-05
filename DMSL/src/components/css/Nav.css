@@ -1,63 +1,49 @@
+/* Base Styles */
 .frame {
     background-color: #C2CAD6;
-    display: flex;
-    flex-direction: column; /* Use column to stack elements */
-    justify-content: center;
-    width: 100%; /* Full width */
-    border:solid 3px #243457;
+    width: 100%;
+    border-bottom: solid 3px #243457;
+    border-top: solid 3px #243457;
+    border-right: solid 3px #243457;
+    overflow: hidden;
 }
 
 .frame .div {
     background-color: #ffffff;
-    height: 134px; /* Adjust this as needed */
+    height: 134px;
+    width: 100%;
+    position: relative;
     overflow: hidden;
-    width: 100%; /* Full width */
 }
 
 .frame .nav-bar {
-    height: 140px; /* Adjust height to fit content */
-    position: relative; /* Remove left/right positioning */
-    width: 100%; /* Full width */
-}
-.frame .poly{
-    height: 134px;
-    position: absolute; /* Keep it absolute if you need it to overlap */
-    top: 0px;
-    left: 87%; 
-    transform: translateX(-50%); /* Adjust to center */
+    height: 140px;
+    width: 100%;
 }
 
 .frame .overlap-group {
     background-color: #C2CAD6;
-    height: 140px; /* Adjust this if needed */
-    position: relative; /* Make it relative to its container */
-    width: 100%; /* Full width */
+    height: 140px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
-.frame .polygon {
-    height: 134px;
-    position: absolute; /* Keep it absolute if you need it to overlap */
-    top: 0px;
-    left: 89%; 
-    transform: translateX(-50%); /* Adjust to center */
-}
-
-.frame .img {
+.frame .poly {
     height: 134px;
     position: absolute;
-    left: 0; /* Align to the left */
-    width: auto; /* Maintain aspect ratio */
+    right: 0;
+    top: 0px;
 }
 
 .frame .text-wrapper {
     color: #243457;
     font-family: "Inter-SemiBold", Helvetica;
-    font-size: 32px;
+    font-size: 34px;
     font-weight: 600;
-    position: absolute;
-    top: 31px;
-    left: 35%; /* Center horizontally */
-    transform: translateX(-50%); /* Adjust to center */
+    margin-left: 200px;
+    margin-top: -35px;
 }
 
 .frame .p {
@@ -66,9 +52,9 @@
     font-size: 20px;
     font-weight: 500;
     position: absolute;
-    top: 73px;
-    left: 35%; /* Center horizontally */
-    transform: translateX(-50%); /* Adjust to center */
+    top: 78px;
+    left: 34%; /* Center horizontally */
+    transform: translateX(-50%);
 }
 
 .frame .pictlogo {
@@ -76,26 +62,127 @@
     object-fit: cover;
     position: absolute;
     top: 6px;
-    left: 7px; /* Align to the left */
+    left: 7px;
+    z-index: 2;
 }
 
+/* Desktop Navigation Links */
 .nav-links {
-    margin-left: auto;  
+    position: absolute;
+    top: 47%;
+    right: 20px; 
+    transform: translateY(-50%); 
     display: flex;
-    gap: 30px;  
-    padding-left: 80%;
-    padding-top: 50px;
-    font-weight: 700;
-  }
-  
-  .nav-links a {
-    color: #C6CADC; /* Link color */
+    gap: 25px;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+.nav-links a {
+    color: #C2CAD6;
     text-decoration: none;
     font-size: 1.2rem;
+    font-weight: 700;
     transition: color 0.3s ease;
-    z-index: 1000;
-  }
-  
-  .nav-links a:hover {
-    color: #f0a500; /* Color on hover */
-  }
+}
+
+.nav-links a:hover {
+    color: #f0a500;
+}
+
+/* Hide mobile elements by default */
+.menu-icon,
+.nav-links-mobile {
+    display: none;
+}
+
+/* Mobile Styles */
+@media (max-width: 480px) {
+    /* Base Styles */
+    .frame {
+        background-color: #C2CAD6;
+        width: 100%;
+        border-bottom: solid 3px #243457;
+        border-top: solid 3px #243457;
+        border-right: solid 3px #243457;
+        overflow: hidden;
+    }
+    .frame .div {
+        background-color: #ffffff;
+        height: 114px;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+    .frame .text-wrapper {
+        font-size: 22px;
+        margin-left: 110px;
+        margin-top: -23px;
+        margin-right: 70px;
+    }
+
+    .frame .p {
+        display: none;
+    }
+
+    .frame .pictlogo {
+        height: 100px;
+        top: 8px;
+        left: 1px;
+    }
+
+    .frame .poly {
+        height: 129px;
+        right: -300px;
+    }
+
+    /* Hide Desktop Navigation */
+    .nav-links {
+        display: none;
+    }
+
+    /* Show Hamburger Menu */
+    .menu-icon {
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 1px;
+        background: none;
+        border: none;
+        color: #C2CAD6;
+        font-size: 39px;
+        cursor: pointer;
+        z-index: 3;
+    }
+
+    /* Mobile Navigation Menu */
+    .nav-links-mobile {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 75px;
+        right: 0;
+        background-color: #243457;
+        width: 60%;
+        padding: 20px;
+        z-index: 1000;
+        border-radius: 10px 0 0 10px;
+        box-shadow: -2px 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-links-mobile.active {
+        display: flex;
+    }
+
+    .nav-links-mobile a {
+        padding: 15px;
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        border-bottom: 1px solid rgba(198, 202, 220, 0.2);
+    }
+
+    .nav-links-mobile a:last-child {
+        border-bottom: none;
+    }
+}

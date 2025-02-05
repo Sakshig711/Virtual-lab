@@ -229,6 +229,30 @@
   }
   
   @media (max-width: 768px) {
+
+    .content-quiz{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 55%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 535px; 
+    background-color: #f5f7fb;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
+    z-index: 5;
+    overflow-y: auto;
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+}
+  
+    .content-quiz h2{
+      text-align: center;
+    }
     .InputDetails {
       flex-direction: column; /* Stack fields vertically on small screens */
     }
@@ -238,6 +262,7 @@
     font-weight: bold;
     color: #2c3e50;
     margin-bottom: 15px;
+    
 }
 
 .reference-links {

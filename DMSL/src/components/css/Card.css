@@ -122,8 +122,8 @@
       transform: scale(1);
     }
     
-    @media (max-width: 768px) {
+    @media (max-width: 480px) { 
       .team-card {
-        width: calc(100% - 40px);
+        width: calc(100% - 20px);
       }
     }

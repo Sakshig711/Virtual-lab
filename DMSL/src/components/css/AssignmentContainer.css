@@ -94,3 +94,27 @@
 .scroll-btn:hover {
   background-color: #2A3E5B;
 }
+
+@media (max-width: 480px) {
+
+  .assignment-container {
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .scrolling-card {
+    width: 100%; /* Makes the card fill the screen with some margin */
+    padding: 1rem; /* Reduced padding to keep content inside */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  .scrolling-wrapper .scrolling-card {
+    flex-shrink: 0;
+    scroll-snap-align: center;  /* Ensures the card is centered when scrolling */
+    width: 100%; /* Adjust the card width to make scrolling less excessive */
+  }
+}

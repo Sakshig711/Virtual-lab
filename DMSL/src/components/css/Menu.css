@@ -64,14 +64,35 @@
   stroke-dashoffset: -300;
 }
 
-@media (max-width: 768px) {
-  .menu-items {
-    flex-direction: column;
-    gap: 10px;
-  }
+@media (max-width: 480px) {
+  .menu-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position:relative;
+  top: 20px; 
+  left: 50%;
+  width: 100%;
+  background-color: #354F77;
+  padding: 10px 0;
+  z-index: 10;
+  border-bottom: solid 3px #243457;
+  border-left: solid 3px #243457;
+  border-right: solid 3px #243457;
+}
 
-  .menu-items a {
-    font-size: 0.9rem;
-    padding: 8px 16px;
+  .menu-items {
+    flex-direction:row;
+    gap: 5px;
   }
+  .menu-items a {
+  color: #FFFFFF;
+  text-align:center;
+  text-decoration: none;
+  font-weight: bold;
+  position:relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 1rem;
+  padding: 0px 14px;
+}
 }
