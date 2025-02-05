@@ -7,18 +7,36 @@ const AssignmentContainer = () => {
   const scrollingWrapperRef = useRef(null);
   const autoScrollInterval = useRef(null);
   const navigate = useNavigate();
+  const [scrollStep, setScrollStep] = useState(364);
   const [activeAssignment, setActiveAssignment] = useState(null);  // Track active assignment title
+
+  useEffect(() => {
+    // Adjust scroll step based on screen width
+    const updateScrollStep = () => {
+      if (window.innerWidth <= 480) {
+        setScrollStep(120); // Smaller step size for phones
+      } else if (window.innerWidth <= 768) {
+        setScrollStep(200); // Medium step size for tablets
+      } else {
+        setScrollStep(364); // Default for desktops
+      }
+    };
+      updateScrollStep();
+      window.addEventListener("resize", updateScrollStep);
+  
+      return () => window.removeEventListener("resize", updateScrollStep);
+    }, []);
 
   const scrollLeft = () => {
     scrollingWrapperRef.current.scrollBy({
-      left: -364,
+      left: -scrollStep,
       behavior: "smooth",
     });
   };
 
   const scrollRight = () => {
     scrollingWrapperRef.current.scrollBy({
-      left: 364,
+      left: scrollStep,
       behavior: "smooth",
     });
   };
@@ -99,24 +117,26 @@ const AssignmentContainer = () => {
     }
   ];
 
-useEffect(() => {
-    const startAutoscroll = () =>{
+  useEffect(() => {
+    const startAutoscroll = () => {
       autoScrollInterval.current = setInterval(() => {
-        if(scrollingWrapperRef.current){
+        if (scrollingWrapperRef.current) {
           const container = scrollingWrapperRef.current;
           const maxScrollLeft = container.scrollWidth - container.clientWidth;
-          scrollingWrapperRef.current.scrollBy({
-            left:364,
-            behavior:'smooth',
+
+          container.scrollBy({
+            left: scrollStep,
+            behavior: "smooth",
           });
+
           if (container.scrollLeft >= maxScrollLeft) {
             setTimeout(() => {
-              container.scrollLeft = 0; // Reset to the first card
-            }, 400)
+              container.scrollLeft = 0;
+            }, 400);
           }
         }
-      },2000);
-    }
+      }, 2500);
+    };
   
   startAutoscroll();
     return() =>{
@@ -128,38 +148,38 @@ const stopAutoScroll = () => {
   clearInterval(autoScrollInterval.current);
 };
 
-  return (
-    <div className="assignment-container">
-      <button className="scroll-btn left" onClick={scrollLeft}>&lt;</button>
-      <div className="scrolling-wrapper" 
-        ref={scrollingWrapperRef} 
-        onMouseEnter={stopAutoScroll} // Stop auto-scroll when mouse hovers
-        onMouseLeave={() => {
-          // Restart auto-scroll when mouse leaves
-          autoScrollInterval.current = setInterval(() => {
-            scrollingWrapperRef.current.scrollBy({
-              left: 364,
-              behavior: "smooth",
-            });
-          }, 2000);
-        }}>
-        {assignments.map((assignment) => (
-          <div className="scrolling-card" key={assignment.id} onClick={() => handleClick(assignment.id)}>
-            <button 
-              className={`assignment-title ${activeAssignment === assignment.id ? 'active' : ''}`} 
-              onClick={() => handleClick(assignment.id)}
-            >
-              {assignment.title}
-            </button>
-            <p className="assignment-aim">{assignment.aim}</p>
-          </div>
-        ))}
-      </div>
-      <button className="scroll-btn right" onClick={() => { stopAutoScroll(); scrollRight(); }}>
-        &gt;
-      </button>
+return (
+  <div className="assignment-container">
+    <button className="scroll-btn left" onClick={scrollLeft}>&lt;</button>
+    <div
+      className="scrolling-wrapper"
+      ref={scrollingWrapperRef}
+      onMouseEnter={stopAutoScroll}
+      onMouseLeave={() => {
+        autoScrollInterval.current = setInterval(() => {
+          scrollingWrapperRef.current.scrollBy({
+            left: scrollStep,
+            behavior: "smooth",
+          });
+        }, 2500);
+      }}
+    >
+      {assignments.map((assignment) => (
+        <div
+          className="scrolling-card"
+          key={assignment.id}
+          onClick={() => handleClick(assignment.id)}
+        >
+          <button className="assignment-title">{assignment.title}</button>
+          <p className="assignment-aim">{assignment.aim}</p>
+        </div>
+      ))}
     </div>
-  );
+    <button className="scroll-btn right" onClick={() => { stopAutoScroll(); scrollRight(); }}>
+      &gt;
+    </button>
+  </div>
+);
 };
 
 export default AssignmentContainer;

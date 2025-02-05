@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify"; // Import ToastContainer
 import "react-toastify/dist/ReactToastify.css";
 import "./css/Quiz1.css";
+import axios from "axios";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const QuizApp = ({ id }) => {
@@ -17,24 +18,6 @@ const QuizApp = ({ id }) => {
     });
     const [isRollNoValid, setIsRollNoValid] = useState(true); // Added validation state for roll number
 
-    // useEffect(() => {
-    //     const getJsonFile = () => {
-    //         if (id >= 10 && id <= 14) return `/mcq${id - 2}.json`;
-    //         if (id >= 7 && id < 10) return `/mcq7.json`;
-    //         return `/mcq${id}.json`;
-    //     };
-
-    //     fetch(getJsonFile())
-    //         .then((response) => {
-    //             if (!response.ok) throw new Error(`Error fetching data: ${response.statusText}`);
-    //             return response.json();
-    //         })
-    //         .then((data) => {
-    //             setQuestions(data.sort(() => Math.random() - 0.5));
-    //             setSelectedOptions(Array(data.length).fill("")); // Initialize selected options
-    //         })
-    //         .catch((error) => console.error("Error fetching quiz data:", error));
-    // }, [id]);
     useEffect(() => {
         console.log("fetching");
                 const getId = () => {

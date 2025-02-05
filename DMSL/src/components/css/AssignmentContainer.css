@@ -9,9 +9,15 @@
 
 .scrolling-wrapper {
   display: flex;
+  scroll-behavior: smooth;
+  /* white-space: nowrap; */
   overflow: hidden;
   gap: 1rem;
   width: 90%;
+}
+
+.scrolling-wrapper::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari */
 }
 
 .scrolling-wrapper button {
@@ -30,7 +36,7 @@
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
   text-align: center;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease-in-out;
 }
 
 /* Hover Effect */
@@ -94,9 +100,20 @@
 .scroll-btn:hover {
   background-color: #2A3E5B;
 }
+/* Responsive Scroll Adjustments */
+@media (max-width: 768px) {
+  .scrolling-card {
+      min-width: 250px;
+  }
+}
 
 @media (max-width: 480px) {
-
+  .scrolling-wrapper {
+      gap: 10px;
+  }
+  .scrolling-card {
+      min-width: 200px;
+  }
   .assignment-container {
     margin-top: 2rem;
     margin-bottom: 4rem;

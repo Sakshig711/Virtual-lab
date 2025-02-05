@@ -8,6 +8,7 @@ import Rectangle from "../components/Rectangle.jsx";
 import QuizApp from "../components/Quiz1.jsx";
 import VideoGallery from "../components/Video.jsx";
 import bgImage from "../assets/bgimg5.jpeg"; // Import the image
+
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const Project = () => {
