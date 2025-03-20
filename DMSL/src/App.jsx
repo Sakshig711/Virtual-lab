@@ -8,7 +8,9 @@ import Contact from "./routes/Contact";
 import Team from "./routes/Team";
 import AssignmentList from "./routes/AssignmentList";
 import FeedbackForm from "./components/FeedbackForm";
-
+import Login from "./components/login";
+import Register from "./components/Register";
+import Quiz from "./components/exam";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
@@ -21,6 +23,9 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/team" element={<Team />} />
                 <Route path="/assignmentlist" element={<AssignmentList />} />
+                <Route path="/admin" element={<Login></Login>}/>
+                <Route path="/register" element={<Register></Register>}></Route>
+                <Route path="/exam" element={<Quiz></Quiz>}></Route>
             </Routes>
             <FeedbackForm />
             <Analytics />
