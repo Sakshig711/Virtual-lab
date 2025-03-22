@@ -5,6 +5,7 @@ const doc = require("./docschema.js");
 const resultSchema = require("./resultSchema.js");
 const quiz=require("./quizschema.js");
 const app = express();
+const userRoute=require("./routes/userRoute.js");
 
 // Middleware
 app.use(express.json()); // Parse incoming JSON requests
@@ -19,7 +20,7 @@ app.use(
         credentials: true,
     })
 );
-
+app.use("/api/",userRoute);
 // Routes
 app.get("/", (req, resp) => {
     resp.send("hi");
