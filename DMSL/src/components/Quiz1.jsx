@@ -34,6 +34,8 @@ const QuizApp = ({ id }) => {
             })
             .catch((error) => console.error("Error fetching quiz data:", error));
     }, [id]);
+
+    //Getting the Name of User
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
