@@ -42,19 +42,21 @@ A virtual laboratory platform for Database Management Systems Lab (DMSL) develop
 ````bash
 git clone https://github.com/yourusername/Virtual-lab.git
 cd Virtual-lab
+````
 
 2. Install Frontend Dependencies
 
 ```bash
 cd DMSL
 npm install
+```
 
 3. Install Backend Dependencies
 ```bash
 cd DMSL_Backend
 npm install
+```
 
 4. Configure Environment Variables
 create a .env file in the root directory of the DMSL(frontend) with the following variables:
 VITE_BASE_URL={your backend url (for example:localhost:5000)}
-````
