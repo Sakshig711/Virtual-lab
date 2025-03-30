@@ -2,7 +2,7 @@ const router=require('express').Router();
 const User=require("../models/login");
 const jwt=require("jsonwebtoken");
 const bcrypt=require('bcrypt');
-const Quiz=require("../quizschema");
+const Quiz=require("../models/quizschema");
 // router.post('/login',async(req,res)=>{
 //     try{
 //         const user=await User.findOne({email:req.body.email})
