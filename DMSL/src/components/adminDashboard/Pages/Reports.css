@@ -1,0 +1,57 @@
+.reports-container {
+  padding: 24px;
+}
+
+.reports-container h1 {
+  margin-bottom: 32px;
+  text-align: center;
+  color: #1a365d;
+}
+
+.stats-row {
+  margin-top: 24px;
+}
+
+.stat-card {
+  padding: 24px;
+  text-align: center;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-card.excellent {
+  background: linear-gradient(145deg, #e6f7ff, #bae7ff);
+  border: 1px solid #91d5ff;
+}
+
+.stat-card.good {
+  background: linear-gradient(145deg, #f6ffed, #d9f7be);
+  border: 1px solid #b7eb8f;
+}
+
+.stat-card.poor {
+  background: linear-gradient(145deg, #fff2f0, #ffccc7);
+  border: 1px solid #ffa39e;
+}
+
+.category-desc {
+  margin-top: 8px;
+  color: #666;
+  font-size: 14px;
+}
+
+.ant-statistic-title {
+  color: #333;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.ant-statistic-content {
+  font-size: 36px;
+  font-weight: bold;
+}

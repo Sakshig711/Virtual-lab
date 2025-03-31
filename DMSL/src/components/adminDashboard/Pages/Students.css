@@ -1,0 +1,46 @@
+.students-container {
+  padding: 24px;
+}
+
+.students-container h2 {
+  margin-bottom: 24px;
+}
+
+.clickable-row {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.clickable-row:hover {
+  background-color: #f5f5f5;
+}
+
+.assignment-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.assignment-card {
+  margin-bottom: 8px;
+}
+
+.assignment-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+}
+
+.assignment-name {
+  font-weight: 500;
+  flex: 1;
+}
+
+.assignment-score {
+  margin: 0 16px;
+}
+
+.assignment-date {
+  color: #666;
+  font-size: 14px;
+}
