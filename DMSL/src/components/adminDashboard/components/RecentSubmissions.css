@@ -1,0 +1,56 @@
+.recent-submissions {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  grid-column: 1 / -1;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background-color: #f8f9fa;
+  color: #2c3e50;
+}
+
+.score {
+  font-weight: bold;
+}
+
+.score.good {
+  color: #27ae60;
+}
+
+.score.poor {
+  color: #e74c3c;
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 0.9em;
+}
+
+.status.completed {
+  background-color: #e8f5e9;
+  color: #27ae60;
+}
+
+.status.pending {
+  background-color: #fff3e0;
+  color: #f39c12;
+}
