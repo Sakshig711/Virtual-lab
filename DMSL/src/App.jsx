@@ -24,10 +24,14 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/team" element={<Team />} />
                 <Route path="/assignmentlist" element={<AssignmentList />} />
-                <Route path="/admin" element={<Login />} />
+                {/* <Route path="/admin" element={<Login />} />
                 <Route path="/admin/*" element={<AdminDashboard />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/exam" element={<Quiz />} />
+                <Route path="/exam" element={<Quiz />} /> */}
+                <Route path="/login" element={<Login />} />
+                <Route path="/admin/*" element={<AdminDashboard />} />
+                <Route path="/register" element={<Register />} />
+            
             </Routes>
             <FeedbackForm />
             <Analytics />

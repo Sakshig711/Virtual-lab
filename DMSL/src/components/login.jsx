@@ -15,7 +15,7 @@ function Login() {
       if (response.success) {
         message.success(response.message);
         localStorage.setItem("token", response.data);
-        navigate("/exam");
+        navigate("/admin");
       } else {
         message.error(response.message);
       }

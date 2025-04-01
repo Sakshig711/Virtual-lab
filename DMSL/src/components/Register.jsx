@@ -13,7 +13,7 @@ function Register() {
       console.log(response);
       if (response.success) {
         message.success(response.message);
-        navigate("/admin");
+        navigate("/login");
       } else {
         message.error(response.message);
         console.log(response.message);
