@@ -4,7 +4,7 @@ const connectDB = require("./config/database");
 const assignmentController = require("./controllers/assignmentController");
 const quizController = require("./controllers/quizController");
 const userRoute = require("./routes/userRoute");
-
+const examRoute = require("./routes/examRoute");
 const app = express();
 
 // Connect to Database
@@ -26,6 +26,7 @@ app.use(
 
 // Routes
 app.use("/api", userRoute);
+app.use("/api/exams",examRoute);
 app.get("/", (req, resp) => resp.send("hi"));
 app.get("/practical/:id", assignmentController.getPractical);
 app.get("/assignmentlist", assignmentController.getAssignmentList);

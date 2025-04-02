@@ -3,37 +3,52 @@ import { Card, Row, Col, Statistic, Tabs, Form, Input, Button, Select, InputNumb
 import { Column } from '@ant-design/charts';
 import { UserOutlined, PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import './Quizzes.css';
-
+import QBank from './Questionbank';
+import Schedule from './ScheduleExam';
+import {  useEffect } from 'react';
+import axiosInstance from '../../../apicalls/axios';
 function Quizzes() {
-  const [quizzes] = useState([
-    {
-      id: 1,
-      title: 'Assignment 1: Database Basics',
-      totalStudents: 50,
-      appearedStudents: 45,
-      averageMarks: 75,
-      marksDistribution: [
-        { category: '0-30', count: 5 },
-        { category: '31-60', count: 15 },
-        { category: '61-80', count: 15 },
-        { category: '81-100', count: 10 },
-      ],
-    },
-    {
-      id: 2,
-      title: 'Assignment 2: SQL Queries',
-      totalStudents: 50,
-      appearedStudents: 48,
-      averageMarks: 82,
-      marksDistribution: [
-        { category: '0-30', count: 3 },
-        { category: '31-60', count: 12 },
-        { category: '61-80', count: 18 },
-        { category: '81-100', count: 15 },
-      ],
-    },
-  ]);
+  // const [quizzes] = useState([
+  //   {
+  //     id: 1,
+  //     title: 'Assignment 1: Database Basics',
+  //     totalStudents: 50,
+  //     appearedStudents: 45,
+  //     averageMarks: 75,
+  //     marksDistribution: [
+  //       { category: '0-30', count: 5 },
+  //       { category: '31-60', count: 15 },
+  //       { category: '61-80', count: 15 },
+  //       { category: '81-100', count: 10 },
+  //     ],
+  //   },
+  //   {
+  //     id: 2,
+  //     title: 'Assignment 2: SQL Queries',
+  //     totalStudents: 50,
+  //     appearedStudents: 48,
+  //     averageMarks: 82,
+  //     marksDistribution: [
+  //       { category: '0-30', count: 3 },
+  //       { category: '31-60', count: 12 },
+  //       { category: '61-80', count: 18 },
+  //       { category: '81-100', count: 15 },
+  //     ],
+  //   },
+  // ]);
+  const [quizzes, setQuizzes] = useState([]);
+  useEffect(() => {
+    const fetchQuizzes = async () => {
+      try {
+        const response = await axiosInstance.get('/api/class-statistics');
+        setQuizzes(response.data);
+      } catch (error) {
+        console.error('Error fetching quizzes:', error);
+      } 
+    };
 
+    fetchQuizzes();
+  }, []);
   const getChartConfig = (title) => ({
     height: 200,
     xField: 'category',
@@ -185,10 +200,10 @@ function Quizzes() {
           </Row>
         </TabPane>
         <TabPane tab="Question Bank" key="2">
-          {renderQuestionForm()}
+          {<QBank></QBank>}
         </TabPane>
         <TabPane tab="Create Exam" key="3">
-          {renderExamForm()}
+          {<Schedule></Schedule>}
         </TabPane>
       </Tabs>
     </div>

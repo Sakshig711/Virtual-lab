@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Table, Tag, Modal, Card, List } from 'antd';
 import './Students.css';
-
+import axiosInstance from '../../../apicalls/axios';
 function Students() {
+
+  const [students, setStudents] = useState([]);
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
 

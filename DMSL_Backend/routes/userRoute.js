@@ -2,111 +2,43 @@ const router=require('express').Router();
 const User=require("../models/login");
 const jwt=require("jsonwebtoken");
 const bcrypt=require('bcrypt');
-const Quiz=require("../models/quizschema");
-// router.post('/login',async(req,res)=>{
-//     try{
-//         const user=await User.findOne({email:req.body.email})
-//         if(!user){
-//             return res.status(200).json({
-//                 message:'user not found',
-//                 success:false
-//             })
-//         }
-//         const validPassword=bcrypt.compare(req,body.password,user.password);
-//         if(!validPassword){
-//             return res.status(200).json({
-//                 message:"invalid password",
-//                 success:false
-//             })
-//         }
-//         const token=jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-//             expiresIn: "1d",
-//           });
+// const Quiz=require("../quizschema");
+const {Question}=require("../models/admin");
+const {QuestionAssignment,StudentResult}= require("../models/admin");
+const {Admin}=require("../models/admin");
+const authMiddleware=require("../middlewares/auth");
+const performanceService = require('../services/performanceService');
 
-//           return res.status(200).json({
-//             message:"User logged in successfully",
-//             success:true,
-//             data:token
-//           })
-
-//     }
-//     catch(err){
-//         return req.status(401).json({
-//             message:err,message,
-//             success:false,
-//             data:err
-//         })
-//     }
-// });
 router.post("/login", async (req, res) => {
+  
     try {
-        console.log("Login request received:", req.body);
+        const { email, password } = req.body;
 
-
-        const user = await User.findOne({ email: req.body.email });
-        if (!user) {
-            return res.status(400).json({
-                message: "User not found",
-                success: false,
-            });
+        // Find the admin by email
+        const admin = await Admin.findOne({ email });
+        if (!admin) {
+            return res.status(401).json({ success: false, message: "Admin not found" });
         }
 
-     
-        const validPassword = await bcrypt.compare(req.body.password, user.password);
-        if (!validPassword) {
-            return res.status(400).json({
-                message: "Invalid password",
-                success: false,
-            });
+        // Check password
+        const isMatch = await bcrypt.compare(password, admin.password);
+        if (!isMatch) {
+            return res.status(401).json({ success: false, message: "Invalid credentials" });
         }
 
-        
-        const token = jwt.sign({ userId: user._id }, "dmsl", {
-            expiresIn: "1d",
-        });
+        // Generate JWT with name and email
+        const token = jwt.sign(
+            { userId: admin._id, name: admin.name, email: admin.email },
+        "dmsl",
+            { expiresIn: "1d" }
+        );
 
-        return res.status(200).json({
-            message: "User logged in successfully",
-            success: true,
-            data: token,
-        });
-
-    } catch (err) {
-        console.error("Login error:", err);
-        return res.status(500).json({
-            message: err.message || "Internal Server Error",
-            success: false,
-            data: err,
-        });
+        res.json({ success: true, message: "Login successful", data: token });
+    } catch (error) {
+        console.error("Login error:", error);
+        res.status(500).json({ success: false, message: "Internal server error" });
     }
 });
-// router.post('/register',async(req,res)=>{
-//     try{
-//         console.log("req received",req.body.email);
-//         const user=await User.findOne({email:req.body.email});
-//         if(user){
-//             return res.status(200).json({message:"user exists"
-//                 ,
-//                 success:false
-//             })
-//         }
-//         const salt = await bcrypt.genSalt(10);
-//         const hashedPassword=bcrypt.hash(req.body.password,salt);
-//         req.body.password=hashedPassword;
-//         const newUser = new User(req.body);
-//         await newUser.save();
-//         return res.status(200).json({
-//             message:"user registered successfully",
-//             success:true
-//         })
-//     }catch(err){
-//         return res.status(500).json({
-//             message:err.message,
-//             data:err,
-//             success:false
-//         })
-//     }
-// })
 
 
 router.post("/register", async (req, res) => {
@@ -114,17 +46,16 @@ router.post("/register", async (req, res) => {
         console.log("Request received:", req.body.email);
 
         // ✅ Check if user already exists
-        const user = await User.findOne({ email: req.body.email });
+        const user = await Admin.findOne({ email: req.body.email });
         if (user) {
             return res.status(400).json({ message: "User already exists", success: false });
         }
 
-        // ✅ Hash the password correctly
-        const salt = await bcrypt.genSalt(10);
+     const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
-        // ✅ Create a new user
-        const newUser = new User({
+      
+        const newUser = new Admin({
             name: req.body.name,
             email: req.body.email,
             password: hashedPassword,
@@ -145,32 +76,30 @@ router.post("/register", async (req, res) => {
     }
 });
 
-
 router.get("/get-all-quiz", async (req, res) => {
-    const quizzes = await Quiz.find(); // Fetch all assignments from MongoDB
-    res.json(quizzes);
+    try {
+      // Fetch assignments and populate the 'questions' field with actual question documents
+      const assignments = await QuestionAssignment.find().populate("questions"); 
+  
+      res.json(assignments);
+    } catch (error) {
+      console.error("Error fetching quizzes:", error);
+      res.status(500).json({ success: false, message: "Server error" });
+    }
   });
   
-  router.put("/get-all-quiz/:assignmentId/questions/:questionId", async (req, res) => {
+router.put("/update-question/:questionId",async (req, res) => {
     try {
-        const { assignmentId, questionId } = req.params;
+        const { questionId } = req.params;
         const { question, options, correctOption } = req.body;
 
-        // Log incoming request data
-        console.log("Received PUT request:");
-        console.log("Assignment ID:", assignmentId);
+        console.log("Received PUT request to update question:");
         console.log("Question ID:", questionId);
         console.log("Request Body:", req.body);
 
-        const result = await Quiz.findOneAndUpdate(
-            { assignmentId: parseInt(assignmentId), "questions.id": parseInt(questionId) },
-            {
-                $set: {
-                    "questions.$.question": question,
-                    "questions.$.options": options,
-                    "questions.$.correctOption": correctOption,
-                },
-            },
+        const result = await Question.findByIdAndUpdate(
+            questionId,
+            { question, options, correctOption },
             { new: true }
         );
 
@@ -179,12 +108,136 @@ router.get("/get-all-quiz", async (req, res) => {
             return res.status(404).json({ success: false, message: "Question not found" });
         }
 
-        console.log("Question updated successfully:", result);
+        console.log("✅ Question updated successfully:", result);
         res.json({ success: true, message: "Question updated", data: result });
     } catch (error) {
-        console.error("Error updating question:", error);
+        console.error("❌ Error updating question:", error);
         res.status(500).json({ success: false, message: error.message });
     }
 });
 
+router.post("/add-question-to-exam", async (req, res) => {
+    try {
+      const { assignmentId, question, options, correctOption } = req.body;
+  
+      
+      const assignment = await QuestionAssignment.findById(assignmentId);
+      if (!assignment) {
+        return res.status(404).json({ success: false, message: "Assignment not found" });
+      }
+  
+     
+      const newQuestion = new Question({
+        question,
+        options,
+        correctOption,
+        assignmentId: assignment._id,
+      });
+  
+      await newQuestion.save(); 
+  
+      res.json({ success: true, message: "Question added successfully!", questionId: newQuestion._id });
+    } catch (error) {
+      res.status(500).json({ success: false, message: error.message });
+    }
+  });
+  
+router.get('/class-statistics', async (req, res) => {
+    try {
+        const studentPerformance = await performanceService.processStudentMarks();
+        const stats = performanceService.calculateClassStatistics(studentPerformance);
+        
+        console.log("stat", stats); // Log the stats for debugging
+
+        res.json(stats); // Directly return stats without transformation
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
+
+router.get('/student-performance', async (req, res) => {
+    try {
+        const studentPerformance = await performanceService.processStudentMarks();
+        
+       
+        const students = studentPerformance.map((student, index) => ({
+            key: (index + 1).toString(),
+            name: student.name,
+            rollNo: student.rollNo,
+            totalAssignments: student.assignmentsCompleted,
+            marks: student.totalMarks,
+            category: student.category,
+            assignments: student.assignments.map(assignment => ({
+                name: `Assignment ${assignment.assignmentId}`,
+                marks: assignment.score,
+                date: "2024-01-10" // Placeholder, replace with actual assignment date if available
+            }))
+        }));
+
+        res.json(students);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+router.get('/recent-submissions', async (req, res) => {
+    try {
+      
+        const recentSubmissions = await StudentResult.find({ examType: 'assignment' })
+            .populate({
+                path: 'student', 
+                select: 'name'   
+            })
+            .populate({
+                path: 'exam', 
+                model: 'QuestionAssignment',
+                select: 'title' 
+            })
+            .sort({ attemptedOn: -1 }) 
+            .limit(10); 
+
+      
+        const formattedSubmissions = recentSubmissions.map(submission => {
+            console.log(submission.student);
+            let percent=(submission.score/5)*100   // Log student data to debug
+            return {
+                student: submission.student ? submission.student.name : 'Unknown',
+                quiz: submission.exam.title,
+                score: percent,
+                date: submission.attemptedOn.toISOString().split('T')[0],
+                status: percent >= 70 ? 'Completed' : 'Failed'
+            };
+        });
+        
+        res.json(formattedSubmissions);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
+router.get("/assignment-count", async (req, res) => {
+    try {
+      
+        const assignments = await QuestionAssignment.find().select("assignmentId studentsAttempted");
+  
+        if (!assignments.length) {
+            return res.status(404).json({ success: false, message: "No assignments found." });
+        }
+  
+    
+        const attemptsData = assignments.map(assignment => ({
+            assignmentId: assignment.assignmentId,
+            attemptCount: assignment.studentsAttempted.length
+        }));
+  
+        res.json({ success: true, assignments: attemptsData });
+    } catch (err) {
+        console.error("❌ Error fetching assignment attempts:", err);
+        res.status(500).json({ success: false, message: "Server error" });
+    }
+  });
+  
 module.exports = router;

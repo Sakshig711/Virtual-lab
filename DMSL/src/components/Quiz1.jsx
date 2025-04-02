@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { toast, ToastContainer } from "react-toastify"; // Import ToastContainer
+import { toast, ToastContainer } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css";
 import "./css/Quiz1.css";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchQuizQuestions } from "../redux/quizSlice";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const QuizApp = ({ id }) => {
-    const [questions, setQuestions] = useState([]);
+    const [questionsQuiz, setQuestionsQuiz] = useState([]);
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [score, setScore] = useState(0);
     const [showResult, setShowResult] = useState(false);
@@ -16,26 +18,66 @@ const QuizApp = ({ id }) => {
         rollno: "",
         marks: 0,
     });
+    // console.log("quiz id:",id);
     const [isRollNoValid, setIsRollNoValid] = useState(true); // Added validation state for roll number
-
+    const dispatch = useDispatch();
+    const { questions, loading, error } = useSelector((state) => state.quiz);
     useEffect(() => {
-        console.log("fetching");
-                const getId = () => {
-            if (id >= 10 && id <= 14) return id - 2;
-            if (id >= 7 && id < 10) return 7;
-            return id ;
-        };
+                dispatch(fetchQuizQuestions());
+            }, [dispatch]);
+        
+            const fetchExamQuestions = async (examId) => {
+                try {
+                    const response = await axios.get(`http://localhost:3000/api/exams/${examId}`); // Replace with actual API URL
+                    const data = response.data;
 
-        axios.get(`${BASE_URL}/quiz/${getId()}`)
-            .then((response) => {
-                setQuestions(response.data.sort(() => Math.random() - 0.5));
-                console.log(response.data);
-                setSelectedOptions(Array(response.data.length).fill("")); // Initialize selected options
-            })
-            .catch((error) => console.error("Error fetching quiz data:", error));
-    }, [id]);
-
-    //Getting the Name of User
+                    if (data && Array.isArray(data.selectedQuestions)) {
+                        // Shuffle questions and update state
+                        setQuestionsQuiz([...data.selectedQuestions].sort(() => Math.random() - 0.5));
+                        setSelectedOptions(Array(data.selectedQuestions.length).fill(""));
+                    } else {
+                        console.warn("No questions found for exam ID:", examId);
+                        setQuestionsQuiz([]);
+                    }
+                } catch (error) {
+                    console.error("Error fetching exam questions:", error);
+                }
+            };
+            useEffect(() => {
+                console.log("Quiz ID received:", id);
+        
+                if (questions && Array.isArray(questions)) {
+                    const isMongoId = typeof id === "string" && id.length === 24 && /^[a-f0-9]{24}$/.test(id);
+        
+                    if (isMongoId) {
+                       
+                        fetchExamQuestions(id);
+                    } else {
+                       
+                        const getId = () => {
+                            if (id >= 10 && id <= 14) return id - 2;
+                            if (id >= 7 && id < 10) return 7;
+                            return id;
+                        };
+        
+                        // const quizId = getId();
+                        const quizId = Number(getId());
+                        // console.log("Looking for assignmentId:", quizId);
+                        // console.log("questions", questions);
+                        const filteredQuiz = questions.find((quiz) => quiz.assignmentId === quizId);
+                        // console.log("Filtered Quiz:", filteredQuiz);
+                        if (filteredQuiz && Array.isArray(filteredQuiz.questions)) {
+                            setQuestionsQuiz([...filteredQuiz.questions].sort(() => Math.random() - 0.5));
+                            setSelectedOptions(Array(filteredQuiz.questions.length).fill(""));
+                        } else {
+                            console.warn("No matching quiz found for assignmentId:", quizId);
+                            setQuestionsQuiz([]);
+                        }
+                    }
+                }
+            }, [id, questions]);
+        
+  
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
@@ -74,8 +116,8 @@ const QuizApp = ({ id }) => {
             return false;
         }
 
-        // Check if all questions have been answered
-        for (let i = 0; i < questions.length; i++) {
+        
+        for (let i = 0; i < questionsQuiz.length; i++) {
             if (!selectedOptions[i]) {
                 toast.error(`Please answer question ${i + 1}`);
                 return false;
@@ -87,46 +129,58 @@ const QuizApp = ({ id }) => {
 
     const calculateScore = () => {
         let tempScore = 0;
-        questions.forEach((q, index) => {
+        questionsQuiz.forEach((q, index) => {
             if (selectedOptions[index] === q.correctOption) tempScore++;
         });
         setScore(tempScore);
         return tempScore;
     };
 
+  
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+    
         // Run strict validation
         if (!validateFormData()) {
             return; // Prevent form submission if validation fails
         }
-
+    
         const updatedMarks = calculateScore();
         setFormData((prev) => ({ ...prev, marks: updatedMarks }));
-
+        // console.log(formData.rollno);
+        // console.log(id);
         setTimeout(async () => {
             try {
-                const response = await fetch(`${BASE_URL}/quiz-response`, {
+                const response = await fetch(`http://localhost:3000/api/exams/submit-exam`, { // ✅ Adjusted API endpoint
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ ...formData, marks: updatedMarks }),
+                    body: JSON.stringify({
+                        rollNumber: formData.rollno, // ✅ Use rollNumber instead of email
+                        name: formData.name, // ✅ Pass name
+                        examId: id, // ✅ Pass exam ID
+                        score: updatedMarks, // ✅ Send computed score
+                    }),
                 });
-
+    
                 const result = await response.json();
-                toast.success(result.message);
+    
+                if (result.success) {
+                    toast.success(result.message);
+                    setShowResult(true);
+                } else {
+                    toast.error(result.message);
+                }
             } catch (error) {
                 toast.error("Error submitting data!");
                 console.error("Error sending data to server:", error);
             }
-        }, 100); // Small delay to ensure marks update before sending
-        setShowResult(true);
+        }, 2000); // Small delay to ensure marks update before sending
     };
-
+    
     const resetTest = () => {
         setShowResult(false);
         setScore(0);
-        setSelectedOptions(Array(questions.length).fill("")); // Reset selected options
+        setSelectedOptions(Array(questionsQuiz.length).fill("")); // Reset selected options
     };
 
     return (
@@ -160,8 +214,8 @@ const QuizApp = ({ id }) => {
                             />
                         </div>
                     </div>
-                    {questions.length > 0 ? (
-                        questions.map((question, index) => (
+                    {questionsQuiz.length > 0 ? (
+                        questionsQuiz.map((question, index) => (
                             <div key={index} className="question-container">
                                 <h3>Question {index + 1}</h3>
                                 <div className="question">{question.question}</div>
@@ -196,9 +250,9 @@ const QuizApp = ({ id }) => {
             ) : (
                 <div className="result-container">
                     <h2>Test Completed!</h2>
-                    <div>Your score: {score}/{questions.length}</div>
+                    <div>Your score: {score}/{questionsQuiz.length}</div>
                     <h3>Questions and Answers:</h3>
-                    {questions.map((question, index) => (
+                    {questionsQuiz.map((question, index) => (
                         <div key={index} className="question-item">
                             <div>
                                 <strong>Question {index + 1}:</strong> {question.question}
