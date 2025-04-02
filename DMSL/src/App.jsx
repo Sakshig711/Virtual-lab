@@ -13,7 +13,7 @@ import Register from "./components/Register";
 import Quiz from "./components/exam";
 import { Route, Routes } from "react-router-dom";
 import AdminDashboard from "./components/adminDashboard/AdminDashboard.jsx";
-
+import ProtectedRoute from "./components/protectedRoute.jsx";
 function App() {
     return (
         <>
@@ -24,12 +24,10 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/team" element={<Team />} />
                 <Route path="/assignmentlist" element={<AssignmentList />} />
-                {/* <Route path="/admin" element={<Login />} />
-                <Route path="/admin/*" element={<AdminDashboard />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/exam" element={<Quiz />} /> */}
+             
                 <Route path="/login" element={<Login />} />
-                <Route path="/admin/*" element={<AdminDashboard />} />
+                {/* <Route path="/admin/*" element={<AdminDashboard />} /> */}
+                 <Route path="/admin/*" element={<ProtectedRoute element={<AdminDashboard />} />} />
                 <Route path="/register" element={<Register />} />
             
             </Routes>
