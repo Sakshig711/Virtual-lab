@@ -14,12 +14,25 @@ function Students() {
       totalAssignments: 5,
       marks: 85,
       category: 'Excellent',
+      batchRank: 3,
+      classRank: 5,
+      percentile: 95.5,
       assignments: [
-        { name: 'Database Basics', marks: 90, date: '2024-01-10' },
-        { name: 'SQL Queries', marks: 85, date: '2024-01-15' },
-        { name: 'Normalization', marks: 88, date: '2024-01-20' },
-        { name: 'DBMS Architecture', marks: 82, date: '2024-01-25' },
-        { name: 'Transaction Management', marks: 80, date: '2024-01-30' },
+        { 
+          name: 'Database Basics', 
+          marks: 90, 
+          date: '2024-01-10', 
+          status: 'completed',
+          batchAvg: 82,
+          classAvg: 78,
+          percentile: 96.5
+        },
+        { name: 'SQL Queries', marks: 85, date: '2024-01-15', status: 'completed' },
+        { name: 'Normalization', marks: 88, date: '2024-01-20', status: 'completed' },
+        { name: 'DBMS Architecture', marks: 82, date: '2024-01-25', status: 'completed' },
+        { name: 'Transaction Management', marks: 80, date: '2024-01-30', status: 'completed' },
+        { name: 'Database Security', status: 'pending', dueDate: '2024-02-15' },
+        { name: 'Data Recovery', status: 'pending', dueDate: '2024-02-20' },
       ]
     },
     {
@@ -97,27 +110,89 @@ function Students() {
         visible={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
         footer={null}
-        width={700}
+        width={800}
       >
         {selectedStudent && (
-          <List
-            className="assignment-list"
-            itemLayout="horizontal"
-            dataSource={selectedStudent.assignments}
-            renderItem={item => (
-              <Card className="assignment-card" size="small">
-                <div className="assignment-details">
-                  <div className="assignment-name">{item.name}</div>
-                  <div className="assignment-score">
-                    <Tag color={item.marks >= 80 ? 'green' : item.marks >= 60 ? 'blue' : 'red'}>
-                      {item.marks}%
-                    </Tag>
-                  </div>
-                  <div className="assignment-date">{item.date}</div>
+          <>
+            <div className="performance-overview">
+              <Card className="overview-card">
+                <div className="overview-item">
+                  <span className="label">Overall Percentile</span>
+                  <span className="value">{selectedStudent.percentile}%</span>
+                </div>
+                <div className="overview-item">
+                  <span className="label">Batch Rank</span>
+                  <span className="value">#{selectedStudent.batchRank}</span>
+                </div>
+                <div className="overview-item">
+                  <span className="label">Class Rank</span>
+                  <span className="value">#{selectedStudent.classRank}</span>
                 </div>
               </Card>
-            )}
-          />
+            </div>
+
+            <div className="quiz-summary">
+              <Card className="summary-card">
+                <div className="summary-item">
+                  <span>Attempted Quizzes</span>
+                  <span className="count completed">{selectedStudent.assignments.filter(a => a.status === 'completed').length}</span>
+                </div>
+                <div className="summary-item">
+                  <span>Pending Quizzes</span>
+                  <span className="count pending">{selectedStudent.assignments.filter(a => a.status === 'pending').length}</span>
+                </div>
+              </Card>
+            </div>
+            <div className="assignment-sections">
+              <h3>Completed Assignments</h3>
+              <List
+                className="assignment-list"
+                itemLayout="horizontal"
+                dataSource={selectedStudent.assignments.filter(a => a.status === 'completed')}
+                renderItem={item => (
+                  <Card className="assignment-card" size="small">
+                    <div className="assignment-details">
+                      <div className="assignment-header">
+                        <div className="assignment-name">{item.name}</div>
+                        <Tag color={item.marks >= 80 ? 'green' : item.marks >= 60 ? 'blue' : 'red'}>
+                          {item.marks}%
+                        </Tag>
+                      </div>
+                      <div className="comparative-analysis">
+                        <div className="analysis-item">
+                          <span>Your Score: {item.marks}%</span>
+                          <span>Batch Avg: {item.batchAvg}%</span>
+                          <span>Class Avg: {item.classAvg}%</span>
+                        </div>
+                        <div className="percentile">
+                          Percentile: <span className="highlight">{item.percentile}%</span>
+                        </div>
+                      </div>
+                      <div className="assignment-footer">
+                        <span>Submitted: {item.date}</span>
+                      </div>
+                    </div>
+                  </Card>
+                )}
+              />
+
+              <h3>Pending Assignments</h3>
+              <List
+                className="assignment-list"
+                itemLayout="horizontal"
+                dataSource={selectedStudent.assignments.filter(a => a.status === 'pending')}
+                renderItem={item => (
+                  <Card className="assignment-card pending-card" size="small">
+                    <div className="assignment-details">
+                      <div className="assignment-name">{item.name}</div>
+                      <div className="assignment-date">Due: {item.dueDate}</div>
+                      <Tag color="orange">Pending</Tag>
+                    </div>
+                  </Card>
+                )}
+              />
+            </div>
+          </>
         )}
       </Modal>
     </div>
