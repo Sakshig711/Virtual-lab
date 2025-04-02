@@ -153,17 +153,38 @@ function Dashboard() {
     fetchAssignmentData();
   }, []);
 
-  const [studentStats] = useState({
+  // const [studentStats] = useState({
+  //   title: 'Student Analytics',
+  //   stats: [
+  //     { label: 'Total Students', value: '6' },
+  //     { label: 'Class Average', value: '73.33%' },
+  //     { label: 'Top Performers', value: '2' }
+  //   ],
+  //   chartData: {
+  //     labels: ['Excellent', 'Good', 'Can Improve'],
+  //     datasets: [{
+  //       data: [2, 4, 0],
+  //       backgroundColor: [
+  //         'rgba(75, 192, 192, 0.8)',
+  //         'rgba(54, 162, 235, 0.8)',
+  //         'rgba(255, 159, 64, 0.8)'
+  //       ],
+  //       borderColor: [
+  //         'rgb(75, 192, 192)',
+  //         'rgb(54, 162, 235)',
+  //         'rgb(255, 159, 64)'
+  //       ],
+  //       borderWidth: 1
+  //     }]
+  //   }
+  // });
+  const [studentStats, setStudentStats] = useState({
     title: 'Student Analytics',
-    stats: [
-      { label: 'Total Students', value: '6' },
-      { label: 'Class Average', value: '73.33%' },
-      { label: 'Top Performers', value: '2' }
-    ],
+    stats: [],
     chartData: {
-      labels: ['Excellent', 'Good', 'Can Improve'],
+      labels: [],
       datasets: [{
-        data: [2, 4, 0],
+        data: [],
         backgroundColor: [
           'rgba(75, 192, 192, 0.8)',
           'rgba(54, 162, 235, 0.8)',
@@ -178,6 +199,41 @@ function Dashboard() {
       }]
     }
   });
+  
+  useEffect(() => {
+    axiosInstance.get('/api/class-statistics')
+      .then(response => {
+        const data = response.data;
+        setStudentStats({
+          title: 'Student Analytics',
+          stats: [
+            { label: 'Total Students', value: data.totalStudents },
+            { label: 'Class Average', value: `${data.classAverage}%` },
+            { label: 'Top Performers', value: Object.values(data.assignmentStats).filter(a => a.average >= 80).length }
+          ],
+          chartData: {
+            labels: Object.keys(data.categoryDistribution),
+            datasets: [{
+              data: Object.values(data.categoryDistribution),
+              backgroundColor: [
+                'rgba(75, 192, 192, 0.8)',
+                'rgba(54, 162, 235, 0.8)',
+                'rgba(255, 159, 64, 0.8)'
+              ],
+              borderColor: [
+                'rgb(75, 192, 192)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 159, 64)'
+              ],
+              borderWidth: 1
+            }]
+          }
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching student data:', error);
+      });
+  }, []);
   useEffect(() => {
     const fetchSubmissions = async () => {
       try {

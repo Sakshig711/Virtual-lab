@@ -141,31 +141,20 @@ router.post("/add-question-to-exam", async (req, res) => {
       res.status(500).json({ success: false, message: error.message });
     }
   });
-  router.get('/class-statistics', async (req, res) => {
+  
+router.get('/class-statistics', async (req, res) => {
     try {
         const studentPerformance = await performanceService.processStudentMarks();
         const stats = performanceService.calculateClassStatistics(studentPerformance);
-
         
-        const quizzes = Object.entries(stats.assignmentStats).map(([assignmentId, data], index) => ({
-            id: index + 1, 
-            title: `Assignment ${assignmentId}`,
-            totalStudents: stats.totalStudents,
-            appearedStudents: data.studentCount,
-            averageMarks: parseFloat(data.average),
-            marksDistribution: [
-                { category: '0-30', count: studentPerformance.filter(s => s.percentage < 30).length },
-                { category: '31-60', count: studentPerformance.filter(s => s.percentage >= 30 && s.percentage < 60).length },
-                { category: '61-80', count: studentPerformance.filter(s => s.percentage >= 60 && s.percentage < 80).length },
-                { category: '81-100', count: studentPerformance.filter(s => s.percentage >= 80).length }
-            ]
-        }));
+        console.log("stat", stats); // Log the stats for debugging
 
-        res.json(quizzes);
+        res.json(stats); // Directly return stats without transformation
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
+
 
 
 router.get('/student-performance', async (req, res) => {
@@ -210,13 +199,14 @@ router.get('/recent-submissions', async (req, res) => {
 
       
         const formattedSubmissions = recentSubmissions.map(submission => {
-            console.log(submission.student);  // Log student data to debug
+            console.log(submission.student);
+            let percent=(submission.score/5)*100   // Log student data to debug
             return {
                 student: submission.student ? submission.student.name : 'Unknown',
                 quiz: submission.exam.title,
-                score: submission.score,
+                score: percent,
                 date: submission.attemptedOn.toISOString().split('T')[0],
-                status: submission.score >= 50 ? 'Completed' : 'Failed'
+                status: percent >= 70 ? 'Completed' : 'Failed'
             };
         });
         
