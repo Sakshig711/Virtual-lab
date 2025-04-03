@@ -86,7 +86,7 @@
     position: absolute;
     left: 200px;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-70%);
     margin: 0;
     white-space: nowrap;
 }
@@ -167,7 +167,7 @@
     font-size: 20px;
     font-weight: 500;
     position: absolute;
-    top: 78px;
+    top: 90px;
     left: 34%; /* Center horizontally */
     transform: translateX(-50%);
 }
@@ -185,7 +185,7 @@
 .nav-links {
     position: absolute;
     top: 47%;
-    right: 20px; 
+    right: 40px; 
     transform: translateY(-50%); 
     display: flex;
     gap: 25px;
@@ -210,9 +210,11 @@
     color: #f0a500;
     font-weight: 700;
     margin-left: 10px;
-    padding: 5px 10px;
-    border-radius: 5px;
+    padding: 0px 15px;
+    border-radius: 3px;
     transition: background-color 0.3s ease;
+    margin-top:5px;
+
 
 }
 
