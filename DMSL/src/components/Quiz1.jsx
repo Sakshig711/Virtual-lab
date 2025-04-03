@@ -5,6 +5,7 @@ import "./css/Quiz1.css";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchQuizQuestions } from "../redux/quizSlice";
+import { useNavigate } from "react-router-dom";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const QuizApp = ({ id }) => {
@@ -12,13 +13,31 @@ const QuizApp = ({ id }) => {
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [score, setScore] = useState(0);
     const [showResult, setShowResult] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         AssignmentNo: id,
         name: "",
         rollno: "",
         marks: 0,
     });
-    // console.log("quiz id:",id);
+
+    // Check authentication status
+    useEffect(() => {
+        const token = localStorage.getItem("studentToken");
+        if (token) {
+            setIsAuthenticated(true);
+            // Get student details from localStorage
+            const studentData = JSON.parse(localStorage.getItem("studentData") || "{}");
+            setFormData(prev => ({
+                ...prev,
+                name: studentData.name || "",
+                rollno: studentData.rollNumber || ""
+            }));
+        }
+    }, []);
+
     const [isRollNoValid, setIsRollNoValid] = useState(true); // Added validation state for roll number
     const dispatch = useDispatch();
     const { questions, loading, error } = useSelector((state) => state.quiz);
@@ -183,37 +202,30 @@ const QuizApp = ({ id }) => {
         setSelectedOptions(Array(questionsQuiz.length).fill("")); // Reset selected options
     };
 
+    const handleLoginClick = () => {
+        navigate("/student/login"); // Adjust this path according to your routing setup
+    };
+
+    if (!isAuthenticated) {
+        return (
+            <div className="content-quiz">
+                <div className="login-prompt">
+                    <h2>Please Login to Take the Quiz</h2>
+                    <button onClick={handleLoginClick} className="login-btn">
+                        Login to Continue
+                    </button>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="content-quiz">
             <ToastContainer /> 
             {!showResult ? (
                 <form onSubmit={handleSubmit}>
                     <h2>Quiz</h2>
-                    <div className="InputDetails">
-                        <div className="NameDiv">
-                            <label htmlFor="name">Name:</label>
-                            <input
-                                type="text"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                placeholder="Enter Your Name"
-                                required
-                            />
-                        </div>
-                        <div className="RollNoDiv">
-                            <label htmlFor="rollno">Roll Number:</label>
-                            <input
-                                type="number"
-                                name="rollno"
-                                value={formData.rollno}
-                                onChange={handleChange}
-                                onBlur={validateRollNumber}
-                                placeholder="Enter Your Roll Number"
-                                required
-                            />
-                        </div>
-                    </div>
+                    {/* Remove the input fields for name and roll number since we get them from authentication */}
                     {questionsQuiz.length > 0 ? (
                         questionsQuiz.map((question, index) => (
                             <div key={index} className="question-container">
@@ -242,7 +254,7 @@ const QuizApp = ({ id }) => {
                         <p>Loading quiz...</p>
                     )}
                     <div className="button">
-                        <button type="submit" className="submit-btn" disabled={!isRollNoValid}>
+                        <button type="submit" className="submit-btn">
                             Submit
                         </button>
                     </div>

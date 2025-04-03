@@ -41,8 +41,12 @@ const studentResultSchema = new mongoose.Schema({
 
 const studentSchema = new mongoose.Schema({
     name: { type: String, required: true },
-    rollNumber: { type: String, required: true, unique: true }, // ✅ Roll number as unique identifier
-    examsTaken: [{ type: mongoose.Schema.Types.ObjectId, ref: "StudentResult" }] // Track attempted exams
+    email: { type: String, required: true, unique: true },
+    batch: { type: String, required: true },
+    rollNumber: { type: String, required: true, unique: true },
+    class: { type: String, required: true },
+    password: { type: String, required: true },
+    examsTaken: [{ type: mongoose.Schema.Types.ObjectId, ref: "StudentResult" }]
 });
 
 // Admin (Teachers) Schema

@@ -303,3 +303,28 @@
     color: #34495e;
     margin-top: 10px;
 }
+
+.login-prompt {
+    text-align: center;
+    padding: 2rem;
+}
+
+.login-prompt h2 {
+    margin-bottom: 1.5rem;
+    color: #243457;
+}
+
+.login-btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    background-color: #243457;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+    background-color: #1a2640;
+}

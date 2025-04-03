@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 const connectDB = require("./config/database");
@@ -5,6 +6,8 @@ const assignmentController = require("./controllers/assignmentController");
 const quizController = require("./controllers/quizController");
 const userRoute = require("./routes/userRoute");
 const examRoute = require("./routes/examRoute");
+const studentRoute = require("./routes/studentRoute"); // Add this line
+
 const app = express();
 
 // Connect to Database
@@ -26,7 +29,8 @@ app.use(
 
 // Routes
 app.use("/api", userRoute);
-app.use("/api/exams",examRoute);
+app.use("/api/exams", examRoute);
+app.use("/api/students", studentRoute);
 app.get("/", (req, resp) => resp.send("hi"));
 app.get("/practical/:id", assignmentController.getPractical);
 app.get("/assignmentlist", assignmentController.getAssignmentList);
