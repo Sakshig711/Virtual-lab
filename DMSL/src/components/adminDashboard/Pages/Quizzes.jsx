@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, Row, Col, Statistic, Tabs, Form, Input, Button, Select, InputNumber, Space, List } from 'antd';
 import { Column } from '@ant-design/charts';
@@ -41,14 +42,33 @@ function Quizzes() {
     const fetchQuizzes = async () => {
       try {
         const response = await axiosInstance.get('/api/class-statistics');
-        setQuizzes(response.data);
+        const apiData = response.data;
+  
+        const transformedQuizzes = Object.entries(apiData.assignmentStats).map(
+          ([assignmentId, stats]) => ({
+            id: parseInt(assignmentId),
+            title: `Assignment ${assignmentId}`,
+            totalStudents: apiData.totalStudents,
+            appearedStudents: stats.studentCount,
+            averageMarks: parseFloat(stats.average),
+            marksDistribution: Object.entries(apiData.categoryDistribution).map(
+              ([category, count]) => ({
+                category,
+                count
+              })
+            ),
+          })
+        );
+  
+        setQuizzes(transformedQuizzes);
       } catch (error) {
         console.error('Error fetching quizzes:', error);
-      } 
+      }
     };
-
+  
     fetchQuizzes();
   }, []);
+  
   const getChartConfig = (title) => ({
     height: 200,
     xField: 'category',

@@ -1,16 +1,28 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import './Sidebar.css';
+
+import React from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import "./Sidebar.css";
 
 const Sidebar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+
   const menuItems = [
-    { label: 'Dashboard', path: '/admin/dashboard' },
-    { label: 'Students', path: '/admin/students' },
-    { label: 'Quizzes', path: '/admin/quizzes' },
-    { label: 'Reports', path: '/admin/reports' },
-    { label: 'Logout', path: '/logout' }
+    { label: "Dashboard", path: "/admin/dashboard" },
+    { label: "Students", path: "/admin/students" },
+    { label: "Quizzes", path: "/admin/quizzes" },
+    { label: "Reports", path: "/admin/reports" },
+    { label: "Logout", path: "/logout" }
   ];
+
+ 
+  const handleLogout = (path) => {
+    if (path === "/logout") {
+      localStorage.removeItem("token"); 
+      // sessionStorage.removeItem("token"); 
+      navigate("/login"); 
+    }
+  };
 
   return (
     <div className="sidebar">
@@ -20,10 +32,12 @@ const Sidebar = () => {
       <nav className="nav-sidebar">
         <ul>
           {menuItems.map((item, index) => (
-            <li key={index} className={location.pathname === item.path ? 'active' : ''}>
-              <Link to={item.path}>
-                {item.label}
-              </Link>
+            <li
+              key={index}
+              className={location.pathname === item.path ? "active" : ""}
+              onClick={() => handleLogout(item.path)} 
+            >
+              <Link to={item.path}>{item.label}</Link>
             </li>
           ))}
         </ul>

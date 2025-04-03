@@ -6,6 +6,92 @@
   margin-bottom: 24px;
 }
 
+.quiz-summary {
+  margin-bottom: 24px;
+}
+
+.performance-overview {
+  margin-bottom: 24px;
+}
+
+.overview-card {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  background: linear-gradient(145deg, #f8fafc, #f1f5f9);
+  border-radius: 12px;
+}
+
+.overview-item {
+  text-align: center;
+}
+
+.overview-item .label {
+  display: block;
+  color: #64748b;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.overview-item .value {
+  display: block;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1e40af;
+}
+
+.assignment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.comparative-analysis {
+  background: #f8fafc;
+  padding: 12px;
+  border-radius: 6px;
+  margin: 8px 0;
+}
+
+.analysis-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: #475569;
+}
+
+.percentile {
+  text-align: right;
+  font-size: 14px;
+  color: #1e293b;
+}
+
+.percentile .highlight {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.assignment-footer {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.assignment-sections h3 {
+  margin: 16px 0;
+  color: #1e293b;
+}
+
+.pending-card {
+  background: #fff7ed;
+}
+
+.pending-card .assignment-details {
+  color: #9a3412;
+}
+
 .clickable-row {
   cursor: pointer;
   transition: background-color 0.3s ease;
