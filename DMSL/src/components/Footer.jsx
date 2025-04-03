@@ -25,10 +25,10 @@ const Footer = () => {
         <div className="footer-right">
           <div className="footer-section">
             <p>© 2024 IT Dept, PICT | All Rights Reserved</p>
-            
           </div>
           <div className="footer-section links">
             <Link to="/team">Our Team</Link>
+            <Link to="/aboutus">About Us</Link>
           </div>
         </div>
       </div>

@@ -1,0 +1,46 @@
+.student-dashboard {
+  background-color: #F8FAFC;
+}
+
+.profile-section, .quiz-statistics, .stat-card {
+  background: #FFFFFF;
+  box-shadow: 0 4px 6px rgba(36, 52, 87, 0.1);
+}
+
+.profile-section h2, .quiz-statistics h3 {
+  color: #243457;
+  border-bottom: 2px solid #3B82F6;
+}
+
+.profile-details p {
+  color: #475569;
+}
+
+.profile-details strong {
+  color: #243457;
+}
+
+.stat-card h4 {
+  color: #243457;
+}
+
+.percentage {
+  color: #3B82F6;
+}
+
+.comparison p {
+  color: #475569;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.rank-item {
+  background-color: #F8FAFC;
+}
+
+.rank-label {
+  color: #243457;
+}
+
+.rank-value {
+  color: #3B82F6;
+}

@@ -33,17 +33,132 @@
 .frame .poly {
     height: 134px;
     position: absolute;
-    right: 0;
+    right: 0px;
     top: 0px;
+    width: 599px;
 }
 
+/* Desktop Navigation Links */
+.nav-links {
+    position: absolute;
+    top: 47%;
+    right: 40px;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 35px;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+.nav-links a {
+    color: #C2CAD6;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    padding: 5px 10px;
+}
+
+/* Mobile Styles */
+@media (max-width: 480px) {
+    .frame .poly {
+        height: 129px;
+        right: -400px;
+        width: 599px;
+    }
+
+    .nav-links-mobile {
+        width: 70%;
+    }
+
+    .nav-links-mobile a {
+        padding: 12px 15px;
+        font-size: 16px;
+    }
+}
+
+/* Update text wrapper positioning */
 .frame .text-wrapper {
     color: #243457;
     font-family: "Inter-SemiBold", Helvetica;
     font-size: 34px;
     font-weight: 600;
-    margin-left: 200px;
-    margin-top: -35px;
+    position: absolute;
+    left: 200px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+    white-space: nowrap;
+}
+
+/* Update profile menu positioning */
+.profile-menu {
+    position: relative;
+    display: inline-block;
+    z-index: 102;
+}
+
+.profile-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #243457;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: 55px;
+    right: -10px;
+    width: 180px;
+    background-color: #243457;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    z-index: 103;
+    padding: 10px 0;
+}
+
+.dropdown-item {
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(198, 202, 220, 0.2);
+
+}
+
+.dropdown-item:hover {
+    background-color: #334b7d;
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+    .frame .text-wrapper {
+        font: 30px;
+        left: 100px;
+        white-space: nowrap;
+        max-width: 60%;
+
+    }
+
+    .profile-dropdown {
+        top: 55px;
+        right: -10px;
+        width: 180px;
+    }
 }
 
 .frame .p {
@@ -90,6 +205,31 @@
     color: #f0a500;
 }
 
+/* Add these styles for the login link */
+.nav-links .login-link {
+    color: #f0a500;
+    font-weight: 700;
+    margin-left: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+
+}
+
+.nav-links .login-link:hover {
+    color: #C2CAD6;
+
+}
+
+/* Update mobile styles */
+.nav-links-mobile .login-link {
+    color: #f0a500;
+}
+
+.nav-links-mobile .login-link:hover {
+    color: #ffffff;
+}
+
 /* Hide mobile elements by default */
 .menu-icon,
 .nav-links-mobile {
@@ -109,7 +249,7 @@
     }
     .frame .div {
         background-color: #ffffff;
-        height: 114px;
+        height: 134px;
         width: 100%;
         position: relative;
         overflow: hidden;
@@ -153,6 +293,11 @@
         font-size: 39px;
         cursor: pointer;
         z-index: 3;
+        padding: 0;
+        margin: 0;
+        line-height: 1;
+        transition: color 0.3s ease;
+
     }
 
     /* Mobile Navigation Menu */
@@ -181,8 +326,14 @@
         font-size: 18px;
         border-bottom: 1px solid rgba(198, 202, 220, 0.2);
     }
+}
 
-    .nav-links-mobile a:last-child {
-        border-bottom: none;
-    }
+.profile-menu:hover .profile-dropdown {
+    display: block;
+
+}
+
+
+.profile-menu:hover .profile-dropdown {
+    display: block;
 }
