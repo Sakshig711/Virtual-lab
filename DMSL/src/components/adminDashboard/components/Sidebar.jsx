@@ -12,15 +12,15 @@ const Sidebar = () => {
     { label: "Students", path: "/admin/students" },
     { label: "Quizzes", path: "/admin/quizzes" },
     { label: "Reports", path: "/admin/reports" },
-    { label: "Logout", path: "/logout" }
+    { label: "Logout", path: "/admin/logout" }
   ];
 
  
   const handleLogout = (path) => {
-    if (path === "/logout") {
-      localStorage.removeItem("token"); 
+    if (path === "/admin/logout") {
+      localStorage.removeItem("adminData"); 
       // sessionStorage.removeItem("token"); 
-      navigate("/login"); 
+      navigate("/adminlogin"); 
     }
   };
 

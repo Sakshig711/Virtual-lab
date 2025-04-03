@@ -1,8 +1,7 @@
 import { Form, message } from "antd";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-// Update this import line
-import { RegisterUser } from "../apicalls/users.js";
+import axios from 'axios'; // Add axios import
 import './css/register.css';
 import { useNavigate } from "react-router-dom";
 import { LoadingOutlined, UserOutlined, LockOutlined, MailOutlined, IdcardOutlined, BookOutlined } from '@ant-design/icons';
@@ -24,25 +23,30 @@ function Register() {
   const onFinish = async (values) => {
     setLoading(true);
     try {
-      if (!values.email.endsWith('@pict.edu')) {
-        message.error('Please use your PICT email address');
-        return;
-      }
-      
       if (!validatePassword(values.password)) {
         message.error('Password must be at least 8 characters long and contain uppercase, lowercase, and numbers');
         return;
       }
 
-      const response = await RegisterUser(values);
-      if (response.success) {
+      // Modify the data structure to match the student registration endpoint
+      const studentData = {
+        name: values.name,
+        email: values.email,
+        rollNumber: values.rollNo,
+        class: values.class,
+        batch: values.batch,
+        password: values.password
+      };
+
+      const response = await axios.post('http://localhost:3000/api/students/register', studentData);
+
+      if (response.data) {
         message.success("Registration successful!");
-        navigate('/login');
-      } else {
-        message.error(response.message);
+        navigate('/login'); // Navigate to student login
       }
     } catch (error) {
-      message.error(error.message);
+      const errorMessage = error.response?.data?.message || "Registration failed";
+      message.error(errorMessage);
     } finally {
       setLoading(false);
     }

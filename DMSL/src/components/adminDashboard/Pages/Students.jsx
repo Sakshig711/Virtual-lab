@@ -4,14 +4,11 @@ import './Students.css';
 import axiosInstance from '../../../apicalls/axios';
 
 function Students() {
-<<<<<<< HEAD
-=======
 
   // const [students, setStudents] = useState([]);
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
->>>>>>> a2b482a6f1708c2e26f535f13f71e651799bf663
   const [students] = useState([
     {
       key: '1',

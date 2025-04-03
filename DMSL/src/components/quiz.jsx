@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './css/quiz.css';
+import axios from 'axios';
 
 const Quiz = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [assignments, setAssignments] = useState([
     {
       id: 1,
@@ -32,14 +35,55 @@ const Quiz = () => {
   const [selectedAssignment, setSelectedAssignment] = useState(null);
 
   useEffect(() => {
-    const userData = localStorage.getItem('user');
-    if (!userData) {
-      navigate('/login');
-    } else {
-      setUser(JSON.parse(userData));
-    }
+    const checkAuthentication = async () => {
+      try {
+        const token = localStorage.getItem('studentToken');
+        const studentData = localStorage.getItem('studentData');
+
+        if (!token || !studentData) {
+          console.log('No token or student data found');
+          navigate('/login');
+          return;
+        }
+
+        // Verify token with backend
+        const response = await axios.get('http://localhost:3000/api/students/profile', {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (response.data) {
+          setUser(JSON.parse(studentData));
+        } else {
+          throw new Error('Invalid authentication');
+        }
+      } catch (error) {
+        console.error('Authentication error:', error);
+        setError('Authentication failed. Please login again.');
+        localStorage.removeItem('studentToken');
+        localStorage.removeItem('studentData');
+        navigate('/login');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkAuthentication();
   }, [navigate]);
 
+  // Show loading state
+  if (loading) {
+    return <div className="quiz-loading">Loading...</div>;
+  }
+
+  // Show error state
+  if (error) {
+    return <div className="quiz-error">{error}</div>;
+  }
+
+  // Show login prompt if no user
+  if (!user) {
+    return <div className="quiz-unauthorized">Please login to access quizzes</div>;
+  }
   const handleAssignmentClick = (assignment) => {
     setSelectedAssignment(assignment);
   };
@@ -52,10 +96,24 @@ const Quiz = () => {
     setSelectedAssignment(null);
   };
 
+  // Remove this duplicate check
   if (!user) {
     return null;
   }
-
+  
+  // Keep only the earlier checks:
+  if (loading) {
+    return <div className="quiz-loading">Loading...</div>;
+  }
+  
+  if (error) {
+    return <div className="quiz-error">{error}</div>;
+  }
+  
+  if (!user) {
+    return <div className="quiz-unauthorized">Please login to access quizzes</div>;
+  }
+  
   return (
     <div className="quiz-container">
       {!selectedAssignment ? (

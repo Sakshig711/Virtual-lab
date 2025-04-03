@@ -1,16 +1,13 @@
-
 import { Form, message } from "antd";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { LoginAdmin } from "../apicalls/login";
+import axios from "axios";
 import './css/login.css';
 import { useNavigate } from "react-router-dom";
 import { LoadingOutlined, UserOutlined, LockOutlined } from '@ant-design/icons';
-
-// Update the import path to match your file structure
 import loginIllustration from '../assets/login-illustration.svg';
 
-function Login() {
+function StudentLogin() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
@@ -18,46 +15,25 @@ function Login() {
   const onFinish = async (values) => {
     setLoading(true);
     try {
-      // First validate email format
-      if (!values.email.endsWith('@gmail.com')) {
-        message.error('Please use valid email address');
-        return;
-      }
+      const response = await axios.post('http://localhost:3000/api/students/login', {
+        rollNumber: values.rollNumber,
+        password: values.password
+      });
 
-      // Demo user credentials check
-      if (values.email === "shlok@gmail.com" && values.password === "shlok") {
-        const demoUser = {
-          name: "shlok gaidhani",
-          rollNo: "TECOA123",
-          class: "TE",
-          batch: "L3",
-          email: "shlok@gmail.com",
-          role: "student",
+      if (response.data) {
+        const studentData = {
+          ...response.data.student,
           lastLogin: new Date().toISOString(),
-          isLoggedIn: true  // Add this flag
+          isLoggedIn: true,
+          role: 'student'
         };
-        localStorage.setItem("user", JSON.stringify(demoUser));
+        localStorage.setItem("studentData", JSON.stringify(studentData));
+        localStorage.setItem("studentToken", response.data.token);
         message.success("Login successful!");
-        window.location.href = '/';  // Changed to href for complete page reload
-        return;
-      }
-
-      // Regular login logic
-      const response = await LoginAdmin(values);
-      if (response.success) {
-        const userData = {
-          ...response.data,
-          lastLogin: new Date().toISOString(),
-          isLoggedIn: true  // Add this flag
-        };
-        localStorage.setItem("user", JSON.stringify(userData));
-        message.success("Login successful!");
-        window.location.href = '/';  // Changed to href for complete page reload
-      } else {
-        message.error(response.message);
+        navigate('/');
       }
     } catch (error) {
-      message.error(error.message);
+      message.error(error.response?.data?.message || "Login failed");
     } finally {
       setLoading(false);
     }
@@ -70,14 +46,14 @@ function Login() {
         </div>
         <div className="login-form-container">
             <div className="login-card">
-                <h1 className="login-title">Sign in</h1>
+                <h1 className="login-title">Student Login</h1>
                 <Form layout="vertical" className="login-form" onFinish={onFinish}>
-                    <Form.Item name="email">
+                    <Form.Item name="rollNumber">
                         <div className="input-wrapper">
                             <input 
                                 type="text" 
-                                placeholder="Email address"
-                                onFocus={() => setFocusedField('email')}
+                                placeholder="Roll Number"
+                                onFocus={() => setFocusedField('rollNumber')}
                                 onBlur={() => setFocusedField(null)}
                             />
                             <UserOutlined className="input-icon" />
@@ -106,7 +82,7 @@ function Login() {
             </div>
         </div>
     </div>
-);
+  );
 }
 
-export default Login;
+export default StudentLogin;

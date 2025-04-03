@@ -201,3 +201,22 @@
   font-weight: 500;
   margin-top: 0.5rem;
 }
+
+.quiz-loading,
+.quiz-error,
+.quiz-unauthorized {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 1.2rem;
+    color: #243457;
+}
+
+.quiz-error {
+    color: #ff4d4f;
+}
+
+.quiz-unauthorized {
+    color: #faad14;
+}
