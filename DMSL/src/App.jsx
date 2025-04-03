@@ -13,8 +13,12 @@ import Register from "./components/Register";
 import Quiz from "./components/quiz.jsx";
 import { Route, Routes } from "react-router-dom";
 import AdminDashboard from "./components/adminDashboard/AdminDashboard.jsx";
+<<<<<<< HEAD
 import StudentDashboard from './components/StudentDashboard';
 
+=======
+import ProtectedRoute from "./components/protectedRoute.jsx";
+>>>>>>> a2b482a6f1708c2e26f535f13f71e651799bf663
 function App() {
     return (
         <>
@@ -25,12 +29,10 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/team" element={<Team />} />
                 <Route path="/assignmentlist" element={<AssignmentList />} />
-                {/* <Route path="/admin" element={<Login />} />
-                <Route path="/admin/*" element={<AdminDashboard />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/exam" element={<Quiz />} /> */}
+             
                 <Route path="/login" element={<Login />} />
-                <Route path="/admin/*" element={<AdminDashboard />} />
+                {/* <Route path="/admin/*" element={<AdminDashboard />} /> */}
+                 <Route path="/admin/*" element={<ProtectedRoute element={<AdminDashboard />} />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/student-dashboard" element={<StudentDashboard />} />
                 <Route path="/quiz" element={<Quiz />} />

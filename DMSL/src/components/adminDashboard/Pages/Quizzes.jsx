@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, Row, Col, Statistic, Tabs, Form, Input, Button, Select, InputNumber, Space, List } from 'antd';
 import { Column } from '@ant-design/charts';
@@ -41,22 +42,51 @@ function Quizzes() {
     const fetchQuizzes = async () => {
       try {
         const response = await axiosInstance.get('/api/class-statistics');
+<<<<<<< HEAD
         // Ensure response.data is an array
         setQuizzes(Array.isArray(response.data) ? response.data : []);
       } catch (error) {
         console.error('Error fetching quizzes:', error);
         setQuizzes([]); // Set empty array on error
       } 
+=======
+        const apiData = response.data;
+  
+        const transformedQuizzes = Object.entries(apiData.assignmentStats).map(
+          ([assignmentId, stats]) => ({
+            id: parseInt(assignmentId),
+            title: `Assignment ${assignmentId}`,
+            totalStudents: apiData.totalStudents,
+            appearedStudents: stats.studentCount,
+            averageMarks: parseFloat(stats.average),
+            marksDistribution: Object.entries(apiData.categoryDistribution).map(
+              ([category, count]) => ({
+                category,
+                count
+              })
+            ),
+          })
+        );
+  
+        setQuizzes(transformedQuizzes);
+      } catch (error) {
+        console.error('Error fetching quizzes:', error);
+      }
+>>>>>>> a2b482a6f1708c2e26f535f13f71e651799bf663
     };
-
+  
     fetchQuizzes();
   }, []);
+<<<<<<< HEAD
 
   // Add null check and default value for reduce
 const calculateTotalAppearedStudents = Array.isArray(quizzes)
     ? quizzes.reduce((total, quiz) => total + (quiz.appearedStudents || 0), 0)
     : 0;
 
+=======
+  
+>>>>>>> a2b482a6f1708c2e26f535f13f71e651799bf663
   const getChartConfig = (title) => ({
     height: 200,
     xField: 'category',
