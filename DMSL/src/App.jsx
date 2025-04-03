@@ -13,12 +13,9 @@ import Register from "./components/Register";
 import Quiz from "./components/quiz.jsx";
 import { Route, Routes } from "react-router-dom";
 import AdminDashboard from "./components/adminDashboard/AdminDashboard.jsx";
-<<<<<<< HEAD
 import StudentDashboard from './components/StudentDashboard';
 
-=======
 import ProtectedRoute from "./components/protectedRoute.jsx";
->>>>>>> a2b482a6f1708c2e26f535f13f71e651799bf663
 function App() {
     return (
         <>

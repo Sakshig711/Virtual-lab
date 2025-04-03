@@ -1,5 +1,4 @@
 
-
 import { Form, message } from "antd";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
@@ -20,19 +19,19 @@ function Login() {
     setLoading(true);
     try {
       // First validate email format
-      if (!values.email.endsWith('@pict.edu')) {
-        message.error('Please use your PICT email address');
+      if (!values.email.endsWith('@gmail.com')) {
+        message.error('Please use valid email address');
         return;
       }
 
       // Demo user credentials check
-      if (values.email === "demo@pict.edu" && values.password === "demo123") {
+      if (values.email === "shlok@gmail.com" && values.password === "shlok") {
         const demoUser = {
-          name: "Demo Student",
+          name: "shlok gaidhani",
           rollNo: "TECOA123",
           class: "TE",
           batch: "L3",
-          email: "demo@pict.edu",
+          email: "shlok@gmail.com",
           role: "student",
           lastLogin: new Date().toISOString(),
           isLoggedIn: true  // Add this flag
