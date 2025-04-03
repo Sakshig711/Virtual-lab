@@ -15,32 +15,32 @@ export const fetchQuizQuestions = createAsyncThunk(
     }
   }
 );
+  
+// import { createSlice } from '@reduxjs/toolkit';
+
+const initialState = {
+  quizzes: [],
+  loading: false,
+  error: null
+};
 
 const quizSlice = createSlice({
-  name: "quiz",
-  initialState: {
-    questions: [],
-    loading: false,
-    error: null,
-  },
-  reducers: {}, // No direct reducers needed
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchQuizQuestions.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(fetchQuizQuestions.fulfilled, (state, action) => {
-        state.loading = false;
-        state.questions = action.payload;
-      })
-      .addCase(fetchQuizQuestions.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload || "An error occurred";
-      });
-  },
+  name: 'quiz',
+  initialState,
+  reducers: {
+    setQuizzes: (state, action) => {
+      state.quizzes = action.payload;
+    },
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    },
+    setError: (state, action) => {
+      state.error = action.payload;
+    }
+  }
 });
 
+export const { setQuizzes, setLoading, setError } = quizSlice.actions;
 export default quizSlice.reducer;
 
 

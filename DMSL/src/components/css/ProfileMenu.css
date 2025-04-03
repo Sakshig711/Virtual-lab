@@ -1,0 +1,58 @@
+.profile-menu-container {
+  position: relative;
+}
+
+.profile-icon {
+  cursor: pointer;
+  font-size: 24px;
+  color: #C2CAD6;
+  padding: 8px;
+}
+
+.profile-icon:hover {
+  color: #f0a500;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  min-width: 200px;
+  z-index: 1000;
+}
+
+.profile-info {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.profile-info p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.profile-info small {
+  color: #666;
+}
+
+.profile-menu-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-menu-items button {
+  padding: 12px 15px;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+}
+
+.profile-menu-items button:hover {
+  background: #f5f5f5;
+}

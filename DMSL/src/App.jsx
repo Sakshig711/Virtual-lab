@@ -10,9 +10,10 @@ import AssignmentList from "./routes/AssignmentList";
 import FeedbackForm from "./components/FeedbackForm";
 import Login from "./components/login";
 import Register from "./components/Register";
-import Quiz from "./components/exam";
+import Quiz from "./components/quiz.jsx";
 import { Route, Routes } from "react-router-dom";
 import AdminDashboard from "./components/adminDashboard/AdminDashboard.jsx";
+import StudentDashboard from './components/StudentDashboard';
 
 function App() {
     return (
@@ -31,7 +32,8 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/admin/*" element={<AdminDashboard />} />
                 <Route path="/register" element={<Register />} />
-            
+                <Route path="/student-dashboard" element={<StudentDashboard />} />
+                <Route path="/quiz" element={<Quiz />} />
             </Routes>
             <FeedbackForm />
             <Analytics />

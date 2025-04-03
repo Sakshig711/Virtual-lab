@@ -36,19 +36,27 @@ function Quizzes() {
   //     ],
   //   },
   // ]);
-  const [quizzes, setQuizzes] = useState([]);
+  const [quizzes, setQuizzes] = useState([]);  // Initialize with empty array
   useEffect(() => {
     const fetchQuizzes = async () => {
       try {
         const response = await axiosInstance.get('/api/class-statistics');
-        setQuizzes(response.data);
+        // Ensure response.data is an array
+        setQuizzes(Array.isArray(response.data) ? response.data : []);
       } catch (error) {
         console.error('Error fetching quizzes:', error);
+        setQuizzes([]); // Set empty array on error
       } 
     };
 
     fetchQuizzes();
   }, []);
+
+  // Add null check and default value for reduce
+const calculateTotalAppearedStudents = Array.isArray(quizzes)
+    ? quizzes.reduce((total, quiz) => total + (quiz.appearedStudents || 0), 0)
+    : 0;
+
   const getChartConfig = (title) => ({
     height: 200,
     xField: 'category',
