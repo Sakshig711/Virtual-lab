@@ -8,7 +8,7 @@ import { UserOutlined } from '@ant-design/icons';
 const Nav = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('studentData'));
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,8 +32,8 @@ const Nav = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
+    localStorage.removeItem('studentData');
+    localStorage.removeItem('studentToken');
     window.location.reload();
   };
 
@@ -70,7 +70,7 @@ const Nav = () => {
                     <UserOutlined style={{ fontSize: '20px' }} />
                   </div>
                   {profileOpen && (
-                    <div className="profile-dropdown">
+                    <div className="profile-dropdown" >
                       <Link to="/student-dashboard" className="dropdown-item">Dashboard</Link>
                       <button onClick={handleLogout} className="dropdown-item">Logout</button>
                     </div>

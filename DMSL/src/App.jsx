@@ -8,6 +8,7 @@ import Contact from "./routes/Contact";
 import Team from "./routes/Team";
 import AssignmentList from "./routes/AssignmentList";
 import FeedbackForm from "./components/FeedbackForm";
+import WebChat from "./components/WebChat"; // Add this import
 
 import StudentLogin from './components/StudentLogin';
 import AdminLogin from './components/AdminLogin'
@@ -32,12 +33,12 @@ function App() {
 
                 <Route path="/login" element={<StudentLogin />} />
                 <Route path="/adminlogin" element={<AdminLogin />} />
-                 <Route path="/admin/*" element={<ProtectedRoute element={<AdminDashboard />} />} />
+                <Route path="/admin/*" element={<ProtectedRoute element={<AdminDashboard />} />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/student-dashboard" element={<StudentDashboard />} />
                 <Route path="/quiz" element={<Quiz />} />
             </Routes>
-            <FeedbackForm />
+            <WebChat /> 
             <Analytics />
         </>
     );
