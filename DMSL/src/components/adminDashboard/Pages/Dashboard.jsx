@@ -117,25 +117,30 @@ function Dashboard() {
     11: 'Assignment 11',
   };
   
-  // Function to fetch data from backend
+
   const fetchAssignmentData = async () => {
     try {
-      // Replace with actual API call
-      const response = await  axiosInstance.get('/api/assignment-count');
+      const response = await axiosInstance.get('/api/assignment-count');
       const data = response.data;
-      // console.log("res",response);
+  
       if (data.success) {
-      
         const labels = data.assignments.map(item => assignmentNameMap[item.assignmentId]);
         const counts = data.assignments.map(item => item.attemptCount);
   
-       
+        // Sum all attemptCount values
+        const totalSubmissions = counts.reduce((acc, curr) => acc + curr, 0);
+  
         setAssignmentStats(prevState => ({
           ...prevState,
+          stats: [
+            { label: 'Total Assignments Quiz', value: '13' }, // You can make this dynamic too if needed
+            { label: 'Total Students Submitted Quiz', value: totalSubmissions.toString() },
+            { label: 'Average Score', value: '43' }
+          ],
           chartData: {
-            labels, // Set the dynamic labels
+            labels,
             datasets: [{
-              data: counts, 
+              data: counts,
               backgroundColor: 'rgba(53, 162, 235, 0.7)',
               borderColor: 'rgb(53, 162, 235)',
               borderWidth: 1
@@ -148,7 +153,6 @@ function Dashboard() {
     }
   };
   
-
   useEffect(() => {
     fetchAssignmentData();
   }, []);
