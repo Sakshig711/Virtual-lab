@@ -1,38 +1,49 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './css/StudentDashboard.css';
-import { Card, Row, Col, Progress } from 'antd';
+import { Card, Row, Col, Progress, message } from 'antd';
+import axios from 'axios';
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function StudentDashboard() {
   const [userData, setUserData] = useState(null);
+  const [examStats, setExamStats] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [showQuizDetails, setShowQuizDetails] = useState(false);
-  const [quizData] = useState({
-    attempted: [
-      { id: 1, name: 'Quiz 1', score: '85%', date: '2024-01-15' },
-      { id: 2, name: 'Quiz 2', score: '90%', date: '2024-01-20' },
-      { id: 3, name: 'Quiz 3', score: '88%', date: '2024-01-25' },
-    ],
-    remaining: [
-      { id: 4, name: 'Quiz 4', dueDate: '2024-02-10' },
-      { id: 5, name: 'Quiz 5', dueDate: '2024-02-15' },
-    ]
-  });
-  const [quizStats, setQuizStats] = useState({
-    attempted: 3,
-    remaining: 2,
-    percentile: 85,
-    batchAvg: 75,
-    classAvg: 70
-  });
   const navigate = useNavigate();
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (!user) {
-      navigate('/login');
-    } else {
-      setUserData(user);
-    }
+    const fetchUserProfile = async () => {
+      try {
+        const token = localStorage.getItem('studentToken');
+        if (!token) {
+          navigate('/login');
+          return;
+        }
+
+        const response = await axios.get(`${BASE_URL}/api/students/profile`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        setUserData(response.data.studentInfo);
+        setExamStats(response.data.examStats);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching profile:', error);
+        message.error('Failed to load profile data');
+        if (error.response?.status === 401) {
+          localStorage.removeItem('studentToken');
+          localStorage.removeItem('studentData');
+          navigate('/login');
+        }
+        setLoading(false);
+      }
+    };
+
+    fetchUserProfile();
   }, [navigate]);
 
   const QuizDetailsModal = () => (
@@ -44,21 +55,22 @@ function StudentDashboard() {
         </div>
         <div className="quiz-lists">
           <div className="attempted-quizzes">
-            <h3>Attempted Quizzes</h3>
-            {quizData.attempted.map(quiz => (
-              <div key={quiz.id} className="quiz-item">
-                <span className="quiz-name">{quiz.name}</span>
-                <span className="quiz-score">Score: {quiz.score}</span>
-                <span className="quiz-date">Date: {quiz.date}</span>
+            <h3>Attempted Exams</h3>
+            {examStats?.scheduledExams.map(exam => (
+              <div key={exam.id} className="quiz-item">
+                <span className="quiz-name">{exam.title}</span>
+                <span className="quiz-score">Score: {exam.percentage}%</span>
+                <span className="quiz-date">Date: {new Date(exam.attemptedOn).toLocaleDateString()}</span>
               </div>
             ))}
           </div>
           <div className="remaining-quizzes">
-            <h3>Remaining Quizzes</h3>
-            {quizData.remaining.map(quiz => (
-              <div key={quiz.id} className="quiz-item">
-                <span className="quiz-name">{quiz.name}</span>
-                <span className="quiz-due">Due: {quiz.dueDate}</span>
+            <h3>Completed Assignments</h3>
+            {examStats?.assignments.map(assignment => (
+              <div key={assignment.id} className="quiz-item">
+                <span className="quiz-name">{assignment.title}</span>
+                <span className="quiz-score">Score: {assignment.percentage}%</span>
+                <span className="quiz-date">Date: {new Date(assignment.attemptedOn).toLocaleDateString()}</span>
               </div>
             ))}
           </div>
@@ -76,48 +88,48 @@ function StudentDashboard() {
 
       <Row gutter={[16, 16]} className="dashboard-stats">
         <Col xs={24} sm={12} lg={8}>
-          <Card className="stat-card" onClick={() => setShowQuizDetails(true)} style={{ cursor: 'pointer' }}>
-            <h3>Quiz Progress</h3>
+          <Card className="stat-card" onClick={() => setShowQuizDetails(true)} style={{ cursor: 'pointer' }} loading={loading}>
+            <h3>Exam Progress</h3>
             <div className="quiz-progress">
               <div className="progress-item">
-                <span>Attempted</span>
-                <span className="progress-value">{quizData.attempted.length}</span>
+                <span>Total Exams</span>
+                <span className="progress-value">{examStats?.totalScheduledExams || 0}</span>
               </div>
               <div className="progress-item">
-                <span>Remaining</span>
-                <span className="progress-value">{quizData.remaining.length}</span>
+                <span>Total Assignments</span>
+                <span className="progress-value">{examStats?.totalAssignments || 0}</span>
               </div>
             </div>
           </Card>
         </Col>
         <Col xs={24} sm={12} lg={8}>
-          <Card className="stat-card">
-            <h3>Your Percentile</h3>
+          <Card className="stat-card" loading={loading}>
+            <h3>Overall Score</h3>
             <Progress 
               type="circle" 
-              percent={quizStats.percentile} 
+              percent={Number(examStats?.overallScore || 0)} 
               strokeColor="#52c41a"
-              format={percent => `${percent}th`}
+              format={percent => `${percent}%`}
             />
             <p>Keep up the good work!</p>
           </Card>
         </Col>
         <Col xs={24} sm={24} lg={8}>
-          <Card className="stat-card">
-            <h3>Comparative Analysis</h3>
+          <Card className="stat-card" loading={loading}>
+            <h3>Recent Performance</h3>
             <div className="comparison-stats">
-              <div className="comparison-item">
-                <span>Your Score</span>
-                <Progress percent={quizStats.percentile} status="active" />
+              {examStats?.scheduledExams.slice(-3).map((exam, index) => (
+                <div key={exam.id} className="comparison-item">
+                  <span>{exam.title}</span>
+                  <Progress percent={Number(exam.percentage)} status="normal" />
+                </div>
+              ))}
+              {examStats?.assignments.slice(-2).map(assignment => (
+                <div key={assignment.id} className="comparison-item">
+                <span>{assignment.title}</span>
+                <Progress percent={Number(assignment.percentage)} status="normal" />
               </div>
-              <div className="comparison-item">
-                <span>Batch Average</span>
-                <Progress percent={quizStats.batchAvg} status="normal" />
-              </div>
-              <div className="comparison-item">
-                <span>Class Average</span>
-                <Progress percent={quizStats.classAvg} status="normal" />
-              </div>
+              ))}
             </div>
           </Card>
         </Col>
@@ -125,23 +137,29 @@ function StudentDashboard() {
 
       <Row gutter={[16, 16]} className="dashboard-details">
         <Col xs={24} lg={12}>
-          <Card title="Personal Information" className="info-card">
-            <p><strong>Roll Number:</strong> {userData?.rollNo}</p>
+          <Card title="Personal Information" className="info-card" loading={loading}>
+            <p><strong>Roll Number:</strong> {userData?.rollNumber}</p>
             <p><strong>Class:</strong> {userData?.class}</p>
             <p><strong>Batch:</strong> {userData?.batch}</p>
             <p><strong>Email:</strong> {userData?.email}</p>
           </Card>
         </Col>
-        <Col xs={24} lg={12}>
-          <Card title="Recent Activity" className="activity-card">
+        {/* <Col xs={24} lg={12}>
+          <Card title="Recent Activity" className="activity-card" loading={loading}>
             <ul>
-              <li>Completed Quiz 3</li>
-              <li>Scored 90% in Quiz 2</li>
-              <li>Started Quiz 1</li>
-              <li>Updated Profile</li>
+              {examStats?.scheduledExams.slice(-3).map(exam => (
+                <li key={exam.id}>
+                  Completed {exam.title} with {exam.percentage}%
+                </li>
+              ))}
+              {examStats?.assignments.slice(-2).map(assignment => (
+                <li key={assignment.id}>
+                  Submitted {assignment.title} with {assignment.percentage}%
+                </li>
+              ))}
             </ul>
           </Card>
-        </Col>
+        </Col> */}
       </Row>
 
       <Row gutter={[16, 16]} className="quick-actions">
