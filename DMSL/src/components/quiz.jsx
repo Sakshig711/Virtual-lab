@@ -174,6 +174,7 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../apicalls/axios';
 import QuizApp from './Quiz1';
 import './css/quiz.css';
+import Nav from './Nav';
 
 const Quiz = () => {
   const navigate = useNavigate();
@@ -182,7 +183,7 @@ const Quiz = () => {
   const [selectedExamId, setSelectedExamId] = useState(null);
 
   useEffect(() => {
-    const userData = localStorage.getItem('user');
+    const userData = localStorage.getItem('studentData');
     if (!userData) {
       navigate('/login');
     } else {
@@ -217,39 +218,55 @@ const Quiz = () => {
   if (!user) return null;
 
   return (
+    <>
+    <Nav />
     <div className="quiz-container" style={{ 
       minHeight: '100vh',
       padding: '20px'
     }}>
       {selectedExamId ? (
-        // Show QuizApp when an exam is selected
         <QuizApp id={selectedExamId} />
       ) : (
         <>
-          <h2>Available Quizzes</h2>
-          <div className="quiz-card">
-            {quizzes.map((quiz) => (
-              <div key={quiz.id} className="quiz-item">
-                <div className="quiz-info">
-                  <h5>{quiz.name}</h5>
-                  <div className="quiz-details">
-                    <span>Duration: {quiz.duration}</span>
-                    <span>Questions: {quiz.questions}</span>
-                    <span>Scheduled time: {new Date(quiz.deadline).toLocaleString()}</span>
+          <h2 style={{ textAlign: "center" }}>Available Quizzes</h2>
+          {quizzes.length === 0 ? (
+            <div className="no-quiz-message" style={{
+              textAlign: 'center',
+              padding: '2rem',
+              backgroundColor: '#f5f5f5',
+              borderRadius: '8px',
+              margin: '2rem auto',
+              maxWidth: '600px'
+            }}>
+              <h3>No Quizzes Available</h3>
+              <p style={{color: "black"}}>There are currently no active quizzes. Please check back later.</p>
+            </div>
+          ) : (
+            <div className="quiz-card">
+              {quizzes.map((quiz) => (
+                <div key={quiz.id} className="quiz-item">
+                  <div className="quiz-info">
+                    <h5>{quiz.name}</h5>
+                    <div className="quiz-details">
+                      <span>Duration: {quiz.duration}</span>
+                      <span>Questions: {quiz.questions}</span>
+                      <span>Scheduled time: {new Date(quiz.deadline).toLocaleString()}</span>
+                    </div>
                   </div>
+                  <button 
+                    className="start-quiz-btn"
+                    onClick={() => setSelectedExamId(quiz.id)}
+                  >
+                    Start Quiz
+                  </button>
                 </div>
-                <button 
-                  className="start-quiz-btn"
-                  onClick={() => setSelectedExamId(quiz.id)}
-                >
-                  Start Quiz
-                </button>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </>
       )}
     </div>
+    </>
   );
 };
 

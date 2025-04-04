@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { Student } = require('../models/admin');
+const { Student, Exam, QuestionAssignment, StudentResult } = require('../models/admin');
 
 // JWT Secret Key
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -130,12 +130,90 @@ router.post('/login', async (req, res) => {
 });
 
 // Protected route example - Get student profile
+// Protected route - Get student profile with exam statistics
 router.get('/profile', authenticateToken, async (req, res) => {
     try {
-        const student = await Student.findById(req.student._id).select('-password');
-        res.json(student);
+        const student = await Student.findById(req.student._id)
+            .select('-password')
+            .populate({
+                path: 'examsTaken',
+                populate: [
+                    {
+                        path: 'exam',
+                        select: 'title totalMarks',
+                        model: Exam
+                    },
+                    {
+                        path: 'exam',
+                        select: 'title assignmentId',
+                        model: QuestionAssignment
+                    }
+                ]
+            });
+
+        // Calculate exam statistics
+        const examStats = {
+            totalExams: student.examsTaken.length,
+            scheduledExams: [],
+            assignments: [],
+            overallScore: 0
+        };
+
+        // Process each exam/assignment result
+        student.examsTaken.forEach(result => {
+            const examData = {
+                id: result._id,
+                score: result.score,
+                attemptedOn: result.attemptedOn,
+                examType: result.examType
+            };
+
+            if (result.examType === 'scheduled') {
+                examStats.scheduledExams.push({
+                    ...examData,
+                    title: result.exam?.title || 'Unknown Exam',
+                    totalMarks: result.exam?.totalMarks || 0,
+                    percentage: ((result.score / result.exam?.totalMarks) * 100).toFixed(2)
+                });
+            } else {
+                examStats.assignments.push({
+                    ...examData,
+                    title: result.exam?.title || 'Unknown Assignment',
+                    assignmentId: result.exam?.assignmentId || 'N/A',
+                    percentage: ((result.score / 5) * 100).toFixed(2) // Assuming assignment scores are already in percentage
+                });
+            }
+        });
+
+        // Calculate overall performance
+        const totalScores = [...examStats.scheduledExams, ...examStats.assignments]
+            .map(exam => parseFloat(exam.percentage));
+        
+        examStats.overallScore = totalScores.length > 0
+            ? (totalScores.reduce((a, b) => a + b) / totalScores.length).toFixed(2)
+            : 0;
+
+        res.json({
+            studentInfo: {
+                id: student._id,
+                name: student.name,
+                email: student.email,
+                batch: student.batch,
+                class: student.class,
+                rollNumber: student.rollNumber
+            },
+            examStats: {
+                ...examStats,
+                totalScheduledExams: examStats.scheduledExams.length,
+                totalAssignments: examStats.assignments.length
+            }
+        });
     } catch (error) {
-        res.status(500).json({ message: "Error fetching profile", error: error.message });
+        console.error('Profile fetch error:', error);
+        res.status(500).json({ 
+            message: "Error fetching profile", 
+            error: error.message 
+        });
     }
 });
 
