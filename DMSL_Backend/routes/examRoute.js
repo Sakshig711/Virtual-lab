@@ -3,17 +3,33 @@ const mongoose=require('mongoose');
 const authMiddleware=require("../middlewares/auth")
 const {Exam,Question,Admin,Student,StudentResult,QuestionAssignment}=require("../models/admin");
 
-router.get("/get-questions",async(req,res)=>{
-    try{
-        const questions = await Question.find({});
-        res.json(questions);
-    }
-    catch(err){
-        console.error(err);
+// router.get("/get-questions",async(req,res)=>{
+//     try{
+//         const questions = await Question.find({});
+//         res.json(questions);
+//     }
+//     catch(err){
+//         console.error(err);
         
-        res.status(500).json({ success: false, message: "Server error" });
+//         res.status(500).json({ success: false, message: "Server error" });
 
-    }
+//     }
+// })
+router.get("/get-questions",async(req,res)=>{
+   
+       try {
+          // Fetch assignments and populate the 'questions' field with actual question documents
+          const assignments = await QuestionAssignment.find()
+          .populate({
+              path: "questions",
+              select: "question", // Only include 'question' field and exclude '_id'
+          });
+
+      res.json(assignments);
+        } catch (error) {
+          console.error("Error fetching quizzes:", error);
+          res.status(500).json({ success: false, message: "Server error" });
+        }
 })
 
 router.post("/schedule-exam", async (req, res) => {

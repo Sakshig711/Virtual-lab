@@ -44,7 +44,7 @@ const QuizApp = ({ id }) => {
     useEffect(() => {
                 dispatch(fetchQuizQuestions());
             }, [dispatch]);
-        
+ 
             const fetchExamQuestions = async (examId) => {
                 try {
                     const response = await axios.get(`http://localhost:3000/api/exams/${examId}`); // Replace with actual API URL

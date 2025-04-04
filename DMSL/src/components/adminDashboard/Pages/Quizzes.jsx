@@ -7,47 +7,21 @@ import './Quizzes.css';
 import QBank from './Questionbank';
 import Schedule from './ScheduleExam';
 import {  useEffect } from 'react';
+import ManageScheduledExams from './ManageScheduledExams';
 import axiosInstance from '../../../apicalls/axios';
 function Quizzes() {
-  // const [quizzes] = useState([
-  //   {
-  //     id: 1,
-  //     title: 'Assignment 1: Database Basics',
-  //     totalStudents: 50,
-  //     appearedStudents: 45,
-  //     averageMarks: 75,
-  //     marksDistribution: [
-  //       { category: '0-30', count: 5 },
-  //       { category: '31-60', count: 15 },
-  //       { category: '61-80', count: 15 },
-  //       { category: '81-100', count: 10 },
-  //     ],
-  //   },
-  //   {
-  //     id: 2,
-  //     title: 'Assignment 2: SQL Queries',
-  //     totalStudents: 50,
-  //     appearedStudents: 48,
-  //     averageMarks: 82,
-  //     marksDistribution: [
-  //       { category: '0-30', count: 3 },
-  //       { category: '31-60', count: 12 },
-  //       { category: '61-80', count: 18 },
-  //       { category: '81-100', count: 15 },
-  //     ],
-  //   },
-  // ]);
-  const [quizzes, setQuizzes] = useState([]);  // Initialize with empty array
+
+  const [quizzes, setQuizzes] = useState([]);
   useEffect(() => {
     const fetchQuizzes = async () => {
       try {
         const response = await axiosInstance.get('/api/class-statistics');
         const apiData = response.data;
-  
+        console.log(apiData);
         const transformedQuizzes = Object.entries(apiData.assignmentStats).map(
           ([assignmentId, stats]) => ({
             id: parseInt(assignmentId),
-            title: `Assignment ${assignmentId}`,
+            title: `${assignmentId}`,
             totalStudents: apiData.totalStudents,
             appearedStudents: stats.studentCount,
             averageMarks: parseFloat(stats.average),
@@ -224,6 +198,9 @@ function Quizzes() {
         </TabPane>
         <TabPane tab="Create Exam" key="3">
           {<Schedule></Schedule>}
+        </TabPane>
+        <TabPane tab="Exams" key="4">
+          {<ManageScheduledExams></ManageScheduledExams>}
         </TabPane>
       </Tabs>
     </div>

@@ -21,8 +21,10 @@ const RecentSubmissions = ({ submissions }) => {
               <tr key={index}>
                 <td>{submission.student}</td>
                 <td>{submission.quiz}</td>
-                <td className={`score ${submission.score >= 70 ? 'good' : 'poor'}`}>
-                  {submission.score}%
+                {/* <td className={`score ${submission.score >= 70 ? 'good' : 'poor'}`}> */}
+                <td className={`score 'good' `}>
+
+                  {submission.score}
                 </td>
                 <td>{submission.date}</td>
                 <td>

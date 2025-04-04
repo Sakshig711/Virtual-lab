@@ -4,7 +4,7 @@ const jwt=require("jsonwebtoken");
 const bcrypt=require('bcrypt');
 // const Quiz=require("../quizschema");
 const {Question}=require("../models/admin");
-const {QuestionAssignment,StudentResult}= require("../models/admin");
+const {QuestionAssignment,StudentResult,Exam}= require("../models/admin");
 const {Admin}=require("../models/admin");
 const authMiddleware=require("../middlewares/auth");
 const performanceService = require('../services/performanceService');
@@ -160,7 +160,7 @@ router.get('/class-statistics', async (req, res) => {
 router.get('/student-performance', async (req, res) => {
     try {
         const studentPerformance = await performanceService.processStudentMarks();
-        
+        console.log("studeentprfor",studentPerformance);
        
         const students = studentPerformance.map((student, index) => ({
             key: (index + 1).toString(),
@@ -169,8 +169,8 @@ router.get('/student-performance', async (req, res) => {
             totalAssignments: student.assignmentsCompleted,
             marks: student.totalMarks,
             category: student.category,
-            assignments: student.assignments.map(assignment => ({
-                name: `Assignment ${assignment.assignmentId}`,
+            assignments: student.examDetails.map(assignment => ({
+                name: `${assignment.title}`,
                 marks: assignment.score,
                 date: "2024-01-10" // Placeholder, replace with actual assignment date if available
             }))
@@ -181,42 +181,44 @@ router.get('/student-performance', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
 router.get('/recent-submissions', async (req, res) => {
     try {
-      
-        const recentSubmissions = await StudentResult.find({ examType: 'assignment' })
+        const recentSubmissions = await StudentResult.find()
             .populate({
-                path: 'student', 
-                select: 'name'   
+                path: 'student',
+                select: 'name'
             })
-            .populate({
-                path: 'exam', 
-                model: 'QuestionAssignment',
-                select: 'title' 
-            })
-            .sort({ attemptedOn: -1 }) 
-            .limit(10); 
+            .sort({ attemptedOn: -1 })
+            .limit(10);
 
-      
-        const formattedSubmissions = recentSubmissions.map(submission => {
-            console.log(submission.student);
-            let percent=(submission.score/5)*100   // Log student data to debug
-            return {
-                student: submission.student ? submission.student.name : 'Unknown',
-                quiz: submission.exam.title,
-                score: percent,
-                date: submission.attemptedOn.toISOString().split('T')[0],
-                status: percent >= 70 ? 'Completed' : 'Failed'
-            };
-        });
-        
-        res.json(formattedSubmissions);
+        // Fetch exam titles in parallel
+        const updatedSubmissions = await Promise.all(
+            recentSubmissions.map(async (submission) => {
+                let examData = null;
+                
+                if (submission.examType === "scheduled") {
+                    examData = await Exam.findById(submission.exam).select('title');
+                } else if (submission.examType === "assignment") {
+                    examData = await QuestionAssignment.findById(submission.exam).select('title');
+                }
+
+                return {
+                    student: submission.student ? submission.student.name : 'Unknown',
+                    quiz: examData ? examData.title : "Unknown Exam",
+                    score: submission.score,
+                    date: submission.attemptedOn.toISOString().split('T')[0],
+                    status: 'Completed'
+                };
+            })
+        );
+
+        res.json(updatedSubmissions);
     } catch (error) {
-        console.error(error);
+        console.error("Error fetching recent submissions:", error);
         res.status(500).json({ error: error.message });
     }
 });
-
 
 router.get("/assignment-count", async (req, res) => {
     try {
