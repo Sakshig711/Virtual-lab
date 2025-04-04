@@ -50,7 +50,7 @@ const Schedule = () => {
       duration: parseInt(duration),
       totalMarks: parseInt(totalMarks),
       scheduledTime,
-      createdBy: "67ea52a5553e9fdf0398aff4",
+      createdBy: "67ebebba7a9fbb4dc715e550",
     };
 
     try {

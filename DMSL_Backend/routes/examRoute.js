@@ -2,7 +2,7 @@ const router=require('express').Router();
 const mongoose=require('mongoose');
 const authMiddleware=require("../middlewares/auth")
 const {Exam,Question,Admin,Student,StudentResult,QuestionAssignment}=require("../models/admin");
-
+const sendExamNotification=require("../mail");
 // router.get("/get-questions",async(req,res)=>{
 //     try{
 //         const questions = await Question.find({});
@@ -32,37 +32,53 @@ router.get("/get-questions",async(req,res)=>{
         }
 })
 
+
 router.post("/schedule-exam", async (req, res) => {
     try {
-      let { title, selectedQuestions, duration, totalMarks, scheduledTime, createdBy } = req.body;
-  
-      if (!title || !selectedQuestions.length || !duration || !totalMarks || !scheduledTime || !createdBy) {
-        return res.status(400).json({ success: false, message: "All fields are required" });
-      }
-      scheduledTime = new Date(scheduledTime).toISOString();
+        console.log("Request received:", req.body);
+        let { title, selectedQuestions, duration, totalMarks, scheduledTime, createdBy } = req.body;
 
-      const admin = await Admin.findById(createdBy);
-      if (!admin) {
-        return res.status(404).json({ success: false, message: "Admin not found" });
-      }
+        if (!title || !selectedQuestions.length || !duration || !totalMarks || !scheduledTime || !createdBy ) {
+            return res.status(400).json({ success: false, message: "All fields are required" });
+        }
 
-      const newExam = new Exam({
-        title,
-        selectedQuestions,
-        duration,
-        totalMarks,
-        scheduledTime,
-        createdBy
-      });
-  
-      await newExam.save();
-  
-      res.json({ success: true, message: "Exam scheduled successfully", exam: newExam });
+        // scheduledTime = new Date(scheduledTime).toISOString();
+
+        // Check if Admin Exists
+        const admin = await Admin.findById(createdBy);
+        if (!admin) {
+            return res.status(404).json({ success: false, message: "Admin not found" });
+        }
+
+        // Create Exam
+        const newExam = new Exam({
+            title,
+            selectedQuestions,
+            duration,
+            totalMarks,
+            scheduledTime,
+            createdBy
+        });
+
+        // Save Exam in Database
+        const savedExam = await newExam.save();
+        if (!savedExam) {
+            return res.status(500).json({ success: false, message: "Exam scheduling failed" });
+        }
+
+        // ✅ Now, send emails only after successful scheduling
+        const studentsWithEmail = await Student.find({ email: { $exists: true, $ne: null } });
+
+        studentsWithEmail.forEach(student => {
+            sendExamNotification(student.email, title, scheduledTime);
+        });
+        // sendExamNotification("gaikwadsatvik555@gmail.com", title, scheduledTime);
+        res.json({ success: true, message: "Exam scheduled successfully, emails sent!", exam: savedExam });
     } catch (error) {
-      console.error("Error scheduling exam:", error);
-      res.status(500).json({ success: false, message: "Server error" });
+        console.error("Error scheduling exam:", error);
+        res.status(500).json({ success: false, message: "Server error" });
     }
-  });
+});
   router.get("/active-exams", async (req, res) => {
     try {
       const currentTime = new Date();
