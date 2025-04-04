@@ -3,14 +3,53 @@ import { FaSearch, FaBell, FaUserCircle } from 'react-icons/fa';
 import { Modal, List, Tag } from 'antd';
 import './TopNav.css';
 import { jwtDecode } from 'jwt-decode';
+import axios from 'axios';
 const TopNav = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
     const [username, setUsername] = useState('Admin'); 
-  const [weakStudents] = useState([
-    { id: 1, name: 'John Smith', rollNo: '101', marks: 45, subject: 'Database Basics' },
-    { id: 2, name: 'Emily Brown', rollNo: '105', marks: 35, subject: 'SQL Queries' },
-    { id: 3, name: 'Mike Wilson', rollNo: '108', marks: 42, subject: 'DBMS Architecture' },
-  ]);
+  // const [weakStudents] = useState([
+  //   { id: 1, name: 'John Smith', rollNo: '101', marks: 45, subject: 'Database Basics' },
+  //   { id: 2, name: 'Emily Brown', rollNo: '105', marks: 35, subject: 'SQL Queries' },
+  //   { id: 3, name: 'Mike Wilson', rollNo: '108', marks: 42, subject: 'DBMS Architecture' },
+  // ]);
+  const [weakStudents, setWeakStudents] = useState([]);
+
+  useEffect(() => {
+    const fetchStudentData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/student-performance');
+        const data = response.data;
+        console.log("student data",data);
+        // Filter and format weak students
+        // const filtered = data
+        //   .filter(student => student.marks < 50) // Filter weak students
+        //   .map(student => ({
+        //     id: student.key,
+        //     name: student.name,
+        //     rollNo: student.rollNo,
+        //     marks: student.marks,
+        //     subject: student.assignments.length > 0 ? student.assignments[0].name : 'N/A'
+        //   }));
+
+        const filtered = data
+        .filter(student => student.category === 'Category C' && student.marks < 50)
+        .map(student => ({
+          id: student.key,
+          name: student.name,
+          rollNo: student.rollNo,
+          marks: student.marks,
+          subject: student.assignments.length > 0 ? student.assignments[0].name : 'N/A'
+        }))
+        .slice(0, 3); 
+
+        setWeakStudents(filtered);
+      } catch (error) {
+        console.error('Error fetching student data:', error);
+      }
+    };
+
+    fetchStudentData();
+  }, []);
 useEffect(() => {
     // Retrieve token from localStorage
     const token = localStorage.getItem('token');
@@ -60,7 +99,7 @@ useEffect(() => {
             <List.Item>
               <List.Item.Meta
                 title={`${student.name} (Roll No: ${student.rollNo})`}
-                description={`Subject: ${student.subject}`}
+                description={`Exam: ${student.subject}`}
               />
               <Tag color="red">{student.marks}%</Tag>
             </List.Item>
