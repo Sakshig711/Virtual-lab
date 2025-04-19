@@ -79,6 +79,13 @@ function StudentDashboard() {
     </div>
   );
 
+  const handleLogout = () => {
+    localStorage.removeItem('studentToken');
+    localStorage.removeItem('studentData');
+    message.success('Logged out successfully');
+    navigate('/login');
+  };
+
   return (
     <div className="dashboard-container">
       <div className="welcome-section">
@@ -178,8 +185,13 @@ function StudentDashboard() {
             Edit Profile
           </button>
         </Col>
+        <Col xs={24} sm={12} md={6}>
+          <button onClick={handleLogout} className="action-button logout">
+            Logout
+          </button>
+        </Col>
       </Row>
-      
+
       <QuizDetailsModal />
     </div>
   );

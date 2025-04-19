@@ -92,6 +92,7 @@
 }
 
 /* Update profile menu positioning */
+/* Profile Menu Styles */
 .profile-menu {
     position: relative;
     display: inline-block;
@@ -119,9 +120,18 @@
     background-color: #243457;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    display: none;
     z-index: 103;
     padding: 10px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.profile-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 .dropdown-item {
@@ -137,11 +147,15 @@
     text-align: left;
     cursor: pointer;
     border-bottom: 1px solid rgba(198, 202, 220, 0.2);
-
 }
 
 .dropdown-item:hover {
     background-color: #334b7d;
+}
+
+/* Remove duplicate hover rules */
+.profile-menu:hover .profile-dropdown {
+    display: none;
 }
 
 /* Mobile adjustments */
@@ -328,14 +342,35 @@
         font-size: 18px;
         border-bottom: 1px solid rgba(198, 202, 220, 0.2);
     }
-}
 
-.profile-menu:hover .profile-dropdown {
-    display: block;
-
-}
-
-
-.profile-menu:hover .profile-dropdown {
-    display: block;
+    /* Remove all profile-menu, profile-circle, and profile-dropdown styles */
+    
+    .profile-link {
+        display: flex;
+        align-items: center;
+        color: #C2CAD6;
+        text-decoration: none;
+        font-size: 1.1rem;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+    
+    .profile-link:hover {
+        color: #f0a500;
+    }
+    
+    .logout-button {
+        background: none;
+        border: none;
+        color: #C2CAD6;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 5px 10px;
+        transition: color 0.3s ease;
+    }
+    
+    .logout-button:hover {
+        color: #f0a500;
+    }
 }

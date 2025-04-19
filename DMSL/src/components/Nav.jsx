@@ -7,25 +7,8 @@ import { UserOutlined } from '@ant-design/icons';
 
 const Nav = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [profileOpen, setProfileOpen] = useState(false);
   const user = JSON.parse(localStorage.getItem('studentData'));
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (profileOpen && !event.target.closest('.profile-menu')) {
-        setProfileOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [profileOpen]);
-
-  const handleProfileClick = (e) => {
-    e.stopPropagation();
-    setProfileOpen(!profileOpen);
-  };
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -35,15 +18,6 @@ const Nav = () => {
     localStorage.removeItem('studentData');
     localStorage.removeItem('studentToken');
     window.location.reload();
-  };
-
-  const handleQuizClick = (e) => {
-    e.preventDefault();
-    if (!user) {
-      navigate('/login');
-    } else {
-      navigate('/quiz');
-    }
   };
 
   return (
@@ -59,39 +33,29 @@ const Nav = () => {
             {/* Desktop Navigation Links */}
             <div className="nav-links">
               <Link to="/">Home</Link>
-              <Link to="/quiz" onClick={handleQuizClick}>Quiz</Link>
+              <Link to="/quiz">Quiz</Link>
               <Link to="/assignmentlist">Assignment List</Link>
               
               {!user ? (
                 <Link to="/login" className="login-link">Login</Link>
               ) : (
-                <div className="profile-menu" onClick={handleProfileClick}>
-                  <div className="profile-circle">
-                    <UserOutlined style={{ fontSize: '20px' }} />
-                  </div>
-                  {profileOpen && (
-                    <div className="profile-dropdown" >
-                      <Link to="/student-dashboard" className="dropdown-item">Dashboard</Link>
-                      <button onClick={handleLogout} className="dropdown-item">Logout</button>
-                    </div>
-                  )}
-                </div>
+                <Link to="/student-dashboard" className="profile-link">
+                  <UserOutlined style={{ marginRight: '8px' }} />
+                  Profile
+                </Link>
               )}
             </div>
 
             {/* Mobile Navigation Links */}
             <div className={`nav-links-mobile ${menuOpen ? "active" : ""}`}>
               <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
-              <Link to="/quiz" onClick={handleQuizClick}>Quiz</Link>
+              <Link to="/quiz" onClick={() => setMenuOpen(false)}>Quiz</Link>
               <Link to="/assignmentlist" onClick={() => setMenuOpen(false)}>Assignment List</Link>
               
               {!user ? (
                 <Link to="/login" className="login-link" onClick={() => setMenuOpen(false)}>Login</Link>
               ) : (
-                <>
-                  <Link to="/student-dashboard" onClick={() => setMenuOpen(false)}>Dashboard</Link>
-                  <button onClick={handleLogout} className="logout-button">Logout</button>
-                </>
+                <Link to="/student-dashboard" onClick={() => setMenuOpen(false)}>Profile</Link>
               )}
             </div>
             

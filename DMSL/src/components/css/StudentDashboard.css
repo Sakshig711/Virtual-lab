@@ -234,3 +234,11 @@
         text-align: center;
     }
 }
+
+.action-button.logout {
+    background-color: #ff4d4f;
+}
+
+.action-button.logout:hover {
+    background-color: #ff7875;
+}
