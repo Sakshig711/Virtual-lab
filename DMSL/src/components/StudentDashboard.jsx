@@ -181,8 +181,8 @@ function StudentDashboard() {
           </button>
         </Col>
         <Col xs={24} sm={12} md={6}>
-          <button onClick={() => navigate('/profile')} className="action-button">
-            Edit Profile
+          <button onClick={() => navigate('/')} className="action-button">
+            Home
           </button>
         </Col>
         <Col xs={24} sm={12} md={6}>
