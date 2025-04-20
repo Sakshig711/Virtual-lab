@@ -156,7 +156,6 @@ router.get('/class-statistics', async (req, res) => {
 });
 
 
-
 router.get('/student-performance', async (req, res) => {
     try {
         const studentPerformance = await performanceService.processStudentMarks();
@@ -166,7 +165,11 @@ router.get('/student-performance', async (req, res) => {
             key: (index + 1).toString(),
             name: student.name,
             rollNo: student.rollNo,
+            class: student.class,          
+            batch: student.batch, 
             totalAssignments: student.assignmentsCompleted,
+            assignmentsCompleted:student.assignmentsCompleted,
+            scheduledExamsCompleted:student.scheduledExamsCompleted,
             marks: student.totalMarks,
             category: student.category,
             assignments: student.examDetails.map(assignment => ({
@@ -181,6 +184,7 @@ router.get('/student-performance', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
 
 router.get('/recent-submissions', async (req, res) => {
     try {

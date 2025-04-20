@@ -189,6 +189,8 @@ const performanceService = {
                 return {
                     rollNo: student.rollNumber,
                     name: student.name,
+                    class: student.class,          
+                    batch: student.batch, 
                     totalMarks: totalMarks,
                     maxPossibleMarks: maxPossibleMarks,
                     assignmentsCompleted: assignments.length,
@@ -249,7 +251,7 @@ const performanceService = {
                 ? (stat.totalMarks / stat.studentCount).toFixed(2) 
                 : "0.00";
         });
-    
+
         return {
             totalStudents,
             classAverage,
