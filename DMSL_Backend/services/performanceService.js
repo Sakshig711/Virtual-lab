@@ -190,7 +190,7 @@ const performanceService = {
                     rollNo: student.rollNumber,
                     name: student.name,
                     class: student.class,          
-                    batch: student.batch, 
+                    batch: student.batch,  
                     totalMarks: totalMarks,
                     maxPossibleMarks: maxPossibleMarks,
                     assignmentsCompleted: assignments.length,
@@ -235,12 +235,18 @@ const performanceService = {
                     assignmentStats[title] = {
                         totalMarks: 0,
                         studentCount: 0,
-                        average: 0
+                        average: 0,
+                        categoryWise: {
+                            "Category A": 0,
+                            "Category B": 0,
+                            "Category C": 0
+                        }
                     };
                 }
     
                 assignmentStats[title].totalMarks += exam.score;
                 assignmentStats[title].studentCount++;
+                assignmentStats[title].categoryWise[student.category]++;
             });
         });
     

@@ -11,38 +11,71 @@ import ManageScheduledExams from './ManageScheduledExams';
 import axiosInstance from '../../../apicalls/axios';
 function Quizzes() {
 
+  // const [quizzes, setQuizzes] = useState([]);
+  // useEffect(() => {
+  //   const fetchQuizzes = async () => {
+  //     try {
+  //       const response = await axiosInstance.get('/api/class-statistics');
+  //       const apiData = response.data;
+  //       console.log(apiData);
+  //       const transformedQuizzes = Object.entries(apiData.assignmentStats).map(
+  //         ([assignmentId, stats]) => ({
+  //           id: parseInt(assignmentId),
+  //           title: `${assignmentId}`,
+  //           totalStudents: apiData.totalStudents,
+  //           appearedStudents: stats.studentCount,
+  //           averageMarks: parseFloat(stats.average),
+  //           marksDistribution: Object.entries(apiData.categoryDistribution).map(
+  //             ([category, count]) => ({
+  //               category,
+  //               count
+  //             })
+  //           ),
+  //         })
+  //       );
+  
+  //       setQuizzes(transformedQuizzes);
+  //     } catch (error) {
+  //       console.error('Error fetching quizzes:', error);
+  //     }
+  //   };
+  
+  //   fetchQuizzes();
+  // }, []);
   const [quizzes, setQuizzes] = useState([]);
-  useEffect(() => {
-    const fetchQuizzes = async () => {
-      try {
-        const response = await axiosInstance.get('/api/class-statistics');
-        const apiData = response.data;
-        console.log(apiData);
-        const transformedQuizzes = Object.entries(apiData.assignmentStats).map(
-          ([assignmentId, stats]) => ({
-            id: parseInt(assignmentId),
-            title: `${assignmentId}`,
-            totalStudents: apiData.totalStudents,
-            appearedStudents: stats.studentCount,
-            averageMarks: parseFloat(stats.average),
-            marksDistribution: Object.entries(apiData.categoryDistribution).map(
-              ([category, count]) => ({
-                category,
-                count
-              })
-            ),
-          })
-        );
-  
-        setQuizzes(transformedQuizzes);
-      } catch (error) {
-        console.error('Error fetching quizzes:', error);
-      }
-    };
-  
-    fetchQuizzes();
-  }, []);
-  
+
+useEffect(() => {
+  const fetchQuizzes = async () => {
+    try {
+      const response = await axiosInstance.get('/api/class-statistics');
+      const apiData = response.data;
+      console.log(apiData);
+
+      const transformedQuizzes = Object.entries(apiData.assignmentStats).map(
+        ([assignmentId, stats]) => ({
+          id: assignmentId, // Keep as string if assignmentId is not numeric
+          title: `${assignmentId}`,
+          totalStudents: apiData.totalStudents,
+          appearedStudents: stats.studentCount,
+          averageMarks: parseFloat(stats.average),
+          marksDistribution: Object.entries(stats.categoryWise || {}).map(
+            ([category, count]) => ({
+              category,
+              count
+            })
+          ),
+        })
+      );
+
+      setQuizzes(transformedQuizzes);
+    } catch (error) {
+      console.error('Error fetching quizzes:', error);
+    }
+  };
+
+  fetchQuizzes();
+}, []);
+
   const getChartConfig = (title) => ({
     height: 200,
     xField: 'category',
@@ -181,7 +214,7 @@ function Quizzes() {
               <Col xs={24} sm={12} lg={8} key={quiz.id}>
                 <Card title={quiz.title} className="quiz-card">
                   <div className="quiz-stats">
-                    <p>Total Students: {quiz.totalStudents}</p>
+                    {/* <p>Total Students: {quiz.totalStudents}</p> */}
                     <p>Students Appeared: {quiz.appearedStudents}</p>
                     <p>Average Marks: {quiz.averageMarks}%</p>
                   </div>
