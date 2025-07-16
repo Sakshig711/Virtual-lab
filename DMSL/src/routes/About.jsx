@@ -3,8 +3,16 @@ import TeamCard from "../components/Card.jsx";
 import "./css/About.css";
 import Jakhete from "../assets/Jakhete.jpg";
 import Hiray from "../assets/hiray.jpg";
-
+import hod from "../assets/hod.jpg"
 const mentors = [
+    {
+    name: "Dr.Emmanuel Mark",
+    role: "Professor & Head, IT Dept.",
+    location: "PICT, Pune, India",
+    email: "hodit@pict.edu",
+    imageUrl: hod,
+    linkedinUrl: "https://www.linkedin.com/in/dr-emmanuel-mark-568a4316/",
+  },
   {
     name: "Sumitra A. Jakhete",
     role: "Associate Professor, IT Dept.",
