@@ -47,7 +47,7 @@
 //         }
 
 //         // Verify token with backend
-//         const response = await axios.get('http://localhost:3000/api/students/profile', {
+//         const response = await axios.get(`${BASE_URL}/api/students/profile`, {
 //           headers: { Authorization: `Bearer ${token}` }
 //         });
 
@@ -100,20 +100,20 @@
 //   if (!user) {
 //     return null;
 //   }
-  
+
 //   // Keep only the earlier checks:
 //   if (loading) {
 //     return <div className="quiz-loading">Loading...</div>;
 //   }
-  
+
 //   if (error) {
 //     return <div className="quiz-error">{error}</div>;
 //   }
-  
+
 //   if (!user) {
 //     return <div className="quiz-unauthorized">Please login to access quizzes</div>;
 //   }
-  
+
 //   return (
 //     <div className="quiz-container">
 //       {!selectedAssignment ? (
@@ -121,8 +121,8 @@
 //           <h2>Available Assignments</h2>
 //           <div className="assignment-grid">
 //             {assignments.map((assignment) => (
-//               <div 
-//                 key={assignment.id} 
+//               <div
+//                 key={assignment.id}
 //                 className="assignment-card"
 //                 onClick={() => handleAssignmentClick(assignment)}
 //               >
@@ -153,7 +153,7 @@
 //                   <p>Questions: {quiz.questions}</p>
 //                   <p className="deadline">Deadline: {new Date(quiz.deadline).toLocaleDateString()}</p>
 //                 </div>
-//                 <button 
+//                 <button
 //                   className="start-quiz-btn"
 //                   onClick={() => handleQuizStart(quiz)}
 //                 >
@@ -169,105 +169,129 @@
 // };
 
 // export default Quiz;
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../apicalls/axios';
-import QuizApp from './Quiz1';
-import './css/quiz.css';
-import Nav from './Nav';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axiosInstance from "../apicalls/axios";
+import QuizApp from "./Quiz1";
+import "./css/quiz.css";
+import Nav from "./Nav";
 
 const Quiz = () => {
-  const navigate = useNavigate();
-  const [user, setUser] = useState(null);
-  const [quizzes, setQuizzes] = useState([]);
-  const [selectedExamId, setSelectedExamId] = useState(null);
+    const navigate = useNavigate();
+    const [user, setUser] = useState(null);
+    const [quizzes, setQuizzes] = useState([]);
+    const [selectedExamId, setSelectedExamId] = useState(null);
 
-  useEffect(() => {
-    const userData = localStorage.getItem('studentData');
-    if (!userData) {
-      navigate('/login');
-    } else {
-      setUser(JSON.parse(userData));
-    }
-  }, [navigate]);
+    useEffect(() => {
+        const userData = localStorage.getItem("studentData");
+        if (!userData) {
+            navigate("/login");
+        } else {
+            setUser(JSON.parse(userData));
+        }
+    }, [navigate]);
 
-  useEffect(() => {
-    const fetchQuizzes = async () => {
-      try {
-        const response = await axiosInstance.get('/api/exams/active-exams');
-        const exams = response.data;
-        
-        const transformedQuizzes = exams.map(exam => ({
-          id: exam._id,
-          name: exam.title,
-          duration: `${exam.duration} mins`,
-          questions: exam.selectedQuestions.length,
-          deadline: exam.scheduledTime,
-        }));
-        console.log("ScheduledQuizzes:", transformedQuizzes);
-        setQuizzes(transformedQuizzes);
-      } catch (error) {
-        console.error('Error fetching quizzes:', error);
-        setQuizzes([]);
-      }
-    };
+    useEffect(() => {
+        const fetchQuizzes = async () => {
+            try {
+                const response = await axiosInstance.get(
+                    "/api/exams/active-exams"
+                );
+                const exams = response.data;
 
-    fetchQuizzes();
-  }, []);
+                const transformedQuizzes = exams.map((exam) => ({
+                    id: exam._id,
+                    name: exam.title,
+                    duration: `${exam.duration} mins`,
+                    questions: exam.selectedQuestions.length,
+                    deadline: exam.scheduledTime,
+                }));
+                console.log("ScheduledQuizzes:", transformedQuizzes);
+                setQuizzes(transformedQuizzes);
+            } catch (error) {
+                console.error("Error fetching quizzes:", error);
+                setQuizzes([]);
+            }
+        };
 
-  if (!user) return null;
+        fetchQuizzes();
+    }, []);
 
-  return (
-    <>
-    <Nav />
-    <div className="quiz-container" style={{ 
-      minHeight: '100vh',
-      padding: '20px'
-    }}>
-      {selectedExamId ? (
-        <QuizApp id={selectedExamId} />
-      ) : (
+    if (!user) return null;
+
+    return (
         <>
-          <h2 style={{ textAlign: "center" }}>Available Quizzes</h2>
-          {quizzes.length === 0 ? (
-            <div className="no-quiz-message" style={{
-              textAlign: 'center',
-              padding: '2rem',
-              backgroundColor: '#f5f5f5',
-              borderRadius: '8px',
-              margin: '2rem auto',
-              maxWidth: '600px'
-            }}>
-              <h3>No Quizzes Available</h3>
-              <p style={{color: "black"}}>There are currently no active quizzes. Please check back later.</p>
+            <Nav />
+            <div
+                className="quiz-container"
+                style={{
+                    minHeight: "100vh",
+                    padding: "20px",
+                }}
+            >
+                {selectedExamId ? (
+                    <QuizApp id={selectedExamId} />
+                ) : (
+                    <>
+                        <h2 style={{ textAlign: "center" }}>
+                            Available Quizzes
+                        </h2>
+                        {quizzes.length === 0 ? (
+                            <div
+                                className="no-quiz-message"
+                                style={{
+                                    textAlign: "center",
+                                    padding: "2rem",
+                                    backgroundColor: "#f5f5f5",
+                                    borderRadius: "8px",
+                                    margin: "2rem auto",
+                                    maxWidth: "600px",
+                                }}
+                            >
+                                <h3>No Quizzes Available</h3>
+                                <p style={{ color: "black" }}>
+                                    There are currently no active quizzes.
+                                    Please check back later.
+                                </p>
+                            </div>
+                        ) : (
+                            <div className="quiz-card">
+                                {quizzes.map((quiz) => (
+                                    <div key={quiz.id} className="quiz-item">
+                                        <div className="quiz-info">
+                                            <h5>{quiz.name}</h5>
+                                            <div className="quiz-details">
+                                                <span>
+                                                    Duration: {quiz.duration}
+                                                </span>
+                                                <span>
+                                                    Questions: {quiz.questions}
+                                                </span>
+                                                <span>
+                                                    Scheduled time:{" "}
+                                                    {new Date(
+                                                        quiz.deadline
+                                                    ).toLocaleString()}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <button
+                                            className="start-quiz-btn"
+                                            onClick={() =>
+                                                setSelectedExamId(quiz.id)
+                                            }
+                                        >
+                                            Start Quiz
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </>
+                )}
             </div>
-          ) : (
-            <div className="quiz-card">
-              {quizzes.map((quiz) => (
-                <div key={quiz.id} className="quiz-item">
-                  <div className="quiz-info">
-                    <h5>{quiz.name}</h5>
-                    <div className="quiz-details">
-                      <span>Duration: {quiz.duration}</span>
-                      <span>Questions: {quiz.questions}</span>
-                      <span>Scheduled time: {new Date(quiz.deadline).toLocaleString()}</span>
-                    </div>
-                  </div>
-                  <button 
-                    className="start-quiz-btn"
-                    onClick={() => setSelectedExamId(quiz.id)}
-                  >
-                    Start Quiz
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
         </>
-      )}
-    </div>
-    </>
-  );
+    );
 };
 
 export default Quiz;

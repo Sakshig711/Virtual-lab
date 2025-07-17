@@ -1,7 +1,5 @@
-
-
 import React, { useState, useEffect } from "react";
-import { toast, ToastContainer } from "react-toastify"; 
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./css/Quiz1.css";
 import axios from "axios";
@@ -31,11 +29,13 @@ const QuizApp = ({ id }) => {
         if (token) {
             setIsAuthenticated(true);
             // Get student details from localStorage
-            const studentData = JSON.parse(localStorage.getItem("studentData") || "{}");
-            setFormData(prev => ({
+            const studentData = JSON.parse(
+                localStorage.getItem("studentData") || "{}"
+            );
+            setFormData((prev) => ({
                 ...prev,
                 name: studentData.name || "",
-                rollno: studentData.rollNumber || ""
+                rollno: studentData.rollNumber || "",
             }));
         }
     }, []);
@@ -44,61 +44,76 @@ const QuizApp = ({ id }) => {
     const dispatch = useDispatch();
     const { questions, loading, error } = useSelector((state) => state.quiz);
     useEffect(() => {
-                dispatch(fetchQuizQuestions());
-            }, [dispatch]);
- 
-            const fetchExamQuestions = async (examId) => {
-                try {
-                    const response = await axios.get(`http://localhost:3000/api/exams/${examId}`); // Replace with actual API URL
-                    const data = response.data;
+        dispatch(fetchQuizQuestions());
+    }, [dispatch]);
 
-                    if (data && Array.isArray(data.selectedQuestions)) {
-                        // Shuffle questions and update state
-                        setQuestionsQuiz([...data.selectedQuestions].sort(() => Math.random() - 0.5));
-                        setSelectedOptions(Array(data.selectedQuestions.length).fill(""));
-                    } else {
-                        console.warn("No questions found for exam ID:", examId);
-                        setQuestionsQuiz([]);
-                    }
-                } catch (error) {
-                    console.error("Error fetching exam questions:", error);
+    const fetchExamQuestions = async (examId) => {
+        try {
+            const response = await axios.get(`${BASE_URL}/api/exams/${examId}`); // Replace with actual API URL
+            const data = response.data;
+
+            if (data && Array.isArray(data.selectedQuestions)) {
+                // Shuffle questions and update state
+                setQuestionsQuiz(
+                    [...data.selectedQuestions].sort(() => Math.random() - 0.5)
+                );
+                setSelectedOptions(
+                    Array(data.selectedQuestions.length).fill("")
+                );
+            } else {
+                console.warn("No questions found for exam ID:", examId);
+                setQuestionsQuiz([]);
+            }
+        } catch (error) {
+            console.error("Error fetching exam questions:", error);
+        }
+    };
+    useEffect(() => {
+        console.log("Quiz ID received:", id);
+
+        if (questions && Array.isArray(questions)) {
+            const isMongoId =
+                typeof id === "string" &&
+                id.length === 24 &&
+                /^[a-f0-9]{24}$/.test(id);
+
+            if (isMongoId) {
+                fetchExamQuestions(id);
+            } else {
+                const getId = () => {
+                    if (id >= 10 && id <= 14) return id - 2;
+                    if (id >= 7 && id < 10) return 7;
+                    return id;
+                };
+
+                // const quizId = getId();
+                const quizId = Number(getId());
+                // console.log("Looking for assignmentId:", quizId);
+                // console.log("questions", questions);
+                const filteredQuiz = questions.find(
+                    (quiz) => quiz.assignmentId === quizId
+                );
+                // console.log("Filtered Quiz:", filteredQuiz);
+                if (filteredQuiz && Array.isArray(filteredQuiz.questions)) {
+                    setQuestionsQuiz(
+                        [...filteredQuiz.questions].sort(
+                            () => Math.random() - 0.5
+                        )
+                    );
+                    setSelectedOptions(
+                        Array(filteredQuiz.questions.length).fill("")
+                    );
+                } else {
+                    console.warn(
+                        "No matching quiz found for assignmentId:",
+                        quizId
+                    );
+                    setQuestionsQuiz([]);
                 }
-            };
-            useEffect(() => {
-                console.log("Quiz ID received:", id);
-        
-                if (questions && Array.isArray(questions)) {
-                    const isMongoId = typeof id === "string" && id.length === 24 && /^[a-f0-9]{24}$/.test(id);
-        
-                    if (isMongoId) {
-                       
-                        fetchExamQuestions(id);
-                    } else {
-                       
-                        const getId = () => {
-                            if (id >= 10 && id <= 14) return id - 2;
-                            if (id >= 7 && id < 10) return 7;
-                            return id;
-                        };
-        
-                        // const quizId = getId();
-                        const quizId = Number(getId());
-                        // console.log("Looking for assignmentId:", quizId);
-                        // console.log("questions", questions);
-                        const filteredQuiz = questions.find((quiz) => quiz.assignmentId === quizId);
-                        // console.log("Filtered Quiz:", filteredQuiz);
-                        if (filteredQuiz && Array.isArray(filteredQuiz.questions)) {
-                            setQuestionsQuiz([...filteredQuiz.questions].sort(() => Math.random() - 0.5));
-                            setSelectedOptions(Array(filteredQuiz.questions.length).fill(""));
-                        } else {
-                            console.warn("No matching quiz found for assignmentId:", quizId);
-                            setQuestionsQuiz([]);
-                        }
-                    }
-                }
-            }, [id, questions]);
-        
-  
+            }
+        }
+    }, [id, questions]);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
@@ -137,7 +152,6 @@ const QuizApp = ({ id }) => {
             return false;
         }
 
-        
         for (let i = 0; i < questionsQuiz.length; i++) {
             if (!selectedOptions[i]) {
                 toast.error(`Please answer question ${i + 1}`);
@@ -157,34 +171,37 @@ const QuizApp = ({ id }) => {
         return tempScore;
     };
 
-  
     const handleSubmit = async (event) => {
         event.preventDefault();
-    
+
         // Run strict validation
         if (!validateFormData()) {
             return; // Prevent form submission if validation fails
         }
-    
+
         const updatedMarks = calculateScore();
         setFormData((prev) => ({ ...prev, marks: updatedMarks }));
         // console.log(formData.rollno);
         // console.log(id);
         setTimeout(async () => {
             try {
-                const response = await fetch(`http://localhost:3000/api/exams/submit-exam`, { // ✅ Adjusted API endpoint
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        rollNumber: formData.rollno, // ✅ Use rollNumber instead of email
-                        name: formData.name, // ✅ Pass name
-                        examId: id, // ✅ Pass exam ID
-                        score: updatedMarks, // ✅ Send computed score
-                    }),
-                });
-    
+                const response = await fetch(
+                    `${BASE_URL}/api/exams/submit-exam`,
+                    {
+                        // ✅ Adjusted API endpoint
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            rollNumber: formData.rollno, // ✅ Use rollNumber instead of email
+                            name: formData.name, // ✅ Pass name
+                            examId: id, // ✅ Pass exam ID
+                            score: updatedMarks, // ✅ Send computed score
+                        }),
+                    }
+                );
+
                 const result = await response.json();
-    
+
                 if (result.success) {
                     toast.success(result.message);
                     setShowResult(true);
@@ -197,7 +214,7 @@ const QuizApp = ({ id }) => {
             }
         }, 2000); // Small delay to ensure marks update before sending
     };
-    
+
     const resetTest = () => {
         setShowResult(false);
         setScore(0);
@@ -223,7 +240,7 @@ const QuizApp = ({ id }) => {
 
     return (
         <div className="content-quiz">
-            <ToastContainer /> 
+            <ToastContainer />
             {!showResult ? (
                 <form onSubmit={handleSubmit}>
                     <h2>Quiz</h2>
@@ -232,23 +249,41 @@ const QuizApp = ({ id }) => {
                         questionsQuiz.map((question, index) => (
                             <div key={index} className="question-container">
                                 <h3>Question {index + 1}</h3>
-                                <div className="question">{question.question}</div>
+                                <div className="question">
+                                    {question.question}
+                                </div>
                                 <div className="options">
-                                    {question.options.map((option, optIndex) => (
-                                        <div key={optIndex} className="option-item">
-                                            <input
-                                                type="radio"
-                                                id={`q${index}_option${optIndex}`}
-                                                name={`question${index}`}
-                                                value={option}
-                                                checked={selectedOptions[index] === option}
-                                                onChange={() => handleOptionChange(index, option)}
-                                            />
-                                            <label htmlFor={`q${index}_option${optIndex}`}>
-                                                {option}
-                                            </label>
-                                        </div>
-                                    ))}
+                                    {question.options.map(
+                                        (option, optIndex) => (
+                                            <div
+                                                key={optIndex}
+                                                className="option-item"
+                                            >
+                                                <input
+                                                    type="radio"
+                                                    id={`q${index}_option${optIndex}`}
+                                                    name={`question${index}`}
+                                                    value={option}
+                                                    checked={
+                                                        selectedOptions[
+                                                            index
+                                                        ] === option
+                                                    }
+                                                    onChange={() =>
+                                                        handleOptionChange(
+                                                            index,
+                                                            option
+                                                        )
+                                                    }
+                                                />
+                                                <label
+                                                    htmlFor={`q${index}_option${optIndex}`}
+                                                >
+                                                    {option}
+                                                </label>
+                                            </div>
+                                        )
+                                    )}
                                 </div>
                             </div>
                         ))
@@ -264,24 +299,42 @@ const QuizApp = ({ id }) => {
             ) : (
                 <div className="result-container">
                     <h2>Test Completed!</h2>
-                    <div>Your score: {score}/{questionsQuiz.length}</div>
+                    <div>
+                        Your score: {score}/{questionsQuiz.length}
+                    </div>
                     <h3>Questions and Answers:</h3>
                     {questionsQuiz.map((question, index) => (
                         <div key={index} className="question-item">
                             <div>
-                                <strong>Question {index + 1}:</strong> {question.question}
+                                <strong>Question {index + 1}:</strong>{" "}
+                                {question.question}
                             </div>
                             <div className="options">
                                 {question.options.map((option, optIndex) => {
-                                    const isCorrect = option === question.correctOption;
-                                    const isSelected = option === selectedOptions[index];
-                                    const isUserCorrect = selectedOptions[index] === question.correctOption;
+                                    const isCorrect =
+                                        option === question.correctOption;
+                                    const isSelected =
+                                        option === selectedOptions[index];
+                                    const isUserCorrect =
+                                        selectedOptions[index] ===
+                                        question.correctOption;
 
-                                    let optionClass = isCorrect ? "correct" : isSelected ? "incorrect" : "";
-                                    let icon = isCorrect ? "✔️" : isSelected ? "❌" : "";
+                                    let optionClass = isCorrect
+                                        ? "correct"
+                                        : isSelected
+                                        ? "incorrect"
+                                        : "";
+                                    let icon = isCorrect
+                                        ? "✔️"
+                                        : isSelected
+                                        ? "❌"
+                                        : "";
 
                                     return (
-                                        <div key={optIndex} className={`option-item ${optionClass}`}>
+                                        <div
+                                            key={optIndex}
+                                            className={`option-item ${optionClass}`}
+                                        >
                                             <input
                                                 type="radio"
                                                 id={`result_q${index}_option${optIndex}`}
@@ -290,7 +343,9 @@ const QuizApp = ({ id }) => {
                                                 checked={isSelected}
                                                 disabled
                                             />
-                                            <label htmlFor={`result_q${index}_option${optIndex}`}>
+                                            <label
+                                                htmlFor={`result_q${index}_option${optIndex}`}
+                                            >
                                                 {option} {icon}
                                             </label>
                                         </div>
