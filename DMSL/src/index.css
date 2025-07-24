@@ -46,3 +46,64 @@ ul{
   color: #fff;
   transition: 0.3s;
 }
+
+.loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 60px;
+  font-size: 1.1rem;
+  color: #001f3f; /* Dark Blue */
+  text-align: center;
+  min-height: 200px;
+  justify-content: center;
+}
+
+.spinner {
+  border: 6px solid #e0e0e0;
+  border-top: 6px solid #007BFF;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.gif-loader,
+.db-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.fact-text {
+  margin-top: 16px;
+  color: darkblue;
+  /* font-size: 1rem; */
+  font-weight: 500;
+  text-align: center;
+  max-width: 80%;
+}
+
+.fact-text {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

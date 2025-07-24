@@ -31,12 +31,19 @@ app.use(
 app.use("/api", userRoute);
 app.use("/api/exams", examRoute);
 app.use("/api/students", studentRoute);
-app.get("/", (req, resp) => resp.send("hi"));
+
 app.get("/practical/:id", assignmentController.getPractical);
 app.get("/assignmentlist", assignmentController.getAssignmentList);
 app.post("/quiz-response", quizController.submitQuizResponse);
 app.get("/quiz/:id", quizController.getQuiz);
 app.get("/students/performance", quizController.getPerformance);
+
+app.get("/", (req, resp) => {
+    resp.status(200).json({
+        message: "Welcome to DMSL",
+        timestamp: new Date().toLocaleString(),
+    });
+});
 
 // Start server
 app.listen(3000, () => {

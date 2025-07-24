@@ -1,10 +1,13 @@
 const doc = require("../models/docschema");
 
+// const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const assignmentController = {
     getPractical: async (req, resp) => {
         const assign_id = req.params.id;
         try {
+            
             const data = await doc.find({ id: assign_id });
+            // await delay(15000); // Simulate a delay of 15 second
             if (data && data.length > 0) {
                 resp.status(200).json(data);
             } else {

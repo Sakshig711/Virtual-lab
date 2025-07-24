@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Footer from '../components/Footer.jsx';
 import './css/Home.css';
 import Navbar from '../components/Nav.jsx'; 
 import AssignmentContainer from '../components/AssignmentContainer'; // Import Assignment container
 
 const Home = () => {
+  const pingBackend = async () => {
+          try{
+              const resp = await fetch(import.meta.env.VITE_BASE_URL + '/');
+              if (!resp.ok) {
+                  throw new Error("Network response was not ok, pls Try Again ");
+              }else {
+                  let data = await resp.json();
+                  console.log(data.message);;
+              }
+          } catch (error) {
+              console.error("Error Connection server:", error);
+          }   
+  }
+  useEffect(() => {
+    pingBackend();
+  },[]); 
   return (
     <div className="home-container">
       <Navbar />
