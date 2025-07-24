@@ -222,7 +222,7 @@ const QuizApp = ({ id }) => {
     };
 
     const handleLoginClick = () => {
-        navigate("/student/login"); // Adjust this path according to your routing setup
+        navigate("/login"); // Adjust this path according to your routing setup
     };
 
     if (!isAuthenticated) {

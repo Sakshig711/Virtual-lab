@@ -24,6 +24,7 @@ const assignmentController = {
                 .find()
                 .select({ id: 1, aim: 1, title: 1, _id: 0 })
                 .sort({ id: 1 });
+                // await delay(15000);
             resp.status(200).json({
                 error: "false",
                 data: list,

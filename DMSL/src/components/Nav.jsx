@@ -4,6 +4,7 @@ import polygon from "../assets/poly4.svg";
 import "./css/Nav.css";
 import { Link, useNavigate } from "react-router-dom";
 import { UserOutlined } from '@ant-design/icons';
+import { MenuOutlined, CloseOutlined } from '@ant-design/icons';
 
 const Nav = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -25,11 +26,10 @@ const Nav = () => {
       <div className="div">
         <div className="nav-bar">
           <div className="overlap-group">
-            <img className="poly" alt="Polygon" src={polygon} />
-            <p className="text-wrapper">Pune Institute Of Computer Technology</p>
-            <p className="p">A Virtual Lab for Database Management System</p>
             <img className="pictlogo" alt="Pictlogo" src={pictlogo} />
-
+            <img className="poly" alt="Polygon" src={polygon} />
+            <p className="text-wrapper">Pune Institute of Computer Technology</p>
+            <p className="subtitle">A Virtual Lab for Database Management System</p>
             {/* Desktop Navigation Links */}
             <div className="nav-links">
               <Link to="/">Home</Link>
@@ -58,8 +58,13 @@ const Nav = () => {
                 <Link to="/student-dashboard" onClick={() => setMenuOpen(false)}>Profile</Link>
               )}
             </div>
-            
-            <button className="menu-icon" onClick={toggleMenu}>☰</button>
+            <button className="menu-icon" onClick={toggleMenu} aria-label="Toggle menu">
+  {menuOpen  ? (
+    <CloseOutlined style={{ fontSize: '24px', color: '#333' }} />
+  ) : (
+    <MenuOutlined style={{ fontSize: '24px', color: '#333' }} />
+  )}
+</button>
           </div>
         </div>
       </div>
